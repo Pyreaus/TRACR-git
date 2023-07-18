@@ -1,0 +1,784 @@
+<div class="container-fluid px-5 mt-4" style="max-height: 90vh !important; overflow: hidden;">
+    <div class="row">
+        <div class="p-0 m-0 col-12 col-xxl-4 col-xl-5 col-lg-6 col-md-7" style="min-height:700px;max-height:700px;">
+            <p-sidebar [(visible)]="barVisible" [blockScroll]="false" [modal]="false" [style]="{width:'495px'}"
+                [showCloseIcon]="false" dismissableMask="true">
+                <div class="row">
+                    <div class="col ps-2 mt-5" *ngIf="(userType$|async)=='Unauthorized';">
+                        <p-messages severity="error">
+                            <ng-template pTemplate>
+                                <div class="ml-2">
+                                    You have not been given access to TRACR. Please contact heldpesk if you are
+                                    authorized to use TRACR.
+                                </div>
+                            </ng-template>
+                        </p-messages>
+                    </div>
+                    <div class="col ps-2 mt-4" *ngIf="(userType$|async)=='Trainee';">
+                        <p-card [header]="'Welcome, '+user$.firstName" styleClass="cd">
+                            <p class="m-0 mt-0">You have not created a diary. To create a new diary please select a week
+                                for your diary from the
+                                <span class="text-info">calendar</span> below:
+                            </p>
+                        </p-card>
+                    </div>
+                    <div class="col ps-2 mt-4" *ngIf="(userType$|async)=='Admin';">
+                        <p-card [header]="'Welcome, '+user$.firstName" styleClass="cd">
+                            <div class="card d-flex justify-content-center"
+                                style="background-color:rgba(0, 0, 0, 0);max-width:fit-content;">
+                                <p-selectButton [options]="stateOptions" [(ngModel)]="menuVal" optionLabel="label"
+                                    optionValue="menuVal" optionDisabled="constant"></p-selectButton>
+                            </div>
+                        </p-card>
+                    </div>
+                    <div class="col ps-2 mt-4" *ngIf="(userType$|async)=='Reviewer';">
+                        <p-card [header]="'Welcome, '+user$.firstName" styleClass="cd">
+                            <div class="card d-flex justify-content-center"
+                                style="max-width:fit-content;background-color:rgba(0, 0, 0, 0);">
+                                <p-selectButton styleClass="sb2" [options]="stateOptions2" [(ngModel)]="menuVal"
+                                    optionLabel="label" optionValue="menuVal"
+                                    optionDisabled="constant"></p-selectButton>
+                            </div>
+                        </p-card>
+                    </div>
+                    <div class="d-flex p-0 mt-0 flex-column" style="top:0px;min-height:66vh;">
+                        <div class="flex-grow-1 py-0 px-2 d-flex align-items-top" *ngIf="(userType$|async)=='Trainee';">
+                            <div></div>
+                        </div>
+                        <div class="col ps-2 pe-3 m-0 mt-0">
+                            <p-divider align="left">
+                                <div class="inline-flex align-items-center" *ngIf="(userType$|async)=='Trainee';">
+                                    <i class="pi pi-calendar me-2 text-info"></i><b class="text-info">select week:</b>
+                                </div>
+                                <div class="inline-flex align-items-center" *ngIf="(userType$|async)=='Reviewer';">
+                                    <i class="pi pi-user me-2 text-secondary"></i><b class="text-secondary">your
+                                        trainees:</b>
+                                </div>
+                                <div class="inline-flex align-items-center"
+                                    *ngIf="(userType$|async)=='Admin'&&menuVal=='Current'&&EditViewPanel==false;">
+                                    <i class="pi pi-user me-2 text-secondary"></i><b class="text-secondary">current
+                                        trainees:</b>
+                                </div>
+                            </p-divider>
+                            <div class="inline-flex align-items-center mt-3"
+                                *ngIf="(userType$|async)=='Admin'&&menuVal=='New';">
+                                <div class="border border-dark p-3 pb-0">
+                                    <p class="text-secondary">Assign one or more trainees to a reviewer by using the
+                                        drop down lists below and then click 'Save Changes'.</p>
+                                </div>
+                            </div>
+                            <!-- (((((((((((((((((())))))))))))))))))-->
+                            <div class="card flex justify-content-center mt-0 mb-5"
+                                *ngIf="(userType$|async)=='Admin'&&menuVal=='New';"
+                                style="background-color:#00000000;margin-top:34px!important;">
+                                <span class="p-float-label">
+                                    <p-dropdown [options]="reviewers$" [(ngModel)]="selectedReviewer$"
+                                        placeholder="Select a Reviewer" optionLabel="firstName"
+                                        inputId="float-label"></p-dropdown>
+                                    <label for="float-label" class="text-secondary">Select a Reviewer</label>
+                                </span>
+                            </div>
+                            <div class="card flex justify-content-center mt-0"
+                                *ngIf="(userType$|async)=='Admin'&&menuVal=='New';"
+                                style="background-color: #00000000;margin-top:55px !important;max-height:5px !important;">
+                                <span class="p-float-label" style="min-width:459px">
+                                    <p-multiSelect [options]="peopleFiltered$" [(ngModel)]="selectedTrainees"
+                                        placeholder="Select Trainees" defaultLabel="Select trainees"
+                                        optionLabel="firstName">
+                                        <ng-template let-value pTemplate="peopleFiltered$">
+                                            <div class="flex align-items-center gap-2"
+                                                *ngFor="let trainee of reviewers$">
+                                                <img src="../../../assets/profilePic.png" [class]="'profilePic'"
+                                                    style="width: 18px" />
+                                                <div>{{ trainee.firstName }}</div>
+                                            </div>
+                                            <div *ngIf="!selectedTrainees">Select Trainees</div>
+                                        </ng-template>
+                                        <ng-template let-profile pTemplate="item">
+                                            <div class="d-flex align-items-center">
+                                                <img src="../../../assets/profilePic.png"
+                                                    style="border-radius: 20%; width: 18px; margin-right: 5px;" />
+                                                <div>{{ profile.firstName }}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-multiSelect>
+                                    <label for="float-label" class="text-secondary">Select Trainees</label>
+                                </span>
+                                <div style="position:absolute;top:10px;padding-left:260px;"><button type="button"
+                                        class="mt-5 btn btn-outline-danger btn-sm">Remove</button>
+                                    <button (click)="SetPairs(selectedReviewer$,selectedTrainees)"
+                                        class="mt-5 ms-1 btn btn-outline-success btn-sm" style="min-height:31px;"
+                                        type="button">Save Changes</button>
+                                </div>
+                            </div>
+                            <!-- region -->
+                            <div class="card flex justify-content-center mt-0 mb-5"
+                                *ngIf="(userType$|async)=='Admin'&&menuVal=='Current'&&EditViewPanel==true;"
+                                style="background-color:#00000000;margin-top:34px!important;">
+                                <span class="p-float-label">
+                                    <p-dropdown [options]="reviewers$" [(ngModel)]="selectedReviewer$" [placeholder]="this.getReviewerByPfid(this.trainees$[0].reviewerPfid!)?.firstName!"
+                                        optionLabel="firstName" inputId="float-label"></p-dropdown>
+                                    <label for="float-label" class="text-secondary"> Edit reviewer:
+                                        <span class="text-white">{{ this.getReviewerByPfid(this.trainees$[0].reviewerPfid!)?.firstName! }}</span></label>
+                                </span>
+                            </div>
+                            <div class="card flex justify-content-center mt-0"
+                                *ngIf="(userType$|async)=='Admin'&&menuVal=='Current'&&EditViewPanel==true;"
+                                style="background-color: #00000000;margin-top:55px !important;max-height:5px !important;">
+                                <span class="p-float-label" style="min-width:459px">
+                                    <p-multiSelect [disabled]="true" [options]="peopleFiltered$" [(ngModel)]="selectedTrainees"
+                                    [placeholder]="this.trainees$[0].firstName!" defaultLabel="Select trainees" optionLabel="firstName">
+                                        <ng-template let-value pTemplate="peopleFiltered$">
+                                            <div class="flex align-items-center gap-2" *ngFor="let trainee of reviewers$">
+                                                <img src="../../../assets/profilePic.png" [class]="'profilePic'" style="width: 18px" />
+                                                <div>{{ trainee.firstName }}</div>
+                                            </div>
+                                            <!-- <div *ngIf="!selectedTrainees">Trainee:</div> -->
+                                        </ng-template>
+                                        <ng-template let-profile pTemplate="item">
+                                            <div class="d-flex align-items-center">
+                                                <img src="../../../assets/profilePic.png"
+                                                    style="border-radius: 20%; width: 18px; margin-right: 5px;" />
+                                                <div>{{ profile.firstName }}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-multiSelect>
+                                </span>
+                                <div style="position:absolute;top:10px;padding-left:260px;"><button (click)="reload()" type="button"
+                                        class="mt-5 btn btn-outline-danger btn-sm">Cancel</button>
+                                    <button (click)="updatePairs(selectedReviewer$,this.trainees$[0])" class="mt-5 ms-1 btn btn-outline-success btn-sm"
+                                        style="min-height:31px;" type="button">Save Changes</button>
+                                </div>
+                            </div>
+                            <!-- region -->
+                            <div class="card bg-dark" *ngIf="(userType$|async)=='Reviewer'&&menuVal=='Current'&&EditViewPanel==false">
+                                <div class="list-group"
+                                    style="height: fit-content;max-height: 460px; overflow-y: scroll;">
+                                    <a *ngFor="let trn of trainees$" href="javascript:void(0)"
+                                        class="list-group-item list-group-item-action flex-column align-items-start"
+                                        style="background-color:rgb(59, 61, 64);border:1px solid rgba(78, 78, 78, 0.762);">
+                                        <div class="d-flex w-100 pt-2 justify-content-between">
+                                            <h5 class="mb-1 text-light" style="margin-right:2px;">{{ trn.firstName }}</h5>
+                                            <small class="text-success"
+                                                style="margin-right:10px;margin-left:45px;">Active</small><img
+                                                src="../../../assets/profilePic.png"
+                                                style="border-radius: 20%; width: 28px;height:25px;margin-right:auto;position:relative;left:-90px;" />
+                                            </div><small class="text-muted">Reviewer: {{ this.user$.firstName! + ' ' + this.user$.lastName! }}</small>
+                                            <button (click)="openTraineeDiary(trn.traineePfid)" type="button" class="btn btn-secondary btn-sm"
+                                            style="float:right !important;position:relative;bottom:13px;">View Diary
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- region -->
+                            <div class="card bg-dark" *ngIf="(userType$|async)=='Admin'&&menuVal=='Current'&&EditViewPanel==false">
+                                <div class="list-group"
+                                    style="height: fit-content;max-height: 460px; overflow-y: scroll;">
+                                    <a *ngFor="let trn of trainees$" href="javascript:void(0)"
+                                        class="list-group-item list-group-item-action flex-column align-items-start"
+                                        style="background-color:rgb(59, 61, 64);border:1px solid rgba(78, 78, 78, 0.762);">
+                                        <div class="d-flex w-100 pt-2 justify-content-between">
+                                            <h5 class="mb-1 text-light" style="margin-right:2px;">{{ trn.firstName }}
+                                            </h5>
+                                            <small class="text-success"
+                                                style="margin-right:10px;margin-left:45px;">Active</small><img
+                                                src="../../../assets/profilePic.png"
+                                                style="border-radius: 20%; width: 28px;height:25px;margin-right:auto;position:relative;left:-90px;" />
+                                        </div>
+                                        <span
+                                            *ngIf="trn.reviewerPfid !== null && trn.reviewerPfid !== undefined && getReviewerByPfid(trn.reviewerPfid) as reviewer">
+                                            <small class="text-muted">Reviewer: {{ reviewer.firstName }}</small>
+                                            <button (click)="openEditView(trn.traineePfid)" type="button" class="btn btn-secondary btn-sm"
+                                                style="float:right !important;position:relative;bottom:13px;">Edit
+                                                user</button>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="py-0 mb-2 d-flex ps-2 pe-5" *ngIf="(userType$|async)=='Trainee';">
+                            <div class="ps-0 position-relative">
+                                <div class="row overlay d-none d-md-flex"
+                                    style="width:57px;position:absolute;z-index:1000;left:16px;top:115px;">
+                                    <div class="col-12 overlay2" (click)="selected(1)"
+                                        style="min-height:58px;margin-top:2px;"></div>
+                                    <div class="col-12 overlay2" (click)="selected(2)"
+                                        style="min-height:57px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" (click)="selected(3)"
+                                        style="min-height:56px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" (click)="selected(4)"
+                                        style="min-height:56px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" (click)="selected(5)"
+                                        style="min-height:62px;margin-top:0px;"></div>
+                                </div>
+                                <div class="row overlay d-md-none d-md-flex"
+                                    style="width:57px;position:absolute;z-index:1000;left:15px;top:105px;">
+                                    <div class="col-12 overlay2" (click)="selected(1)"
+                                        style="min-height:41px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" (click)="selected(2)"
+                                        style="min-height:40px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" (click)="selected(3)"
+                                        style="min-height:41px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" (click)="selected(4)"
+                                        style="min-height:41px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" (click)="selected(5)"
+                                        style="min-height:60px;margin-top:0px;"></div>
+                                </div>
+                                <div class="card p-0 d-flex justify-content-center align-items-center"
+                                    style="border-color:#00000000;background-color:#00000000;">
+                                    <p-calendar #calElement [(ngModel)]="date" [disabledDays]="[0,1,2,3,4,5,6]"
+                                        class="max-w-full" [inline]="true" [styleClass]="rowSelected" [showWeek]="true"
+                                        class="cal" [firstDayOfWeek]="1">
+                                    </p-calendar>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ng-template pTemplate="footer" styleClass="f"><b *ngIf="(userType$|async)!=='Unauthorized';"
+                        class="ps-2 pe-2 text-secondary d-inline-block border border-striped border-secondary"
+                        style="margin-left:122px !important">Training Contract Record</b>
+                </ng-template>
+            </p-sidebar>
+            <p-sidebar [(visible)]="rightBarVisible" [modal]="false" [style]="{width:'495px'}" styleClass="secondBar"
+                [showCloseIcon]="true" [closeOnEscape]="true" dismissableMask="true" position="right">
+                <div class="row">
+                    <div class="col ps-2 mt-5" *ngIf="(userType$|async)=='Unauthorized';">
+                        <p-messages severity="error">
+                            <ng-template pTemplate>
+                                <div class="ml-2">
+                                    You have not been given access to TRACR. Please contact heldpesk if you are
+                                    authorized to use TRACR.
+                                </div>
+                            </ng-template>
+                        </p-messages>
+                    </div>
+                    <div class="col ps-2 mt-4" *ngIf="(userType$|async)=='Trainee';">
+                        <p-card [header]="'Welcome, '+user$.firstName" styleClass="cd">
+                            <p class="m-0 mt-0">You have not created a diary. To create a new diary please select a week
+                                for your diary from the
+                                <span class="text-info">calendar</span> below:
+                            </p>
+                        </p-card>
+                    </div>
+                    <div class="col ps-2 mt-4" *ngIf="(userType$|async)=='Admin';">
+                        <p-card [header]="'Welcome, '+user$.firstName" styleClass="cd">
+                            <div class="card d-flex justify-content-center"
+                                style="background-color:rgba(0, 0, 0, 0);max-width:fit-content;">
+                                <p-selectButton [options]="stateOptions" [(ngModel)]="menuVal" optionLabel="label"
+                                    optionValue="menuVal" optionDisabled="constant"></p-selectButton>
+                            </div>
+                        </p-card>
+                    </div>
+                    <div class="col ps-2 mt-4" *ngIf="(userType$|async)=='Reviewer';">
+                        <p-card [header]="'Welcome, '+user$.firstName" styleClass="cd">
+                            <div class="card d-flex justify-content-center"
+                                style="max-width:fit-content;background-color:rgba(0, 0, 0, 0);">
+                                <p-selectButton styleClass="sb2" [options]="stateOptions2" [(ngModel)]="menuVal"
+                                    optionLabel="label" optionValue="menuVal"
+                                    optionDisabled="constant"></p-selectButton>
+                            </div>
+                        </p-card>
+                    </div>
+                    <div class="d-flex p-0 mt-0 flex-column" style="top:0px;min-height:66vh;">
+                        <div class="flex-grow-1 py-0 px-2 d-flex align-items-top" *ngIf="(userType$|async)=='Trainee';">
+                            <div></div>
+                        </div>
+                        <div class="col ps-2 pe-3 m-0 mt-0">
+                            <p-divider align="left">
+                                <div class="inline-flex align-items-center" *ngIf="(userType$|async)=='Trainee';">
+                                    <i class="pi pi-calendar me-2 text-info"></i><b class="text-info">select week:</b>
+                                </div>
+                                <div class="inline-flex align-items-center" *ngIf="(userType$|async)=='Reviewer';">
+                                    <i class="pi pi-user me-2 text-secondary"></i><b class="text-secondary">your
+                                        trainees:</b>
+                                </div>
+                                <div class="inline-flex align-items-center"
+                                    *ngIf="(userType$|async)=='Admin'&&menuVal=='Current'&&EditViewPanel==false;">
+                                    <i class="pi pi-user me-2 text-secondary"></i><b class="text-secondary">current
+                                        trainees:</b>
+                                </div>
+                            </p-divider>
+                            <div class="inline-flex align-items-center mt-3"
+                                *ngIf="(userType$|async)=='Admin'&&menuVal=='New';">
+                                <div class="border border-dark p-3 pb-0">
+                                    <p class="text-secondary">Assign one or more trainees to a reviewer by using the
+                                        drop down lists below and then click 'Save Changes'.</p>
+                                </div>
+                            </div>
+                            <div class="card flex justify-content-center mt-0 mb-5"
+                                *ngIf="(userType$|async)=='Admin'&&menuVal=='New';"
+                                style="background-color:#00000000;margin-top:34px!important;">
+                                <span class="p-float-label">
+                                    <p-dropdown [options]="reviewers$" [(ngModel)]="selectedReviewer$"
+                                        placeholder="Select a Reviewer" optionLabel="firstName"
+                                        inputId="float-label"></p-dropdown>
+                                    <label for="float-label" class="text-secondary">Select a Reviewer</label>
+                                </span>
+                            </div>
+                            <div class="card flex justify-content-center mt-0"
+                                *ngIf="(userType$|async)=='Admin'&&menuVal=='New';"
+                                style="background-color: #00000000;margin-top:55px !important;max-height:5px !important;">
+                                <span class="p-float-label" style="min-width:459px">
+                                    <p-multiSelect [options]="peopleFiltered$" [(ngModel)]="selectedTrainees"
+                                        placeholder="Select Trainees" defaultLabel="Select trainees"
+                                        optionLabel="firstName">
+                                        <ng-template let-value pTemplate="peopleFiltered$">
+                                            <div class="flex align-items-center gap-2"
+                                                *ngFor="let trainee of peopleFiltered$">
+                                                <img src="../../../assets/profilePic.png" [class]="'profilePic'"
+                                                    style="width: 18px" />
+                                                <div>{{ trainee.firstName }}</div>
+                                            </div>
+                                            <div *ngIf="!selectedTrainees">Select Trainees</div>
+                                        </ng-template>
+                                        <ng-template let-profile pTemplate="item">
+                                            <div class="d-flex align-items-center">
+                                                <img src="../../../assets/profilePic.png"
+                                                    style="border-radius: 20%; width: 18px; margin-right: 5px;" />
+                                                <div>{{ profile.firstName }}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-multiSelect>
+                                    <label for="float-label" class="text-secondary">Select Trainees</label>
+                                </span>
+                                <div style="position:absolute;top:10px;padding-left:260px;"><button type="button"
+                                        class="mt-5 btn btn-outline-danger btn-sm">Remove</button>
+                                    <button (click)="SetPairs(selectedReviewer$,selectedTrainees)"
+                                        class="mt-5 ms-1 btn btn-outline-success btn-sm" style="min-height:31px;"
+                                        type="button">Save Changes</button>
+                                </div>
+                            </div>
+                            <div class="card bg-dark" *ngIf="(userType$|async)=='Admin'&&menuVal=='Current'&&EditViewPanel==false">
+                                <div class="list-group"
+                                    style="height: fit-content;max-height: 460px; overflow-y: scroll;">
+                                    <a *ngFor="let trn of trainees$" href="javascript:void(0)"
+                                        class="list-group-item list-group-item-action flex-column align-items-start"
+                                        style="background-color:rgb(59, 61, 64);border:1px solid rgba(78, 78, 78, 0.762);">
+                                        <div class="d-flex w-100 pt-2 justify-content-between">
+                                            <h5 class="mb-1 text-light" style="margin-right:2px;">{{ trn.firstName }}
+                                            </h5>
+                                            <small class="text-success"
+                                                style="margin-right:10px;margin-left:45px;">Active</small><img
+                                                src="../../../assets/profilePic.png"
+                                                style="border-radius: 20%; width: 28px;height:25px;margin-right:auto;position:relative;left:-90px;" />
+                                        </div>
+                                        <span
+                                            *ngIf="trn.reviewerPfid !== null && trn.reviewerPfid !== undefined && getReviewerByPfid(trn.reviewerPfid) as reviewer">
+                                            <small class="text-muted">Reviewer: {{ reviewer.firstName }}</small>
+                                            <button type="button" class="btn btn-secondary btn-sm"
+                                                style="float:right !important;position:relative;bottom:13px;">Edit
+                                                diary</button>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="py-0 mb-2 d-flex ps-2 pe-5" *ngIf="(userType$|async)=='Trainee';">
+                            <div class="ps-0 position-relative">
+                                <div class="row overlay d-none d-md-flex"
+                                    style="width:57px;position:absolute;z-index:1000;left:16px;top:115px;">
+                                    <div class="col-12 overlay2" (click)="selected(1)"
+                                        style="min-height:58px;margin-top:2px;"></div>
+                                    <div class="col-12 overlay2" (click)="selected(2)"
+                                        style="min-height:57px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" (click)="selected(3)"
+                                        style="min-height:56px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" (click)="selected(4)"
+                                        style="min-height:56px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" (click)="selected(5)"
+                                        style="min-height:62px;margin-top:0px;"></div>
+                                </div>
+                                <div class="row overlay d-md-none d-md-flex"
+                                    style="width:57px;position:absolute;z-index:1000;left:15px;top:105px;">
+                                    <div class="col-12 overlay2" (click)="selected(1)"
+                                        style="min-height:41px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" (click)="selected(2)"
+                                        style="min-height:40px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" (click)="selected(3)"
+                                        style="min-height:41px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" (click)="selected(4)"
+                                        style="min-height:41px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" (click)="selected(5)"
+                                        style="min-height:60px;margin-top:0px;"></div>
+                                </div>
+                                <div class="card p-0 d-flex justify-content-center align-items-center"
+                                    style="border-color:#00000000;background-color:#00000000;">
+                                    <p-calendar #calElement [(ngModel)]="date" [disabledDays]="[0,1,2,3,4,5,6]"
+                                        class="max-w-full" [inline]="true" [styleClass]="rowSelected" [showWeek]="true"
+                                        class="cal" [firstDayOfWeek]="1"></p-calendar>
+                                 </div>
+                        </div></div>
+                    </div></div>
+                <ng-template pTemplate="footer" styleClass="f"><b *ngIf="(userType$|async)!=='Unauthorized';"
+                        class="ps-2 pe-2 text-secondary d-inline-block border border-striped border-secondary"
+                        style="margin-left:122px !important">Training Contract Record</b></ng-template>
+            </p-sidebar>
+        </div>
+        <div class="d-md-block d-none ps-xl-4 p-0 ps-lg-0 ps-md-4 col-xxl-8 col-11 col-xl-7 col-lg-6 col-md-5"
+            style="overflow-x:hidden !important;overflow-y:scroll !important;max-height:86vh !important;">
+            <div class="row">
+                <div class="col">
+                    <div *ngIf="(userType$|async)=='Unauthorized'; else landing;"
+                        class="h-100 pb-5 d-flex align-items-center justify-content-center text-info"
+                        style="margin-top:27vh;">
+                        <strong class="me-3 text-info">Loading...</strong>
+                        <div role="status" class="mb-1 text-info spinner-border" aria-hidden="true"></div>
+                    </div>
+                    <ng-template #landing>
+                        <!-- <p-panel>
+                            <ng-template pTemplate="Training Contract Record"> <span class="text-primary font-semibold text-xl">Header</span></ng-template>
+                            Body Content
+                            <ng-template pTemplate="footer"> Footer content here </ng-template>
+                        </p-panel> -->
+                        <!-- ((((((((((()))))))))))-->
+                        <div class="card flex justify-content-center align-items-center d-flex"
+                            style="border-color:#00000000;background-color:#00000000;">
+                            <p-panel *ngIf="(userType$|async)=='Admin'&&step==1;" header="Training Contract Record"
+                                [toggleable]="true">
+                                <h3 class="border border-striped border-info p-5 text-secondary"
+                                    style="border-style:dashed !important;">Step 1: Please select a trainee from the list...
+                                </h3>
+                            </p-panel>
+                            <p-panel *ngIf="(userType$|async)=='Trainee'&&step==3;" header="Training Contract Record"
+                                [toggleable]="true">
+                                <div *ngIf="newDiaryPanel">
+                                    <h3>New Diary:</h3>
+                                    <form class="form" [formGroup]="diaryForm" (ngSubmit)="onSubmitNewDiary()"
+                                        #f="ngForm" style="min-width: 680px;">
+                                        <div class="form-group mb-2">
+                                            <label class="label text-light" for="#">Practice Area:</label>
+                                            <input type="text" formControlName="learningPoints"
+                                                [(ngModel)]="diary.learningPoints"
+                                                class="bg-dark border-secondary text-light form-control"
+                                                [class.is-invalid]="diaryForm.get('learningPoints')?.invalid && (submitted || diaryForm.get('learningPoints')?.touched || diaryForm.get('learningPoints')?.dirty)"
+                                                required />
+                                            <span *ngIf="diaryForm.get('learningPoints')?.errors?.['required']"
+                                                class="invalid-feedback" aria-describedby="basic-addon1">Practice Area
+                                                is required</span>
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label class="label text-light" for="#">Learning Points:</label>
+                                            <input type="text" formControlName="learningPoints"
+                                                [(ngModel)]="diary.learningPoints"
+                                                class="bg-dark border-secondary text-light form-control"
+                                                [class.is-invalid]="diaryForm.get('learningPoints')?.invalid && (submitted || diaryForm.get('learningPoints')?.touched || diaryForm.get('learningPoints')?.dirty)"
+                                                required />
+                                            <span *ngIf="diaryForm.get('learningPoints')?.errors?.['required']"
+                                                class="invalid-feedback" aria-describedby="basic-addon1">Learning Points
+                                                is required</span>
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label class="label text-light" for="#">Professional Development:</label>
+                                            <textarea formControlName="ProfessionalDevelopmentUndertaken"
+                                                [(ngModel)]="diary.professionalDevelopmentUndertaken"
+                                                class="bg-dark border-secondary text-light form-control"
+                                                [class.is-invalid]="diaryForm.get('ProfessionalDevelopmentUndertaken')?.invalid && (submitted || diaryForm.get('ProfessionalDevelopmentUndertaken')?.touched || diaryForm.get('ProfessionalDevelopmentUndertaken')?.dirty)"
+                                                required></textarea>
+                                            <span
+                                                *ngIf="diaryForm.get('ProfessionalDevelopmentUndertaken')?.errors?.['required']"
+                                                class="invalid-feedback">Professional
+                                                Development is required</span>
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <label class="label text-light" for="#">Professional Conduct Issues:</label>
+                                            <textarea formControlName="ProfessionalConductIssues"
+                                                [(ngModel)]="diary.professionalConductIssues"
+                                                class="bg-dark border-secondary text-light form-control"
+                                                [class.is-invalid]="diaryForm.get('ProfessionalConductIssues')?.invalid && (submitted || diaryForm.get('ProfessionalConductIssues')?.touched || diaryForm.get('ProfessionalConductIssues')?.dirty)"
+                                                required></textarea>
+                                            <span
+                                                *ngIf="diaryForm.get('ProfessionalConductIssues')?.errors?.['required']"
+                                                class="invalid-feedback">Professional
+                                                Conduct Issues is required</span>
+                                        </div>
+                                        <div>
+                                            <a class="btn btn-secondary me-1" [routerLink]="['/diaries']"
+                                                href="javascript:void(0);">Cancel</a>
+                                            <button type="submit" (click)="submitted = true;"
+                                                class="btn btn-light ms-1">Save Changes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </p-panel>
+                            <div style="position:relative;bottom:40px;max-width:716px;"><p-panel [collapsed]="true"
+                                    *ngIf="(userType$|async)=='Trainee'&&step==4;" header="TRACR | Tasks"
+                                    [toggleable]="true">
+                                    <div *ngIf="ViewDiaryPanel"
+                                        style="height:fit-content;max-height: 400px; overflow-y: scrollable;overflow-x: hidden;">
+                                        <h5 class="ms-3 text-light">View Tasks:</h5>
+                                        <div class="row" style="min-width: 700px;">
+                                            <div class="col-sm-12">
+                                                <div class="card" style="background-color:hsl(215, 18%, 20%);">
+                                                    <div class="card-body">
+                                                        <div class="p-4 pt-0">
+                                                            <div class="d-flex row" style="background-color:hsl(217, 18%, 20%);">
+                                                                <!-- <div *ngFor="let task of tasks$" class="card me-4 mb-3 col-4 text-white bg-dark" -->
+                                                                <div *ngFor="let task of tasks$;let i = index" class="card col-4 py-2 me-4 mb-3 text-white bg-dark"
+                                                                    style="max-width: 180px;overflow-y: scrollable;overflow-x: hidden;">
+                                                                    <div class="card-header" style="background-color:hsl(215, 18%, 20%);">
+                                                                        <b>[Task: {{ i + 1 }}]</b></div>
+                                                                    <div class="card-body" style="max-height:104px;background-color:hsl(215, 18%, 20%);overflow:scroll;">
+                                                                        <span><b class="card-text text-light">Description:</b><p class="card-text text-secondary">
+                                                                            {{ task.taskDescription }}</p></span>
+                                                                        <p></p><span><b class="card-text text-light">Matter:</b><p class="card-text text-secondary">
+                                                                            {{ task.matter }}</p></span>
+                                                                        <p></p><span><b class="card-text text-light">Skills:</b>
+                                                                            <p *ngFor="let skill of task.skills" class="card-text text-secondary">
+                                                                            {{ skill }}</p></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </p-panel></div>
+                                <div style="position:relative;bottom:40px;max-width:716px;"><p-panel [collapsed]="true"
+                                    *ngIf="(userType$|async)=='Reviewer'&&ViewDiaryPanel&&step==3" header="TRACR | Tasks"
+                                    [toggleable]="true">
+                                    <div style="height:fit-content;max-height: 400px; overflow-y: scrollable;overflow-x: hidden;">
+                                        <h5 class="ms-3 text-light">View Tasks:</h5>
+                                        <div class="row" style="min-width: 700px;">
+                                            <div class="col-sm-12">
+                                                <div class="card" style="background-color:hsl(215, 18%, 20%);">
+                                                    <div class="card-body">
+                                                        <div class="p-4 pt-0">
+                                                            <div class="d-flex row" style="background-color:hsl(217, 18%, 20%);">
+                                                                <!-- <div *ngFor="let task of tasks$" class="card me-4 mb-3 col-4 text-white bg-dark" -->
+                                                                <div *ngFor="let task of tasks$;let i = index" class="card col-4 py-2 me-4 mb-3 text-white bg-dark"
+                                                                    style="max-width: 180px;overflow-y: scrollable;overflow-x: hidden;">
+                                                                    <div class="card-header" style="background-color:hsl(215, 18%, 20%);">
+                                                                        <b>[Task: {{ i + 1 }}]</b></div>
+                                                                    <div class="card-body" style="max-height:104px;background-color:hsl(215, 18%, 20%);overflow:scroll;">
+                                                                        <span><b class="card-text text-light">Description:</b><p class="card-text text-secondary">
+                                                                            {{ task.taskDescription }}</p></span>
+                                                                        <p></p><span><b class="card-text text-light">Matter:</b><p class="card-text text-secondary">
+                                                                            {{ task.matter }}</p></span>
+                                                                        <p></p><span><b class="card-text text-light">Skills:</b>
+                                                                            <p *ngFor="let skill of task.skills" class="card-text text-secondary">
+                                                                            {{ skill }}</p></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </p-panel></div>
+                            <div style="overflow-y:none;position:relative;bottom:55px;max-width:716px;"><p-panel
+                                    *ngIf="(userType$|async)=='Trainee'&&step==4;" header="TRACR | View Diary"
+                                    [toggleable]="true">
+                                    <div *ngIf="ViewDiaryPanel"
+                                        style="height:fit-content;height:550px;overflow-y: none;">
+                                        <div class="row" style="min-width: 500px;">
+                                            <div class="col-sm-12">
+                                                <div class="card" style="background-color:rgb(42, 50, 61);">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"
+                                                            style="padding-left:30px;margin-bottom:9px !important;">
+                                                            Diary week: <span
+                                                                style="font-size: small;color: rgb(13, 202, 240);">
+                                                                {{ this.currentDiary.weekBeginning }}</span></h5>
+                                                        <h5 class="position-relative"
+                                                            style="bottom:32px;left:370px;margin-bottom:0px !important;">
+                                                            Reviewer: <span
+                                                                style="font-size: small;color: rgb(13, 202, 240);">
+                                                                {{ this.currentReviewer$ }}</span></h5>
+                                                        <div class="p-4 pt-0">
+                                                            <div
+                                                                style="overflow-x:hidden !important;overflow-y:scroll;max-height:420px !important;">
+                                                                <div class="card text-white bg-dark mb-3"
+                                                                    style="max-width: 34rem;">
+                                                                    <div class="card-header"><b>Practice Area:</b></div>
+                                                                    <div class="card-body">
+                                                                        <p class="card-text text-secondary">{{
+                                                                            this.currentDiary.learningPoints
+                                                                         }}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card text-white bg-dark mb-3"
+                                                                    style="max-width: 34rem;">
+                                                                    <div class="card-header"><b>Learning Points:</b>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <p class="card-text text-secondary">{{
+                                                                            this.currentDiary.learningPoints}}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card text-white bg-dark mb-3"
+                                                                    style="max-width: 34rem;">
+                                                                    <div class="card-header"><b>Professional
+                                                                            Development:</b></div>
+                                                                    <div class="card-body">
+                                                                        <p class="card-text text-secondary">{{
+                                                                            this.currentDiary.professionalDevelopmentUndertaken
+                                                                            }}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card text-white bg-dark mb-3"
+                                                                    style="max-width: 34rem;">
+                                                                    <div class="card-header"><b>Professional Conduct
+                                                                            Issues:</b></div>
+                                                                    <div class="card-body">
+                                                                        <p class="card-text text-secondary">{{
+                                                                            this.currentDiary.professionalConductIssues
+                                                                            }}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button (click)="SubmitSignOff()" [disabled]="disableSubmit"
+                                            href="javascript:void(0);" class="btn btn-info"
+                                            style="float:left;position:relative;bottom:32px;width:645px;">Submit for
+                                            sign off</button>
+                                    </div>
+                                </p-panel>
+                            </div>
+                            <div style="overflow-y:none;position:relative;bottom:55px;max-width:716px;"><p-panel
+                                *ngIf="(userType$|async)=='Reviewer'&&step==3;" [header]="'TRACR | View Diary'"
+                                [toggleable]="true">
+                                <div *ngIf="ViewDiaryPanel"
+                                    style="height:fit-content;height:550px;overflow-y: none;">
+                                    <div class="row" style="min-width: 500px;">
+                                        <div class="col-sm-12">
+                                            <div class="card" style="background-color:rgb(42, 50, 61);">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"
+                                                        style="padding-left:30px;margin-bottom:9px !important;">
+                                                        Diary week: <span
+                                                            style="font-size: small;color: rgb(13, 202, 240);">
+                                                            {{ this.currentDiary.weekBeginning }}</span></h5>
+                                                    <h5 class="position-relative"
+                                                        style="bottom:32px;left:370px;margin-bottom:0px !important;">
+                                                        Reviewer: <span
+                                                            style="font-size: small;color: rgb(13, 202, 240);">
+                                                            {{ this.getReviewerByPfid(this.currentDiary.pfid!)?.firstName!  }} (you)</span></h5>
+                                                    <div class="p-4 pt-0">
+                                                        <div
+                                                            style="overflow-x:hidden !important;overflow-y:scroll;max-height:420px !important;">
+                                                            <div class="card text-white bg-dark mb-3"
+                                                                style="max-width: 34rem;">
+                                                                <div class="card-header"><b>Practice Area:</b></div>
+                                                                <div class="card-body">
+                                                                    <p class="card-text text-secondary">{{
+                                                                        this.currentDiary.learningPoints
+                                                                     }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card text-white bg-dark mb-3"
+                                                                style="max-width: 34rem;">
+                                                                <div class="card-header"><b>Learning Points:</b>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <p class="card-text text-secondary">{{
+                                                                        this.currentDiary.learningPoints}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card text-white bg-dark mb-3"
+                                                                style="max-width: 34rem;">
+                                                                <div class="card-header"><b>Professional
+                                                                        Development:</b></div>
+                                                                <div class="card-body">
+                                                                    <p class="card-text text-secondary">{{
+                                                                        this.currentDiary.professionalDevelopmentUndertaken
+                                                                        }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card text-white bg-dark mb-3"
+                                                                style="max-width: 34rem;">
+                                                                <div class="card-header"><b>Professional Conduct
+                                                                        Issues:</b></div>
+                                                                <div class="card-body">
+                                                                    <p class="card-text text-secondary">{{
+                                                                        this.currentDiary.professionalConductIssues
+                                                                        }}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button (click)="SubmitSignOff()" [disabled]="disableSubmit"
+                                        href="javascript:void(0);" class="btn btn-warning"
+                                        style="float:left;position:relative;bottom:32px;width:645px;">Sign off diary</button>
+                                </div>
+                            </p-panel>
+                        </div>
+                        </div>
+                        <div class="card flex justify-content-center align-items-center d-flex"
+                            *ngIf="(userType$|async)=='Trainee'&&menuVal=='Current'&&step==1;"
+                            style="border-color:#00000000;background-color:#00000000;">
+                            <p-panel header="Training Contract Record" [toggleable]="true">
+                                <h3 class="border border-striped border-info p-5 text-secondary"
+                                    style="border-style:dashed !important;">
+                                    Step 1: Please select the week for your diary...
+                                </h3>
+                            </p-panel>
+                        </div>
+                        <div class="card flex justify-content-center align-items-center d-flex"
+                            *ngIf="(userType$|async)=='Trainee'&&menuVal=='Current'&&step==2;"
+                            style="border-color:#00000000;background-color:#00000000;">
+                            <p-panel header="Training Contract Record" [toggleable]="true">
+                                <h3 class="border border-striped border-info p-5 text-secondary"
+                                    style="border-style:dashed !important;">
+                                    Step 2: Click the button below to open the week
+                                </h3>
+                                <button class="btn btn-info mt-2" (click)="openNewDiary()">Open Week</button>
+                            </p-panel>
+                        </div>
+                        <div class="card flex justify-content-center align-items-center d-flex"
+                            *ngIf="(userType$|async)=='Reviewer'&&menuVal=='Current'&&step==2;"
+                            style="border-color:#00000000;background-color:#00000000;">
+                            <p-panel header="Training Contract Record" [toggleable]="true">
+                                <h3 class="border border-striped border-info p-5 text-secondary"
+                                    style="border-style:dashed !important;">
+                                    Step 2: Click the button below to open the week
+                                </h3>
+                                <button class="btn btn-info mt-2" (click)="step=3">Open Week</button>
+                            </p-panel>
+                        </div>
+                        <div class="card flex justify-content-center align-items-center d-flex"
+                            *ngIf="(userType$|async)=='Reviewer'&&menuVal=='Current'&&step==1;"
+                            style="border-color:#00000000;background-color:#00000000;">
+                            <p-panel header="Training Contract Record" [toggleable]="true">
+                                <h3 class="border border-striped border-info p-5 text-secondary"
+                                    style="border-style:dashed !important;">
+                                    Step 1: Please select a trainee from the list...
+                                </h3>
+                            </p-panel>
+                        </div>
+                    </ng-template>
+                    <button (click)="openTaskModal()" type="button" class="btn me-1 px-2 py-0" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" data-bs-backdrop="static" data-bs-keyboard="false" style="z-index:1000;position:absolute;top:0px;right:0px;height:50px;width:100px;"></button>
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-header bg-light">
+                              <h5 class="modal-title">Add Field</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body me-2">
+                              <new-diarytask *ngIf="modalOpen" [diary]="this.currentDiary"></new-diarytask>
+                            </div>
+                            <div class="modal-footer bg-light">
+                              <button style="z-index:10000" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <!-- <button (click)="closeDeleteModal(newDiaryTask)" data-bs-dismiss="modal" type="button" class="btn btn-danger">Delete</button> -->
+                              <button data-bs-dismiss="modal" style="z-index:10000" (click)="taskModalSubmitted()" type="button" class="btn btn-info">Create</button>
+                            </div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,419 @@
+.overlay > *:hover {
+    border: 1px solid #09b9d892;
+}
+:host ::ng-deep {
+    &.cal1 {
+        &.p-calendar tbody tr:nth-of-type(1) {
+            border: solid 1px #111a24e3;
+            background-color: #0a0b0c47;
+        }
+        &.p-calendar .p-datepicker-today > * {
+        color: hwb(0 97% 3%);
+        background-color: #1b1e1e;
+        }
+        tr:nth-of-type(5){td.p-datepicker-weeknumber{ position:relative;height:60px;}
+        }
+        &.p-calendar > .p-datepicker {
+            padding-left:1px;
+            font-weight: bold;
+            background-color: #0a0b0c47;
+            border-color: #111a24e3;
+            max-height: 410px;
+        }
+        td.p-datepicker-weeknumber {
+            color: #0fc7ff !important;
+            opacity: 1 !important;
+            font-weight: bolder !important;
+            background-color: #15d3674b;
+            border: solid 0.1px #00090a;
+            border-left-color: #1f20204a;
+            border-right-color: #0a0c0b4b;
+            border-top-color: #0a0c0b4b;
+            &:hover {
+            background-color: hsla(0, 0%, 0%, 0.224);
+            }
+            &:hover + .overlay > .overlay-2 {
+            background-color: #003cffed;
+            }
+        }
+    }
+    &.cal2 {
+        &.p-calendar tbody tr:nth-of-type(2) {
+            border: solid 1px #111a24e3;
+            background-color: #0a0b0c47;
+        }
+        &.p-calendar > .p-datepicker {
+            padding-left:1px;
+            font-weight: bold;
+            background-color: #0a0b0c47;
+            border-color: #111a24e3;
+            max-height: 410px;
+        }
+        &.p-calendar .p-datepicker-today > * {
+        color: hwb(0 97% 3%);
+        background-color: #1b1e1e;
+        }
+        tr:nth-of-type(5){
+            td.p-datepicker-weeknumber { position:relative;height:60px;}
+        }
+        td.p-datepicker-weeknumber {
+            color: #0fc7ff !important;
+            opacity: 1 !important;
+            font-weight: bolder !important;
+            background-color: #0a0c0b4b;
+            border: solid 0.1px #00090a;
+            border-left-color: #1f20204a;
+            border-right-color: #0a0c0b4b;
+            border-top-color: #0a0c0b4b;
+            &:hover {
+            background-color: hsla(0, 0%, 0%, 0.224);
+            }
+            &:hover + .overlay > .overlay-2 {
+            background-color: #003cffed;
+            }
+        }
+    }
+    &.cal3 {
+        &.p-calendar tbody tr:nth-of-type(3) {
+            border: solid 1px #111a24e3;
+            background-color: #0a0b0c47;
+        }
+        &.p-calendar > .p-datepicker {
+            padding-left:1px;
+            font-weight: bold;
+            background-color: #0a0b0c47;
+            border-color: #111a24e3;
+            max-height: 410px;
+        }
+        &.p-calendar .p-datepicker-today > * {
+        color: hwb(0 97% 3%);
+        background-color: #1b1e1e;
+        }
+        tr:nth-of-type(5){
+            td.p-datepicker-weeknumber { position:relative;height:60px;}
+        }
+        td.p-datepicker-weeknumber {
+            color: #0fc7ff !important;
+            opacity: 1 !important;
+            font-weight: bolder !important;
+            background-color: #0a0c0b4b;
+            border: solid 0.1px #00090a;
+            border-left-color: #1f20204a;
+            border-right-color: #0a0c0b4b;
+            border-top-color: #0a0c0b4b;
+            &:hover {
+            background-color: hsla(0, 0%, 0%, 0.224);
+            }
+            &:hover + .overlay > .overlay-2 {
+            background-color: #003cffed;
+            }
+        }
+    }
+    &.cal4 {
+        &.p-calendar tbody tr:nth-of-type(4) {
+            border: solid 1px #111a24e3;
+            background-color: #0a0b0c47;
+        }
+        &.p-calendar > .p-datepicker {
+            padding-left:1px;
+            font-weight: bold;
+            background-color: #0a0b0c47;
+            border-color: #111a24e3;
+            max-height: 410px;
+        }
+        &.p-calendar .p-datepicker-today > * {
+        color: hwb(0 97% 3%);
+        background-color: #1b1e1e;
+        }
+        tr:nth-of-type(5){
+            td.p-datepicker-weeknumber { position:relative;height:60px;}
+        }
+        td.p-datepicker-weeknumber {
+            color: #0fc7ff !important;
+            opacity: 1 !important;
+            font-weight: bolder !important;
+            background-color: #0a0c0b4b;
+            border: solid 0.1px #00090a;
+            border-left-color: #1f20204a;
+            border-right-color: #0a0c0b4b;
+            border-top-color: #0a0c0b4b;
+            &:hover {
+            background-color: hsla(0, 0%, 0%, 0.224);
+            }
+            &:hover + .overlay > .overlay-2 {
+            background-color: #003cffed;
+            }
+        }
+    }
+    &.cal5 {
+        &.p-calendar tbody tr:nth-of-type(5) {
+            border: solid 1px #111a24e3;
+            background-color: #0a0b0c47;
+        }
+        &.p-calendar > .p-datepicker {
+            padding-left:1px;
+            font-weight: bold;
+            background-color: #0a0b0c47;
+            border-color: #111a24e3;
+            max-height: 410px;
+        }
+        &.p-calendar .p-datepicker-today > * {
+        color: hwb(0 97% 3%);
+        background-color: #1b1e1e;
+        }
+        tr:nth-of-type(5){
+            td.p-datepicker-weeknumber { position:relative;height:60px;}
+        }
+        td.p-datepicker-weeknumber {
+            color: #0fc7ff !important;
+            opacity: 1 !important;
+            font-weight: bolder !important;
+            background-color: #0a0c0b4b;
+            border: solid 0.1px #00090a;
+            border-left-color: #1f20204a;
+            border-right-color: #0a0c0b4b;
+            border-top-color: #0a0c0b4b;
+            &:hover {
+            background-color: hsla(0, 0%, 0%, 0.224);
+            }
+            &:hover + .overlay > .overlay-2 {
+            background-color: #003cffed;
+            }
+        }
+    }
+    &.cal {
+        &.p-calendar > .p-datepicker {
+            padding-left:1px;
+            font-weight: bold;
+            background-color: #0a0b0c47;
+            border-color: #111a24e3;
+            max-height: 410px;
+        }
+        &.p-calendar .p-datepicker-today > * {
+        color: hwb(0 97% 3%);
+        background-color: #1b1e1e;
+        }
+        tr:nth-of-type(5){
+            td.p-datepicker-weeknumber { position:relative;height:60px;}
+        }
+        td.p-datepicker-weeknumber {
+            color: #0fc7ff !important;
+            opacity: 1 !important;
+            font-weight: bolder !important;
+            background-color: #0a0c0b4b;
+            border: solid 0.1px #00090a;
+            border-left-color: #1f20204a;
+            border-right-color: #0a0c0b4b;
+            border-top-color: #0a0c0b4b;
+            &:hover {
+            background-color: hsla(0, 0%, 0%, 0.224);
+            }
+            &:hover + .overlay > .overlay-2 {
+            background-color: #003cffed;
+            }
+        }
+    }
+    *.cal1 {
+        tr:nth-of-type(1){
+            td.p-datepicker-weeknumber {
+                color: #0fd7ff !important;
+                font-weight: bolder !important;
+                opacity: 1 !important;
+                font-weight: bolder !important;
+                background-color: #000000ae;
+                border: solid 0.1px #00090a;
+                border-left-color: #1f20204a;
+                border-right-color: #0a0c0b4b;
+                border-top-color: #0a0c0b4b;
+                    &:hover {
+                         background-color: hsla(0, 0%, 0%, 0.224);
+                }
+            }
+        }
+    }
+    *.cal2 {
+        tr:nth-of-type(2){
+            td.p-datepicker-weeknumber {
+                color: #0fd7ff !important;
+                font-weight: bolder !important;
+                font-weight: bolder !important;
+                background-color: #000000ae;
+                border: solid 0.1px #00090a;
+                border-left-color: #1f20204a;
+                border-right-color: #0a0c0b4b;
+                border-top-color: #0a0c0b4b;
+                    &:hover {
+                         background-color: hsla(0, 0%, 0%, 0.224);
+                }
+            }
+        }
+    }
+    *.cal3 {
+        tr:nth-of-type(3){
+            td.p-datepicker-weeknumber {
+                color: #0fd7ff !important;
+                font-weight: bolder !important;
+                font-weight: bolder !important;
+                background-color: #000000ae;
+                border: solid 0.1px #00090a;
+                border-left-color: #1f20204a;
+                border-right-color: #0a0c0b4b;
+                border-top-color: #0a0c0b4b;
+                    &:hover {
+                         background-color: hsla(0, 0%, 0%, 0.224);
+                }
+            }
+        }
+    }
+    *.cal4 {
+        tr:nth-of-type(4){
+            td.p-datepicker-weeknumber {
+                color: #0fd7ff !important;
+                font-weight: bolder !important;
+                font-weight: bolder !important;
+                background-color: #000000ae;
+                border: solid 0.1px #00090a;
+                border-left-color: #1f20204a;
+                border-right-color: #0a0c0b4b;
+                border-top-color: #0a0c0b4b;
+                    &:hover {
+                         background-color: hsla(0, 0%, 0%, 0.224);
+                }
+            }
+        }
+    }
+    *.cal5 {
+        tr:nth-of-type(5){
+            td.p-datepicker-weeknumber {
+                color: #0fd7ff !important;
+                font-weight: bolder !important;
+                font-weight: bolder !important;
+                background-color: #000000ae;
+                border: solid 0.1px #00090a;
+                border-left-color: #1f20204a;
+                border-right-color: #0a0c0b4b;
+                border-top-color: #0a0c0b4b;
+                    &:hover {
+                         background-color: hsla(0, 0%, 0%, 0.224);
+                }
+            }
+        }
+    }
+}
+:host ::ng-deep .cd {
+    &.p-card {
+        > * {
+            padding: 0px;
+            padding-left: 5px;
+            color: #d8d8d8e3;
+            margin-top:20px;
+        }
+        >:first-child .p-card-title {
+            color: rgb(185, 197, 200);
+            padding-left: 2px;
+            padding-bottom: 0px;
+        }
+        >:first-child .p-card-content {
+            padding-top: 0px;
+            padding-bottom: 10px;
+        }
+        max-width: 444px;
+        p {
+        color: rgba(226, 226, 226, 0.819);
+        margin:0px;
+        padding:0px;
+        }
+    }
+}
+:host ::ng-deep .p-panel {
+    &.landing {
+        background-color: #00000000;
+        margin: 10px;
+    }
+    > :first-child {
+        margin-top: 40px;
+        white-space: nowrap !important;
+        color:rgb(13, 202, 240);
+        font-weight: bolder;
+        font-size: larger;
+    }
+    >.p-panel-header {border: 1px solid #000000b0}
+    padding-left:30px;
+}
+// :host ::ng-deep .p-panel-header {
+//     // background-color: var(--pink-500);
+//     // border-color: var(--pink-500);
+//     color: #223eae;
+// }
+:host ::ng-deep .p-card-header {
+    background-color: var(--pink-500);
+    border-color: var(--pink-500);
+    color: #17a229;
+}
+:host ::ng-deep .p-card-content {
+    border-color: var(--pink-500);
+}
+:host ::ng-deep p-multiSelect > * {
+    min-width: 450px;
+    z-index: 900;
+    // .p-multiselect-label.p-placeholder {
+    //     color: red;
+    //     z-index: 950; 
+    //     border: 1px solid yellow;
+    // }
+    p-multiselect .p-placeholder {
+        color: red; /* Replace "red" with the desired color */
+      }
+}
+:host ::ng-deep p-dropdown > * {
+    min-width: 450px;
+}
+:host ::ng-deep .p-dropdown {
+    > * {z-index: 100000;}
+}
+
+:host ::ng-deep {
+    &.p-sidebar.secondBar .p-sidebar-content {
+    overflow: hidden
+    }
+    *.p-sidebar.secondBar .p-sidebar-header {
+        //increase padding make it red and add border
+        padding: 20px;
+        border: 10px solid red;
+        .p-sidebar-close.p-sidebar-icon { 
+            //change color of x
+            color: rgb(0, 208, 255);
+            right:410px;
+            top:30px;
+            border: 1px solid rgb(0, 208, 255);
+        }
+    }
+    &.p-calendar {
+        * { border: 0.09px solid rgba(0, 0, 0, 0) }
+        border-bottom: 4px solid #34393b5e;
+    }
+    &.p-selectbutton {
+        div.p-button:nth-child(3) { background-color:#6e6e6e46;}
+        &.sb2 .p-button { width: 212px; }
+        div.p-button {
+            &:focus { border: 1px solid rgb(51, 51, 51); }
+            &:focus:not(:focus) { border: 1px solid green;}
+            width: 143px;
+            border: 1px solid rgb(51, 51, 51);
+            background-color:rgba(110, 110, 110, 0.274);
+        }
+    }
+}
+ 
+
+/* .p-calendar.cal
+{
+    margin-top: 100px;
+    background: var(--blue-500);
+    .p-datepicker-current-day {
+        color: blueviolet;
+    }
+} */
+/* .p-datepicker-weeknumber {
+    display: none;
+} */

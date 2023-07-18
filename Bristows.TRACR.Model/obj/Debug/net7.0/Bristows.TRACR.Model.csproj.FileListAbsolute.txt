@@ -1,0 +1,42 @@
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.Model/bin/Debug/net7.0/Bristows.TRACR.Model.deps.json
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.Model/bin/Debug/net7.0/Bristows.TRACR.Model.runtimeconfig.json
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.Model/bin/Debug/net7.0/Bristows.TRACR.Model.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.Model/bin/Debug/net7.0/Bristows.TRACR.Model.pdb
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.Model/obj/Debug/net7.0/Bristows.TRACR.Model.csproj.AssemblyReference.cache
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.Model/obj/Debug/net7.0/Bristows.TRACR.Model.GeneratedMSBuildEditorConfig.editorconfig
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.Model/obj/Debug/net7.0/Bristows.TRACR.Model.AssemblyInfoInputs.cache
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.Model/obj/Debug/net7.0/Bristows.TRACR.Model.AssemblyInfo.cs
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.Model/obj/Debug/net7.0/Bristows.TRACR.Model.csproj.CoreCompileInputs.cache
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.Model/obj/Debug/net7.0/Bristows.TRACR.Model.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.Model/obj/Debug/net7.0/refint/Bristows.TRACR.Model.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.Model/obj/Debug/net7.0/Bristows.TRACR.Model.pdb
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.Model/obj/Debug/net7.0/Bristows.TRACR.Model.genruntimeconfig.cache
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.Model/obj/Debug/net7.0/ref/Bristows.TRACR.Model.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.Model/bin/Debug/net7.0/Bristows.TRACR.Model.deps.json
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.Model/bin/Debug/net7.0/Bristows.TRACR.Model.runtimeconfig.json
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.Model/bin/Debug/net7.0/Bristows.TRACR.Model.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.Model/bin/Debug/net7.0/Bristows.TRACR.Model.pdb
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.Model/obj/Debug/net7.0/Bristows.TRACR.Model.csproj.AssemblyReference.cache
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.Model/obj/Debug/net7.0/Bristows.TRACR.Model.GeneratedMSBuildEditorConfig.editorconfig
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.Model/obj/Debug/net7.0/Bristows.TRACR.Model.AssemblyInfoInputs.cache
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.Model/obj/Debug/net7.0/Bristows.TRACR.Model.AssemblyInfo.cs
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.Model/obj/Debug/net7.0/Bristows.TRACR.Model.csproj.CoreCompileInputs.cache
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.Model/obj/Debug/net7.0/Bristows.TRACR.Model.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.Model/obj/Debug/net7.0/refint/Bristows.TRACR.Model.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.Model/obj/Debug/net7.0/Bristows.TRACR.Model.pdb
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.Model/obj/Debug/net7.0/Bristows.TRACR.Model.genruntimeconfig.cache
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.Model/obj/Debug/net7.0/ref/Bristows.TRACR.Model.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.Model\bin\Debug\net7.0\Bristows.TRACR.Model.deps.json
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.Model\bin\Debug\net7.0\Bristows.TRACR.Model.runtimeconfig.json
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.Model\bin\Debug\net7.0\Bristows.TRACR.Model.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.Model\bin\Debug\net7.0\Bristows.TRACR.Model.pdb
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.Model\obj\Debug\net7.0\Bristows.TRACR.Model.csproj.AssemblyReference.cache
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.Model\obj\Debug\net7.0\Bristows.TRACR.Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.Model\obj\Debug\net7.0\Bristows.TRACR.Model.AssemblyInfoInputs.cache
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.Model\obj\Debug\net7.0\Bristows.TRACR.Model.AssemblyInfo.cs
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.Model\obj\Debug\net7.0\Bristows.TRACR.Model.csproj.CoreCompileInputs.cache
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.Model\obj\Debug\net7.0\Bristows.TRACR.Model.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.Model\obj\Debug\net7.0\refint\Bristows.TRACR.Model.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.Model\obj\Debug\net7.0\Bristows.TRACR.Model.pdb
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.Model\obj\Debug\net7.0\Bristows.TRACR.Model.genruntimeconfig.cache
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.Model\obj\Debug\net7.0\ref\Bristows.TRACR.Model.dll

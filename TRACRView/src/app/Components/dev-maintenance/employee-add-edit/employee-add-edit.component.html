@@ -1,0 +1,80 @@
+<div *ngIf="mode=='edit'&&!(employee$|async)" class="h-100 pb-5 d-flex align-items-center justify-content-center text-info">
+  <strong class="me-3 text-info">Loading...</strong>
+  <div class="spinner-border text-info mb-1" role="status" aria-hidden="true"></div>
+</div>
+
+<ng-template #editView>
+  <div style="max-width:600px;" *ngIf="employee$ | async as emp" [hidden]="mode!='edit'" class="container mt-4 text-light">
+    <h3>Edit Employee:</h3>
+    <form class="form" [formGroup]="editEmployeeForm" (ngSubmit)="onSubmitEdit()" #f="ngForm">
+      <div class="form-group mb-2">
+        <label class="label text-secondary" for="#">Id</label>
+        <input formControlName='id' [(ngModel)]="emp.id" [readonly]="editEmployeeForm.get('id')?.disabled" type="text" class="border-dark bg-dark form-control" style="color:rgb(168, 167, 167);"/>
+      </div>
+      <div class="form-group mb-2">
+        <label class="label text-secondary" for="#">Full Name</label>
+        <input type="text" formControlName='name' [(ngModel)]="emp.name" class="bg-dark border-secondary text-light form-control"
+          [class.is-invalid]="editEmployeeForm.get('name')?.invalid&&(submitted||(editEmployeeForm.get('name')?.touched||editEmployeeForm.get('name')?.dirty))" required />
+        <span *ngIf="editEmployeeForm.get('name')?.errors?.['required']" class="invalid-feedback" aria-describedby="basic-addon1">Name is required</span>
+        <span *ngIf="editEmployeeForm.get('name')?.touched&&editEmployeeForm.get('name')?.errors?.['pattern']" class="invalid-feedback">That doesn't look right!</span>
+      </div>
+      <div class="form-group mb-2">
+        <label class="label text-secondary" for="#">Email</label>
+        <div class="input-group">
+          <span class="input-group-text border-secondary bg-secondary text-light" id="basic-addon1">@</span>
+          <input type="text" formControlName="email" [(ngModel)]="emp.email" class="bg-dark border-secondary text-light form-control"
+            [class.is-invalid]="editEmployeeForm.get('email')?.invalid&&(submitted||(editEmployeeForm.get('email')?.touched||editEmployeeForm.get('email')?.dirty))" required />
+        </div>
+        <span *ngIf="editEmployeeForm.get('email')?.errors?.['required']" class="invalid-feedback">Email is required</span>
+        <span *ngIf="editEmployeeForm.get('email')?.touched&&editEmployeeForm.get('email')?.errors?.['email']" class="invalid-feedback">That doesn't look right!</span>
+      </div>
+
+      <div class="form-group mb-4">
+        <label class="label text-secondary" for="#">Phone</label>
+        <input type="text" formControlName="phone" [(ngModel)]="emp.phone" class="bg-dark border-secondary text-light form-control"
+          [class.is-invalid]="editEmployeeForm.get('phone')?.invalid&&(submitted||(editEmployeeForm.get('phone')?.touched||editEmployeeForm.get('phone')?.dirty))" required />
+        <span *ngIf="editEmployeeForm.get('phone')?.errors?.['required']" class="invalid-feedback">Phone is required</span>
+        <span *ngIf="editEmployeeForm.get('phone')?.touched&&editEmployeeForm.get('phone')?.errors?.['pattern']" class="invalid-feedback">Phone must be a valid phone number</span>
+      </div>
+      <div>
+        <a class="btn btn-secondary me-1" [routerLink]="['/employees']" href="javascript:void(0);">Cancel</a>
+        <button type="submit" (click)="submitted=true;" class="btn btn-light ms-1">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #addView>
+  <div class="container text-light mt-4" style="max-width:600px;" [hidden]="mode!='add'">
+    <h3>Add New Employee:</h3>
+    <form [formGroup]="employeeForm" class="form" (ngSubmit)="onSubmitAdd()" #f="ngForm">
+      <div class="form-group">
+        <label class="label" for="#">Full Name</label>
+        <input formControlName='name' class="bg-secondary border-dark text-light form-control"
+        [class.is-invalid]="employeeForm.get('name')?.invalid&&(submitted||(employeeForm.get('name')?.touched||employeeForm.get('name')?.dirty))" type="text" required />
+        <span *ngIf="employeeForm.get('name')?.errors?.['required']" class="invalid-feedback">Name is required</span>
+        <span *ngIf="employeeForm.get('name')?.touched&&employeeForm.get('name')?.errors?.['pattern']" class="invalid-feedback">That doesn't look right!</span>
+      </div>
+      <div class="form-group">
+        <label class="label" for="#">Email</label>
+        <input formControlName="email" class="bg-secondary border-dark text-light form-control"
+        [class.is-invalid]="employeeForm.get('email')?.invalid&&(submitted||(employeeForm.get('email')?.touched||employeeForm.get('email')?.dirty))" type="text" required />
+        <span *ngIf="employeeForm.get('email')?.errors?.['required']" class="invalid-feedback" aria-describedby="basic-addon1">Email is required</span>
+        <span *ngIf="employeeForm.get('email')?.touched&&employeeForm.get('email')?.errors?.['email']" class="invalid-feedback">That doesn't look right!</span>
+      </div>
+      <div class="form-group">
+        <label class="label" for="#">Phone</label>
+        <input formControlName="phone" class="bg-secondary border-dark text-light form-control"
+        [class.is-invalid]="employeeForm.get('phone')?.invalid&&(submitted||(employeeForm.get('phone')?.touched||employeeForm.get('phone')?.dirty))" type="text" required />
+        <span *ngIf="employeeForm.get('phone')?.errors?.['required']" class="invalid-feedback">Phone is required</span>
+        <span *ngIf="employeeForm.get('phone')?.touched&&employeeForm.get('phone')?.errors?.['pattern']" class="invalid-feedback">Phone must be a valid phone number</span>
+      </div>
+      <div>
+        <a class="btn btn-secondary me-1" [routerLink]="['/employees']" href="javascript:void(0);">Cancel</a>
+        <button type="submit" (click)="submitted=true;" class="btn btn-success ms-1">Add Employee</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<div *ngIf="mode=='edit'; then editView; else addView;"></div>

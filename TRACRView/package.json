@@ -1,0 +1,46 @@
+{
+  "name": "tracr",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "echo 'Starting the application' && ng serve -o --port 5200",
+    "build": "echo 'Building the application' && ng build",
+    "watch": "echo 'Watching the application' && ng build --watch --configuration development",
+    "test": "echo 'Testing the application' && ng test"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "latest",
+    "@angular/common": "latest",
+    "@angular/compiler": "^16.0.2",
+    "@angular/core": "latest",
+    "@angular/forms": "^16.0.2",
+    "@angular/platform-browser": "^16.0.2",
+    "@angular/platform-browser-dynamic": "^16.0.2",
+    "@angular/router": "^16.0.2",
+    "bootstrap-icons": "^1.10.5",
+    "google-libphonenumber": "^3.2.32",
+    "intl-tel-input": "^18.1.6",
+    "primeflex": "^3.3.0",
+    "primeicons": "^6.0.1",
+    "primeng": "^16.0.0-rc.2",
+    "rxjs": "~7.8.1",
+    "tslib": "^2.5.2",
+    "zone.js": "latest"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^16.0.2",
+    "@angular/cli": "~16.0.2",
+    "@angular/compiler-cli": "^16.0.2",
+    "@angularclass/hmr": "^3.0.0",
+    "@types/jasmine": "~4.3.1",
+    "jasmine-core": "~5.0.0",
+    "karma": "~6.4.2",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.0.0",
+    "node-sass": "^9.0.0",
+    "typescript": "~5.0.4"
+  }
+}

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Bristows.TRACR.API.props" />
+</Project>

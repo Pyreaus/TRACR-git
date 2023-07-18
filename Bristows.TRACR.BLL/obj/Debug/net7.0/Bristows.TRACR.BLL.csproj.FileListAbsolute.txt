@@ -1,0 +1,51 @@
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/bin/Debug/net7.0/Bristows.TRACR.BLL.deps.json
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/bin/Debug/net7.0/Bristows.TRACR.BLL.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/bin/Debug/net7.0/Bristows.TRACR.BLL.pdb
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/bin/Debug/net7.0/Bristows.TRACR.DAL.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/bin/Debug/net7.0/Bristows.TRACR.Model.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/bin/Debug/net7.0/Bristows.TRACR.DAL.pdb
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/bin/Debug/net7.0/Bristows.TRACR.Model.pdb
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/obj/Debug/net7.0/Bristows.TRACR.BLL.csproj.AssemblyReference.cache
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/obj/Debug/net7.0/Bristows.TRACR.BLL.GeneratedMSBuildEditorConfig.editorconfig
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/obj/Debug/net7.0/Bristows.TRACR.BLL.AssemblyInfoInputs.cache
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/obj/Debug/net7.0/Bristows.TRACR.BLL.AssemblyInfo.cs
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/obj/Debug/net7.0/Bristows.TRACR.BLL.csproj.CoreCompileInputs.cache
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/obj/Debug/net7.0/Bristows.TRACR.BLL.csproj.CopyComplete
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/obj/Debug/net7.0/Bristows.TRACR.BLL.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/obj/Debug/net7.0/refint/Bristows.TRACR.BLL.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/obj/Debug/net7.0/Bristows.TRACR.BLL.pdb
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.BLL/obj/Debug/net7.0/ref/Bristows.TRACR.BLL.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/bin/Debug/net7.0/Bristows.TRACR.BLL.deps.json
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/bin/Debug/net7.0/Bristows.TRACR.BLL.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/bin/Debug/net7.0/Bristows.TRACR.BLL.pdb
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/bin/Debug/net7.0/Bristows.TRACR.DAL.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/bin/Debug/net7.0/Bristows.TRACR.Model.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/bin/Debug/net7.0/Bristows.TRACR.DAL.pdb
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/bin/Debug/net7.0/Bristows.TRACR.Model.pdb
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/obj/Debug/net7.0/Bristows.TRACR.BLL.csproj.AssemblyReference.cache
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/obj/Debug/net7.0/Bristows.TRACR.BLL.GeneratedMSBuildEditorConfig.editorconfig
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/obj/Debug/net7.0/Bristows.TRACR.BLL.AssemblyInfoInputs.cache
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/obj/Debug/net7.0/Bristows.TRACR.BLL.AssemblyInfo.cs
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/obj/Debug/net7.0/Bristows.TRACR.BLL.csproj.CoreCompileInputs.cache
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/obj/Debug/net7.0/Bristows.TRACR.BLL.csproj.CopyComplete
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/obj/Debug/net7.0/Bristows.TRACR.BLL.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/obj/Debug/net7.0/refint/Bristows.TRACR.BLL.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/obj/Debug/net7.0/Bristows.TRACR.BLL.pdb
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.BLL/obj/Debug/net7.0/ref/Bristows.TRACR.BLL.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\bin\Debug\net7.0\Bristows.TRACR.BLL.deps.json
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\bin\Debug\net7.0\Bristows.TRACR.BLL.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\bin\Debug\net7.0\Bristows.TRACR.BLL.pdb
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\bin\Debug\net7.0\Bristows.TRACR.DAL.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\bin\Debug\net7.0\Bristows.TRACR.Model.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\bin\Debug\net7.0\Bristows.TRACR.DAL.pdb
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\bin\Debug\net7.0\Bristows.TRACR.Model.pdb
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.csproj.AssemblyReference.cache
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.AssemblyInfoInputs.cache
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.AssemblyInfo.cs
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.csproj.CoreCompileInputs.cache
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.csproj.CopyComplete
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\obj\Debug\net7.0\refint\Bristows.TRACR.BLL.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.pdb
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\obj\Debug\net7.0\ref\Bristows.TRACR.BLL.dll

@@ -1,0 +1,20 @@
+<h5 style="white-space: nowrap;">Create a new task for the week
+    <span [style.color]="'rgb(13, 202, 240)'"><strong>{{ diary?.weekBeginning }}</strong></span>?
+</h5>
+<form [formGroup]="taskForm">
+    <label>Matter:</label>
+    <input formControlName="matter" tooltipPosition="bottom" pInputText [tooltipZIndex]="'1000000'" class="form-control mb-2" type="text" pTooltip="Brief description of the matter (e.g Pharma Agreement or Commercial Lease etc). Do not use client names.">
+    <label>Task Description:</label>
+    <textarea formControlName="taskDescription" class="form-control" id="taskFormControlDescription" rows="3"></textarea>
+    <br>
+    <label>Skills:</label>
+    <!-- <select class="form-control mb-1" id="taskFormControlSkills">
+        <option>skill 1</option>
+        <option>skill 2</option>
+        <option>skill 3</option>
+        <option>skill 4</option>
+        <option>skill 5</option>
+    </select> -->
+    <input formControlName="skills" class="form-control" type="text">
+</form>
+<div style="position: relative;top:66px;left:7px;"><h6>Diary ID: <span class="text-info" [style]="diary?.diaryId | fontSize : '20px'">{{ diary?.diaryId }}</span></h6></div>

@@ -1,0 +1,303 @@
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/appsettings.Development.json
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/appsettings.json
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.API
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.API.deps.json
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.API.runtimeconfig.json
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.API.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.API.pdb
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Azure.Core.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Azure.Identity.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Humanizer.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.AspNetCore.OpenApi.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Bcl.AsyncInterfaces.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Data.SqlClient.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Design.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Relational.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.SqlServer.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Extensions.DependencyModel.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Identity.Client.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Identity.Client.Extensions.Msal.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.OpenApi.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.SqlServer.Server.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Win32.SystemEvents.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Mono.TextTemplating.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/System.CodeDom.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/System.Configuration.ConfigurationManager.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/System.Drawing.Common.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/System.Memory.Data.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/System.Runtime.Caching.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/System.Security.Cryptography.ProtectedData.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/System.Security.Permissions.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/System.Windows.Extensions.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/unix/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win/lib/netstandard2.0/System.Runtime.Caching.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.BLL.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.DAL.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.Model.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.BLL.pdb
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.Model.pdb
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.DAL.pdb
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.csproj.AssemblyReference.cache
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.GeneratedMSBuildEditorConfig.editorconfig
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.AssemblyInfoInputs.cache
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.AssemblyInfo.cs
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.csproj.CoreCompileInputs.cache
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.MvcApplicationPartsAssemblyInfo.cs
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.MvcApplicationPartsAssemblyInfo.cache
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/staticwebassets/msbuild.Bristows.TRACR.API.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/staticwebassets/msbuild.build.Bristows.TRACR.API.props
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.Bristows.TRACR.API.props
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.Bristows.TRACR.API.props
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/staticwebassets.pack.json
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/staticwebassets.build.json
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/staticwebassets.development.json
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/scopedcss/bundle/Bristows.TRACR.API.styles.css
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.csproj.CopyComplete
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/refint/Bristows.TRACR.API.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.pdb
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.genruntimeconfig.cache
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/obj/Debug/net7.0/ref/Bristows.TRACR.API.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/AutoMapper.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/package-lock.json
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.Negotiate.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.AspNetCore.Connections.Abstractions.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Extensions.Features.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/System.DirectoryServices.Protocols.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/linux/lib/net7.0/System.DirectoryServices.Protocols.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/osx/lib/net7.0/System.DirectoryServices.Protocols.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.DirectoryServices.Protocols.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Extensions.Identity.Core.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Extensions.Identity.Stores.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Extensions.Options.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.API.staticwebassets.runtime.json
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.AspNetCore.Identity.UI.Views.V4.dll
+/Users/noel/Desktop/Dev/Application 03/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.AspNetCore.Identity.UI.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/appsettings.Development.json
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/appsettings.json
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/package-lock.json
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.API.staticwebassets.runtime.json
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.API
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.API.deps.json
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.API.runtimeconfig.json
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.API.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.API.pdb
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/AutoMapper.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Azure.Core.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Azure.Identity.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Humanizer.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.Negotiate.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.AspNetCore.Connections.Abstractions.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.AspNetCore.Identity.UI.Views.V4.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.AspNetCore.Identity.UI.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.AspNetCore.OpenApi.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Bcl.AsyncInterfaces.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Data.SqlClient.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Design.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Relational.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.SqlServer.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Extensions.DependencyModel.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Extensions.Features.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Extensions.Identity.Core.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Extensions.Identity.Stores.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Extensions.Options.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Identity.Client.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Identity.Client.Extensions.Msal.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.OpenApi.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.SqlServer.Server.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Microsoft.Win32.SystemEvents.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Mono.TextTemplating.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/System.CodeDom.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/System.Configuration.ConfigurationManager.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/System.DirectoryServices.Protocols.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/System.Drawing.Common.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/System.Memory.Data.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/System.Runtime.Caching.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/System.Security.Cryptography.ProtectedData.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/System.Security.Permissions.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/System.Windows.Extensions.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/unix/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/linux/lib/net7.0/System.DirectoryServices.Protocols.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/osx/lib/net7.0/System.DirectoryServices.Protocols.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.DirectoryServices.Protocols.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win/lib/netstandard2.0/System.Runtime.Caching.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.BLL.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.DAL.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.Model.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.BLL.pdb
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.Model.pdb
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/bin/Debug/net7.0/Bristows.TRACR.DAL.pdb
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.csproj.AssemblyReference.cache
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.GeneratedMSBuildEditorConfig.editorconfig
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.AssemblyInfoInputs.cache
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.AssemblyInfo.cs
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.csproj.CoreCompileInputs.cache
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.MvcApplicationPartsAssemblyInfo.cs
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.MvcApplicationPartsAssemblyInfo.cache
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/staticwebassets/msbuild.Bristows.TRACR.API.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/staticwebassets/msbuild.build.Bristows.TRACR.API.props
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.Bristows.TRACR.API.props
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.Bristows.TRACR.API.props
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/staticwebassets.pack.json
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/staticwebassets.build.json
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/staticwebassets.development.json
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/scopedcss/bundle/Bristows.TRACR.API.styles.css
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.csproj.CopyComplete
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/refint/Bristows.TRACR.API.dll
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.pdb
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/Bristows.TRACR.API.genruntimeconfig.cache
+/Users/noel/Desktop/Dev/TRACR/Bristows.TRACR.API/obj/Debug/net7.0/ref/Bristows.TRACR.API.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\appsettings.json
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\package-lock.json
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Bristows.TRACR.API.staticwebassets.runtime.json
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Bristows.TRACR.API.exe
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Bristows.TRACR.API.deps.json
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Bristows.TRACR.API.runtimeconfig.json
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Bristows.TRACR.API.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Bristows.TRACR.API.pdb
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Azure.Core.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Azure.Identity.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Humanizer.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.Negotiate.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.UI.Views.V4.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.UI.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.Extensions.Features.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.Identity.Client.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\System.CodeDom.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\System.DirectoryServices.Protocols.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\System.Drawing.Common.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\System.Memory.Data.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\System.Runtime.Caching.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\System.Security.Permissions.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\System.Windows.Extensions.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\runtimes\linux\lib\net7.0\System.DirectoryServices.Protocols.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\runtimes\osx\lib\net7.0\System.DirectoryServices.Protocols.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.DirectoryServices.Protocols.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Bristows.TRACR.BLL.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Bristows.TRACR.DAL.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Bristows.TRACR.Model.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Bristows.TRACR.BLL.pdb
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Bristows.TRACR.Model.pdb
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\bin\Debug\net7.0\Bristows.TRACR.DAL.pdb
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\Bristows.TRACR.API.csproj.AssemblyReference.cache
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\Bristows.TRACR.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\Bristows.TRACR.API.AssemblyInfoInputs.cache
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\Bristows.TRACR.API.AssemblyInfo.cs
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\Bristows.TRACR.API.csproj.CoreCompileInputs.cache
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\Bristows.TRACR.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\Bristows.TRACR.API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\staticwebassets\msbuild.Bristows.TRACR.API.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\staticwebassets\msbuild.build.Bristows.TRACR.API.props
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Bristows.TRACR.API.props
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.Bristows.TRACR.API.props
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\scopedcss\bundle\Bristows.TRACR.API.styles.css
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\Bristows.TRACR.API.csproj.CopyComplete
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\Bristows.TRACR.API.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\refint\Bristows.TRACR.API.dll
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\Bristows.TRACR.API.pdb
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\Bristows.TRACR.API.genruntimeconfig.cache
+C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.API\obj\Debug\net7.0\ref\Bristows.TRACR.API.dll
