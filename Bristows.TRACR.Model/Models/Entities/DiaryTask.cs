@@ -3,21 +3,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bristows.TRACR.Model.Models.Entities
 {
-    [Table("DiaryTask", Schema="dbo")]
+    [Table("DIARY_TASKS", Schema="dbo")]
     public partial class DiaryTask
     {
         [Key]
-        public int DiaryTaskId { get; set; } = 0;
+        public int DIARY_TASK_ID { get; set; } = 0;
         [Required]
-        public int DiaryId { get; set; } = 0;
-        public Guid? LocalId { get; set; } = null;
-        public ICollection<Skill>? Skills { get; set; } = new List<Skill>();
+        public int DIARY_ID { get; set; } = 0;
+        [MaxLength(500)]
+        public string? MATTER { get; set; } = string.Empty;
+        public string? FEE_EARNERS { get; set; } = string.Empty;
+        public string? TASK_DESCRIPTION { get; set; } = string.Empty;
+        public string? SKILLS { get; set; } = string.Empty;
+        public DateTime? TIMESTAMP { get; set; }
         [MaxLength(50)]
-        [RegularExpression(@"^[a-zA-Z\s]+$")]
-        public string? Matter { get; set; } = string.Empty;
-        [MaxLength(100)]
-        public string? TaskDescription { get; set; } = string.Empty;
-        public DateTime? Timestamp { get; set; }
-        public bool? Show { get; set; } = true;
+        public string? SHOW { get; set; } = string.Empty;
     }
 }

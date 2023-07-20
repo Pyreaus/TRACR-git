@@ -1,33 +1,75 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Bristows.TRACR.Model.Models.ValidationAttributes;
 
 namespace Bristows.TRACR.Model.Models.Entities
 {
-    [Table("PeopleFinderUser", Schema="dbo")]
+    [Table("People", Schema="dbo")]
     // [Keyless]
     public partial class PeopleFinderUser
     {
         [Key]
-        [ValidPfid]
-        public int PfId { get; set; } = 0;
-        public Guid? LocalId { get; set; } = Guid.Empty;
+        [ValidationAttributes.ValidPfid]
+        public int? PFID { get; set; } = 0;
+        [MinLength(2),MaxLength(50)]
         [Required]
-        [MaxLength(10),MinLength(2)]
-        public string FirstName { get; set; } = string.Empty;
+        public string? FirstName { get; set; } = string.Empty;
+        [MinLength(2),MaxLength(50)]
         [Required]
-        [MaxLength(35),MinLength(2)]
-        public string LastName { get; set; } = string.Empty;
-        [MaxLength(40)]
-        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")]
-        public string? Email { get; set; }
-        [MaxLength(40),MinLength(5)]
-        [RegularExpression(@"^(\d{3}[- .]?){2}\d{4}$")]
-        public string? Telephone { get; set; }
-        [ValidPfid]
-        public int? OtherPfid { get; set; } = 0;
-        public string? Photo { get; set; } = string.Empty;
-        [ValidWinUser]
+        public string? LastName { get; set; } = string.Empty;
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [MinLength(2),MaxLength(101)]
+        [Required]
+        public string? FullName { get; set; } = string.Empty;
+        [MaxLength(50)]
         public string? WinUser { get; set; } = string.Empty;
-    }
+        [Required]
+        public int? DepartmentID { get; set; } = 0;
+        [Required]
+        [MaxLength(100)]
+        public string? JobTitle { get; set; } = string.Empty;
+        [Required]
+        [MaxLength(50)]
+        public string? Telephone { get; set; } = string.Empty;
+        [MaxLength(50)]
+        public string? Mobile { get; set; } = string.Empty;
+        [MaxLength(260)]
+        public string? Photo { get; set; } = string.Empty;
+        [MaxLength(100)]
+        public string? Email { get; set; } = string.Empty;
+        public int? SecretaryID { get; set; } = 0;
+        public int? LocationID { get; set; } = 0;
+        public int? RoomID { get; set; } = 0;
+        public DateTime? JoinDate { get; set; }
+        public DateTime? MaternityDate { get; set; }
+        public bool? MaternityDirection { get; set; } = false;
+        public DateTime? SecondmentDate { get; set; }
+        [MaxLength(50)]
+        public string? SecondmentCompanyName { get; set; } = string.Empty;
+        public DateTime? LeaveDate { get; set; }
+        public string? About { get; set; } = string.Empty;
+        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public bool? ActiveUser { get; set; } = true;
+        [Required]
+        public bool? Partner { get; set; } = false;
+        [Required]
+        public bool? Human { get; set; } = false;
+        [Required]
+        public DateTime Timestamped { get; set; }
+        [Required]
+        public int? CreatorID { get; set; } = 0;
+        [MaxLength(10)]
+        public string? Initials { get; set; } = string.Empty;
+        [Required]
+        public bool? FeeEarner { get; set; } = false;
+        [Required]
+        public bool? Show { get; set; } = false;
+        public decimal? FeeEarnerChargeOutRate { get; set; } = 0;
+        [MaxLength(50)]
+        public string? Upn { get; set; } = string.Empty;
+        public DateTime? SabbaticalBeginDate { get; set; }
+        public DateTime? SabbaticalEndDate { get; set; }
+        [MaxLength(260)]
+        public string? PronouncedAs { get; set; } = string.Empty;
+    }    
 }

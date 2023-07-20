@@ -5,14 +5,16 @@ namespace Bristows.TRACR.Model.DTOs
     public partial class AddModifyDiaryTaskReq
     {
         [Required]
-        public int DiaryId { get; set; }
-        public ICollection<SkillDTO>? Skills { get; set; }
-        [MaxLength(25)]
+        public int DIARY_ID { get; set; }
+        [MaxLength(250)]
         [RegularExpression(@"^[a-zA-Z\s]+$")]
-        public string? Matter { get; set; }
-        [MaxLength(100)]
-        public string? TaskDescription { get; set; }
-        public bool? Show { get; set; } = true;
+        public string? MATTER { get; set; }
+        public string? FEE_EARNERS { get; set; }
+        [MaxLength(300)]
+        public string? TASK_DESCRIPTION { get; set; }
+        public string? SKILLS { get; set; }
+        [MaxLength(50)]
+        public string? SHOW { get; set; }
     }
 }
 

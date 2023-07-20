@@ -1,15 +1,14 @@
 using System.ComponentModel.DataAnnotations;
-using Bristows.TRACR.Model.Models.ValidationAttributes;
 
 namespace Bristows.TRACR.Model.DTOs
 {
     public partial class AddModifyDiaryReq
     {
         [Required]
-        [ValidPfid]
-        public int Pfid { get; set; }
-        public string? WeekBeginning { get; set; }
-        public string? LearningPoints { get; set; }
+        [Models.ValidationAttributes.ValidPfid]
+        public string? PFID { get; set; }
+        public string? WEEK_BEGINNING { get; set; }
+        public string? LEARNING_POINTS { get; set; }
         // public string? PracticeArea { get; set; }
         public string? ProfessionalDevelopmentUndertaken { get; set; }
         public string? ProfessionalConductIssues { get; set; }
