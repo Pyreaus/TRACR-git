@@ -7,8 +7,8 @@ namespace Bristows.TRACR.Model.DTOs
         [Required]
         [MaxLength(50)]
         [Models.ValidationAttributes.ValidPfid]
-        public string? REVIEWER_PFID { get; set; } = string.Empty;
-        public string? ACTIVE { get; set; } = "true";
-        public string? SHOW { get; set; } = "true";
+        public string? REVIEWER_PFID { get; set; }
+        public string? ACTIVE { get; set; }
+        public string? SHOW { get; set; }
     }
 }

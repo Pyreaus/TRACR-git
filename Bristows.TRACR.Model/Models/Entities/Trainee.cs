@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Bristows.TRACR.Model.Models.ValidationAttributes;
 
 namespace Bristows.TRACR.Model.Models.Entities
 {
@@ -9,14 +8,14 @@ namespace Bristows.TRACR.Model.Models.Entities
     {
         [Key]
         public int TRAINEE_ID { get; set; } = 0;
-        [ValidPfid]
+        [ValidationAttributes.ValidPfid]
         [Required]
         [MaxLength(50)]
         public string? TRAINEE_PFID { get; set; } = string.Empty;
-        [ValidPfid]
+        [ValidationAttributes.ValidPfid]
         [MaxLength(50)]
         public string? REVIEWER_PFID { get; set; } = string.Empty;
-        [ValidPfid]
+        [ValidationAttributes.ValidPfid]
         [MaxLength(50)]
         public string? OTHER_PFID { get; set; } = string.Empty;
         [MaxLength(50)]
