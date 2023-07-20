@@ -1,28 +1,29 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Bristows.TRACR.Model.Models.ValidationAttributes;
 
 namespace Bristows.TRACR.Model.Models.Entities
 {
-    [Table("Diary", Schema="dbo")]
+    [Table("DIARY", Schema="dbo")]
     public partial class Diary
     {
         [Key]
-        public int DiaryId { get; set; } = 0;
-        public Guid? LocalId { get; set; } = null;
-        [Required]
-        [ValidPfid]
-        public int Pfid { get; set; } = 0;
-        public string? WeekBeginning { get; set; }
-        // public string? PracticeArea { get; set; } = string.Empty;
-        public string? LearningPoints { get; set; } = string.Empty;
-        public string? ProfessionalDevelopmentUndertaken { get; set; } = string.Empty;
-        public string? ProfessionalConductIssues { get; set; } = string.Empty;
-        public bool? SignOffSubmitted { get; set; } = false;
-        [MaxLength(10)]
-        public string? SignedOffBy { get; set; } = string.Empty;
-        public DateTime? SignedOffTimestamp { get; set; }
-        public DateTime? Timestamp { get; set; }
-        public bool? Show { get; set; } = true;
+        public int DIARY_ID { get; set; } = 0;
+        [MaxLength(50)]
+        [ValidationAttributes.ValidPfid]
+        public string? PFID { get; set; } = string.Empty;
+        [MaxLength(255)]
+        public string? PRACTICE_AREA { get; set; } = string.Empty;
+        public DateTime? WEEK_BEGINNING { get; set; }
+        public string? LEARNING_POINTS { get; set; } = string.Empty;
+        public string? PROFESSIONAL_DEVELOPMENT_UNDERTAKEN { get; set; } = string.Empty;
+        public string? PROFESSIONAL_CONDUCT_ISSUES { get; set; } = string.Empty;
+        [MaxLength(50)]
+        public string? SIGN_OFF_SUBMITTED { get; set; } = string.Empty;
+        [MaxLength(255)]
+        public string? SIGNED_OFF_BY { get; set; } = string.Empty;
+        public DateTime? SIGNED_OFF_TIMESTAMP { get; set; }
+        public DateTime? TIMESTAMP { get; set; }
+        [MaxLength(50)]
+        public string? SHOW { get; set; } = string.Empty;
     }
 }

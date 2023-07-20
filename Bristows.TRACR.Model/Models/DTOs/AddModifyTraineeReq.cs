@@ -1,14 +1,14 @@
 using System.ComponentModel.DataAnnotations;
-using Bristows.TRACR.Model.Models.ValidationAttributes;
 
 namespace Bristows.TRACR.Model.DTOs
 {
     public partial class AddModifyTraineeReq
     {
         [Required]
-        [ValidPfid]
-        public int? ReviewerPfid { get; set; }
-        public bool? Active { get; set; } = true;
-        public bool? Show { get; set; } = true;
+        [MaxLength(50)]
+        [Models.ValidationAttributes.ValidPfid]
+        public string? REVIEWER_PFID { get; set; } = string.Empty;
+        public string? ACTIVE { get; set; } = "true";
+        public string? SHOW { get; set; } = "true";
     }
 }
