@@ -14,6 +14,6 @@ namespace Bristows.TRACR.Model.DTOs
         [Required]
         [MaxLength(30),MinLength(6)]
         public string? Email { get; set; }
-        public bool? Show { get; set; } = true;
+        public bool? Show { get; set; }
     }
 }
