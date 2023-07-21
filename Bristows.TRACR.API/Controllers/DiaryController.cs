@@ -60,7 +60,7 @@ public partial class DiaryController : ControllerBase
         if (addReq is null) return BadRequest(addReq);
         DiaryTask? newDiaryTask = _diaryService.CreateDiaryTask(_mapper.Map<AddModifyDiaryTaskReq,DiaryTask>(addReq));
         DiaryTaskViewModel diaryTaskVM = _mapper.Map<DiaryTask,DiaryTaskViewModel>(newDiaryTask!);
-        return CreatedAtAction(nameof(GetTaskByTaskId), new { id = newDiaryTask?.DiaryId }, diaryTaskVM);
+        return CreatedAtAction(nameof(GetTaskByTaskId), new { id = newDiaryTask?.DIARY_ID }, diaryTaskVM);
     }
 
     /// <summary>
@@ -152,7 +152,7 @@ public partial class DiaryController : ControllerBase
         if (addReq is null) return BadRequest(addReq);
         Diary? newDiary = _diaryService.CreateDiary(_mapper.Map<AddModifyDiaryReq,Diary>(addReq));
         DiaryViewModel diaryVM = _mapper.Map<Diary,DiaryViewModel>(newDiary!);
-        return CreatedAtAction(nameof(GetDiaryPfid), new { pfid = newDiary?.Pfid }, diaryVM);
+        return CreatedAtAction(nameof(GetDiaryPfid), new { pfid = newDiary?.PFID }, diaryVM);
     }
 
     /// <summary>

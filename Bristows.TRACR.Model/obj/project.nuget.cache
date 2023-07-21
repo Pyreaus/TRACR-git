@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0ASf3lH/g9S1G5HOk0wJLVPxcVYyxkeqySbeydfSENKSoyayzoewIXWAOQOykeHnh+Oexs7Wez2L7kB2w5DCyQ==",
+  "dgSpecHash": "t8oJjNAcbKge4VleJiy/qHboVW9lPB7V09G6kHQ8ztDMuP8wGa/zWThcqLXMYFvN/i9gq3F5Lxj2LOvwV3uY0w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\NRhima\\OneDrive - Bristows\\Desktop\\code\\Bristows.TRACR.Model\\Bristows.TRACR.Model.csproj",
+  "projectFilePath": "C:\\Devops\\Bristows.TRACR-Git\\Bristows.TRACR.Model\\Bristows.TRACR.Model.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\NRhima\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\NRhima\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

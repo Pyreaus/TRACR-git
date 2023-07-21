@@ -21,9 +21,6 @@ namespace Bristows.TRACR.BLL.Services.Interfaces
         public Task<bool> IsAdminPfidAsync([ValidPfid] int pfid);
         public Task<bool> IsReviewerPfidAsync([ValidPfid] int pfid);
         public Task<bool> IsTraineePfidAsync([ValidPfid] int pfid);
-        public Task<PeopleFinderUser?> GetUserByLocalIdAsync(Guid id);
-        public PeopleFinderUser? GetUserById(int id);
-        public Task<PeopleFinderUser?> GetUserByIdAsync(int id);
         public Task<string?> GetRoleByPfidAsync([ValidPfid] int pfid);
     }
 }

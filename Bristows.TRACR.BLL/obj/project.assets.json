@@ -3859,11 +3859,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\NRhima\\OneDrive - Bristows\\Desktop\\code\\Bristows.TRACR.BLL\\Bristows.TRACR.BLL.csproj",
+      "projectUniqueName": "C:\\Devops\\Bristows.TRACR-Git\\Bristows.TRACR.BLL\\Bristows.TRACR.BLL.csproj",
       "projectName": "Bristows.TRACR.BLL",
-      "projectPath": "C:\\Users\\NRhima\\OneDrive - Bristows\\Desktop\\code\\Bristows.TRACR.BLL\\Bristows.TRACR.BLL.csproj",
+      "projectPath": "C:\\Devops\\Bristows.TRACR-Git\\Bristows.TRACR.BLL\\Bristows.TRACR.BLL.csproj",
       "packagesPath": "C:\\Users\\NRhima\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\NRhima\\OneDrive - Bristows\\Desktop\\code\\Bristows.TRACR.BLL\\obj\\",
+      "outputPath": "C:\\Devops\\Bristows.TRACR-Git\\Bristows.TRACR.BLL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\NRhima\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -3878,11 +3878,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\NRhima\\OneDrive - Bristows\\Desktop\\code\\Bristows.TRACR.DAL\\Bristows.TRACR.DAL.csproj": {
-              "projectPath": "C:\\Users\\NRhima\\OneDrive - Bristows\\Desktop\\code\\Bristows.TRACR.DAL\\Bristows.TRACR.DAL.csproj"
+            "C:\\Devops\\Bristows.TRACR-Git\\Bristows.TRACR.DAL\\Bristows.TRACR.DAL.csproj": {
+              "projectPath": "C:\\Devops\\Bristows.TRACR-Git\\Bristows.TRACR.DAL\\Bristows.TRACR.DAL.csproj"
             },
-            "C:\\Users\\NRhima\\OneDrive - Bristows\\Desktop\\code\\Bristows.TRACR.Model\\Bristows.TRACR.Model.csproj": {
-              "projectPath": "C:\\Users\\NRhima\\OneDrive - Bristows\\Desktop\\code\\Bristows.TRACR.Model\\Bristows.TRACR.Model.csproj"
+            "C:\\Devops\\Bristows.TRACR-Git\\Bristows.TRACR.Model\\Bristows.TRACR.Model.csproj": {
+              "projectPath": "C:\\Devops\\Bristows.TRACR-Git\\Bristows.TRACR.Model\\Bristows.TRACR.Model.csproj"
             }
           }
         }

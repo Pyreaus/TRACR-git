@@ -47,11 +47,11 @@ public partial class UserController : ControllerBase
         IEnumerable<TraineeViewModel?> traineesVM = _mapper.Map<IEnumerable<Trainee?>,IEnumerable<TraineeViewModel>>(
             trainees.Where(
                 trainee => users.Any(
-                    user => user?.OtherPfid == trainee?.TraineePfid
+                    user => user?.PFID.ToString() == trainee?.TRAINEE_PFID
                 )
             ).OfType<Trainee>().ToList()!).OfType<TraineeViewModel>().ToList();
         foreach (PeopleFinderUser? user in users) user!.Photo = (bnetUrl + user.Photo?.ToString()) ?? "../../../assets/profilePic.png";
-        foreach (TraineeViewModel? trainee in traineesVM) _mapper.Map(users.FirstOrDefault(user => trainee?.TraineePfid == user?.OtherPfid)!, trainee);
+        foreach (TraineeViewModel? trainee in traineesVM) _mapper.Map(users.FirstOrDefault(user => trainee?.TRAINEE_PFID == user?.PFID.ToString())!, trainee);
         return (trainees.GetType() == typeof(List<Trainee>)) && traineesVM != null ? Ok(traineesVM) : StatusCode(404);
     }
 
@@ -73,7 +73,7 @@ public partial class UserController : ControllerBase
         Trainee? currentTrainee = await _userService.GetTraineeByPfidAsync(pfid);
         _userService.SetPair(_mapper.Map(addReq, currentTrainee!));
         TraineeViewModel traineeVM = _mapper.Map<Trainee,TraineeViewModel>(currentTrainee!);
-        return CreatedAtAction(nameof(GetTraineesByReviewer), new { pfid = currentTrainee?.ReviewerPfid }, traineeVM);
+        return CreatedAtAction(nameof(GetTraineesByReviewer), new { pfid = currentTrainee?.REVIEWER_PFID }, traineeVM);
     }
 
     /// <summary>
@@ -111,7 +111,7 @@ public partial class UserController : ControllerBase
         Trainee? currentTrainee = await _userService.GetTraineeByPfidAsync(pfid);
         _userService.AssignTrainees(_mapper.Map(addReq, currentTrainee!));
         TraineeViewModel traineeVM = _mapper.Map<Trainee,TraineeViewModel>(currentTrainee!);
-        return CreatedAtAction(nameof(GetTraineesByReviewer), new { pfid = currentTrainee?.ReviewerPfid }, traineeVM);
+        return CreatedAtAction(nameof(GetTraineesByReviewer), new { pfid = currentTrainee?.REVIEWER_PFID }, traineeVM);
     }
                                     //------------------------------MAINTENANCE--------------------------------//
     /// <summary>
@@ -140,7 +140,7 @@ public partial class UserController : ControllerBase
     /// </summary>
     /// <response code="200">{trainee view objects}</response>
     /// <response code="404">missing trainee objects</response>
-    [Authorize(Policy="tracr-admin")]
+                                                // [Authorize(Policy="tracr-admin")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<TraineeViewModel>))]
     [ActionName("GetTrainees"),HttpGet("[action]")]
@@ -151,11 +151,11 @@ public partial class UserController : ControllerBase
         IEnumerable<TraineeViewModel?> traineesVM = _mapper.Map<IEnumerable<Trainee?>,IEnumerable<TraineeViewModel>>(
             trainees.Where(
                 trainee => users.Any(
-                    user => user?.OtherPfid == trainee?.TraineePfid
+                    user => user?.PFID.ToString() == trainee?.TRAINEE_PFID
                 )
             ).OfType<Trainee>().ToList()!).OfType<TraineeViewModel>().ToList();
         foreach (PeopleFinderUser? user in users) user!.Photo = (bnetUrl + user.Photo?.ToString()) ?? "../../../assets/profilePic.png";
-        foreach (TraineeViewModel? trainee in traineesVM) _mapper.Map(users.FirstOrDefault(user => trainee?.TraineePfid == user?.OtherPfid)!, trainee);
+        foreach (TraineeViewModel? trainee in traineesVM) _mapper.Map(users.FirstOrDefault(user => trainee?.TRAINEE_PFID == user?.PFID.ToString())!, trainee);
         return (trainees.GetType() == typeof(List<Trainee>)) && traineesVM != null ? Ok(traineesVM) : StatusCode(404);
     }
 
@@ -192,9 +192,9 @@ public partial class UserController : ControllerBase
             if (usernameClaim?.Value != null)
             {
                 PeopleFinderUser? user = await _userService.GetByDomainAsync(usernameClaim.Value);
-                if (user != null && user?.OtherPfid != null)
+                if (user != null && user?.PFID != null)
                 {
-                    string? role = await _userService.GetRoleByPfidAsync((int)user.OtherPfid);
+                    string? role = await _userService.GetRoleByPfidAsync((int)user.PFID);
                     UserViewModel? userVM = role != null ? _mapper.Map<PeopleFinderUser,UserViewModel>(user) : null;
                     userVM!.Role = role ?? "Unauthorized";
                     return userVM != null ? Ok(userVM) : StatusCode(StatusCodes.Status511NetworkAuthenticationRequired);

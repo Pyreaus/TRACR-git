@@ -11,7 +11,7 @@ namespace Bristows.TRACR.Model.Contexts
         {
             if (!optionsBuilder.IsConfigured)
             {                                       // Fallback connection string in case options are not configured
-                optionsBuilder.UseSqlServer("Server=localhost,1433;Database=master;User Id=SA;Password=Databased1;Trusted_Connection=False;Encrypt=True;TrustServerCertificate=True;");
+                optionsBuilder.UseSqlServer("Server=SRV-SQL04;Database=TRACR_DEV; User ID=DB_USER;Password=intranet;MultipleActiveResultSets=True;Encrypt=False;");
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -23,13 +23,9 @@ namespace Bristows.TRACR.Model.Contexts
         public virtual DbSet<Trainee> Trainees { get; set; }
         public virtual DbSet<Employee> Employees { get; set; } //development only
 
-        // protected override void OnModelCreating(ModelBuilder modelBuilder)
-        // {
-        //     modelBuilder.Entity<Diary>().ToTable("Diary", schema: "dbo");
-        //     modelBuilder.Entity<DiaryTask>().ToTable("DiaryTask", schema: "dbo");
-        //     modelBuilder.Entity<Skill>().ToTable("Skill", schema: "dbo");
-        //     modelBuilder.Entity<Trainee>().ToTable("Trainee", schema: "dbo");
-        //     base.OnModelCreating(modelBuilder);
-        // }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PeopleFinderUser>().ToView("PeopleFinderUser").HasKey(x=>x.PFID);
+        }
     }
 }

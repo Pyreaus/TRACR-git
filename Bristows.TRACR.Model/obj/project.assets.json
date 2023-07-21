@@ -3816,11 +3816,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\NRhima\\OneDrive - Bristows\\Desktop\\code\\Bristows.TRACR.Model\\Bristows.TRACR.Model.csproj",
+      "projectUniqueName": "C:\\Devops\\Bristows.TRACR-Git\\Bristows.TRACR.Model\\Bristows.TRACR.Model.csproj",
       "projectName": "Bristows.TRACR.Model",
-      "projectPath": "C:\\Users\\NRhima\\OneDrive - Bristows\\Desktop\\code\\Bristows.TRACR.Model\\Bristows.TRACR.Model.csproj",
+      "projectPath": "C:\\Devops\\Bristows.TRACR-Git\\Bristows.TRACR.Model\\Bristows.TRACR.Model.csproj",
       "packagesPath": "C:\\Users\\NRhima\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\NRhima\\OneDrive - Bristows\\Desktop\\code\\Bristows.TRACR.Model\\obj\\",
+      "outputPath": "C:\\Devops\\Bristows.TRACR-Git\\Bristows.TRACR.Model\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\NRhima\\AppData\\Roaming\\NuGet\\NuGet.Config"

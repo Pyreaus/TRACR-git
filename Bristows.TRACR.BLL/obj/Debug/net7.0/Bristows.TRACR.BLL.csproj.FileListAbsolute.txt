@@ -49,3 +49,20 @@ C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\obj\Debug\ne
 C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\obj\Debug\net7.0\refint\Bristows.TRACR.BLL.dll
 C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.pdb
 C:\Users\NRhima\OneDrive - Bristows\Desktop\code\Bristows.TRACR.BLL\obj\Debug\net7.0\ref\Bristows.TRACR.BLL.dll
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.csproj.AssemblyReference.cache
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.AssemblyInfoInputs.cache
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.AssemblyInfo.cs
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.csproj.CoreCompileInputs.cache
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.dll
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\obj\Debug\net7.0\refint\Bristows.TRACR.BLL.dll
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.pdb
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\bin\Debug\net7.0\Bristows.TRACR.BLL.deps.json
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\bin\Debug\net7.0\Bristows.TRACR.BLL.dll
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\bin\Debug\net7.0\Bristows.TRACR.BLL.pdb
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\bin\Debug\net7.0\Bristows.TRACR.DAL.dll
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\bin\Debug\net7.0\Bristows.TRACR.Model.dll
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\bin\Debug\net7.0\Bristows.TRACR.DAL.pdb
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\bin\Debug\net7.0\Bristows.TRACR.Model.pdb
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\obj\Debug\net7.0\Bristows.TRACR.BLL.csproj.CopyComplete
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.BLL\obj\Debug\net7.0\ref\Bristows.TRACR.BLL.dll

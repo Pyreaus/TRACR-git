@@ -9,7 +9,6 @@ namespace Bristows.TRACR.Model.Models.Entities
         [Key]
         public int TRAINEE_ID { get; set; } = 0;
         [ValidationAttributes.ValidPfid]
-        [Required]
         [MaxLength(50)]
         public string? TRAINEE_PFID { get; set; } = string.Empty;
         [ValidationAttributes.ValidPfid]

@@ -21,13 +21,12 @@ namespace Bristows.TRACR.BLL.Services
             this.TRACRUnitOfWork = TRACRUnitOfWork ?? throw new ArgumentNullException(nameof(TRACRUnitOfWork));
         }
         #region [Diary methods] - DiaryRepository
-        public Diary? GetDiaryByPfid([ValidPfid] int pfid) => diaryRepository.FirstOrDefault(d => d.Pfid == pfid);
-        public async Task<Diary?> GetDiaryByPfidAsync([ValidPfid] int pfid) => await diaryRepository.FirstOrDefaultAsync(d => d.Pfid == pfid);
-        public async Task<Diary?> GetDiaryByLocalIdAsync(Guid id) => await diaryRepository.FirstOrDefaultAsync(d => d.LocalId == id);
+        public Diary? GetDiaryByPfid([ValidPfid] int pfid) => diaryRepository.FirstOrDefault(d => d.PFID == pfid.ToString());
+        public async Task<Diary?> GetDiaryByPfidAsync([ValidPfid] int pfid) => await diaryRepository.FirstOrDefaultAsync(d => d.PFID == pfid.ToString());
         public IEnumerable<Diary?> GetDiaries() => diaryRepository.GetAll();
         public async Task<IEnumerable<Diary?>> GetDiariesAsync() => await diaryRepository.GetAllAsync();
-        public Diary? GetDiaryByDiaryId(int id) => diaryRepository.FirstOrDefault(d => d.DiaryId == id);
-        public async Task<Diary?> GetDiaryByDiaryIdAsync(int id) => await diaryRepository.FirstOrDefaultAsync(d => d.DiaryId == id);
+        public Diary? GetDiaryByDiaryId(int id) => diaryRepository.FirstOrDefault(d => d.DIARY_ID == id);
+        public async Task<Diary?> GetDiaryByDiaryIdAsync(int id) => await diaryRepository.FirstOrDefaultAsync(d => d.DIARY_ID == id);
         public Diary? UpdateDiary(Diary diary, bool commit=true)
         {
             diaryRepository.Update(diary);
@@ -52,15 +51,14 @@ namespace Bristows.TRACR.BLL.Services
         }
         #endregion
         #region [DiaryTask methods] - DiaryTaskRepository
-        public async Task<DiaryTask?> DiaryTaskByLocalIdAsync(Guid id) => await diaryTaskRepository.FirstOrDefaultAsync(d => d.LocalId == id);
-        public DiaryTask? DiaryTaskByTaskId(int id) => diaryTaskRepository.FirstOrDefault(d => d.DiaryTaskId == id);
-        public async Task<DiaryTask?> DiaryTaskByTaskIdAsync(int id) => await diaryTaskRepository.FirstOrDefaultAsync(d => d.DiaryTaskId == id);
-        public IEnumerable<DiaryTask?> DiaryTasksByDiaryId(int id) => diaryTaskRepository.GetMany(d => d.DiaryId == id);
-        public async Task<IEnumerable<DiaryTask?>> DiaryTasksByDiaryIdAsync(int id) => await diaryTaskRepository.GetManyAsync(d => d.DiaryId == id);
+        public DiaryTask? DiaryTaskByTaskId(int id) => diaryTaskRepository.FirstOrDefault(d => d.DIARY_TASK_ID == id);
+        public async Task<DiaryTask?> DiaryTaskByTaskIdAsync(int id) => await diaryTaskRepository.FirstOrDefaultAsync(d => d.DIARY_TASK_ID == id);
+        public IEnumerable<DiaryTask?> DiaryTasksByDiaryId(int id) => diaryTaskRepository.GetMany(d => d.DIARY_ID == id);
+        public async Task<IEnumerable<DiaryTask?>> DiaryTasksByDiaryIdAsync(int id) => await diaryTaskRepository.GetManyAsync(d => d.DIARY_ID == id);
         public async Task<IEnumerable<DiaryTask?>> DiaryTasksByPfidAsync([ValidPfid] int pfid)
         {
             Diary? UserDiary = await this.GetDiaryByPfidAsync(pfid);
-            return await this.DiaryTasksByDiaryIdAsync(UserDiary!.DiaryId);
+            return await this.DiaryTasksByDiaryIdAsync(UserDiary!.DIARY_ID);
         }
         public void DeleteDiaryTask(Expression<Func<DiaryTask, bool>> predicate, bool commit=true)
         {

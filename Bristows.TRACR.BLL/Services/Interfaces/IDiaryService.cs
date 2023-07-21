@@ -6,7 +6,6 @@ namespace Bristows.TRACR.BLL.Services.Interfaces
     public interface IDiaryService
     {
         #region [DiaryTask methods] - DiaryTaskRepository
-        public Task<DiaryTask?> DiaryTaskByLocalIdAsync(Guid id);
         public Task<IEnumerable<DiaryTask?>> DiaryTasksByPfidAsync(int id);
         public Task<IEnumerable<DiaryTask?>> DiaryTasksByDiaryIdAsync(int id);
         public IEnumerable<DiaryTask?> DiaryTasksByDiaryId(int id);
@@ -18,7 +17,6 @@ namespace Bristows.TRACR.BLL.Services.Interfaces
         public DiaryTask? CreateDiaryTask(DiaryTask diaryTask, bool commit=true);
         #endregion
         #region [Diary methods] - DiaryRepository
-        public Task<Diary?> GetDiaryByLocalIdAsync(Guid id);
         public IEnumerable<Diary?> GetDiaries();
         public Task<IEnumerable<Diary?>> GetDiariesAsync();
         public Diary? GetDiaryByDiaryId(int id);

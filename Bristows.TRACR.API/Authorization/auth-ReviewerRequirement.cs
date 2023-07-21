@@ -27,7 +27,7 @@ namespace Bristows.TRACR.API.Authorization
                 if (usernameClaim?.Value != null)
                 {
                     PeopleFinderUser? user = await _userService.GetByDomainAsync(usernameClaim.Value);
-                    if (user != null && await _userService.IsReviewerPfidAsync((int)user!.OtherPfid))
+                    if (user != null && await _userService.IsReviewerPfidAsync((int)user!.PFID))
                     {
                         context.Succeed(requirement);
                         return;
