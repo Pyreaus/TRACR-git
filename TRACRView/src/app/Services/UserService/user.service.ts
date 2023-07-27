@@ -3,12 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Trainee } from 'src/app/Interfaces/Trainee';
 import { env } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { AddModifyTraineeReq } from 'src/app/Interfaces/DTOs/AddModifyTraineeReq';
 import { AddModifyDiaryReq } from 'src/app/Interfaces/DTOs/AddModifyDiaryReq';
 import { Diary } from 'src/app/Interfaces/Diary';
 import { DiaryTask } from 'src/app/Interfaces/DiaryTask';
-import { Skill } from 'src/app/Interfaces/Skill';
 import { AddModifyTaskReq } from 'src/app/Interfaces/DTOs/AddModifyTaskReq';
 
 @Injectable({
@@ -18,35 +17,46 @@ import { AddModifyTaskReq } from 'src/app/Interfaces/DTOs/AddModifyTaskReq';
   staticTrainees$!: Trainee[];
   constructor(private http: HttpClient) {}
 
-  GetUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetUsers`)
-  }
   SetPair(PfId: number, addReq: AddModifyTraineeReq): Observable<AddModifyTraineeReq> {
     return this.http.put<AddModifyTraineeReq>(`${env.ApiUrl}/${env.version}/${env.usrController}/SetPair/${PfId}`, addReq);
+  }
+  GetTasksDiaryId(DiaryId: number): Observable<DiaryTask[]> {
+    return this.http.get<DiaryTask[]>(`${env.ApiUrl}/${env.version}/${env.diaryController}/GetTasksByDiaryId/${DiaryId}`)
+    .pipe(map(res => this.deserialize('Usr|Rev',res,true)));
+  }
+  GetDiaryPfid(PfId: number): Observable<Diary> {
+    return this.http.get<Diary>(`${env.ApiUrl}/${env.version}/${env.diaryController}/GetDiaryPfid/${PfId}`)
+    .pipe(map(res => this.deserialize('Usr|Rev',res,false)));
+  }
+  GetUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetUsers`)
+    .pipe(map(res => this.deserialize('Usr|Rev',res,true)));
   }
   EditDiaryPfid(PfId: number, addDiaryRequest: AddModifyDiaryReq): Observable<AddModifyDiaryReq> {
     return this.http.put<AddModifyDiaryReq>(`${env.ApiUrl}/${env.version}/${env.diaryController}/EditDiaryPfid/${PfId}`, addDiaryRequest);
   }
   getTraineesByReviewer(PfId: number): Observable<Trainee[]> {
-    return this.http.get<Trainee[]>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetTraineesByReviewer/${PfId}`);
+    return this.http.get<Trainee[]>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetTraineesByReviewer/${PfId}`)
+    .pipe(map(res => this.deserialize('Usr|Rev',res,true)));
   }
   AssignTrainees(PfId: number, addReq: AddModifyTraineeReq): Observable<AddModifyTraineeReq> {
     return this.http.post<AddModifyTraineeReq>(`${env.ApiUrl}/${env.version}/${env.usrController}/AssignTrainees/${PfId}`, addReq);
   }
   GetTrainees(): Observable<Trainee[]> {
-    return this.http.get<Trainee[]>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetTrainees`);
+    return this.http.get<Trainee[]>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetTrainees`)
+    .pipe(map(res => this.deserialize('Usr|Rev',res,true)));
   }
   GetReviewers(): Observable<User[]> {
-    return this.http.get<User[]>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetReviewers`);
+    return this.http.get<User[]>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetReviewers`)
+    .pipe(map(res => this.deserialize('Usr|Rev',res,true)));
   }
   GetTrainee(PfId: number): Observable<Trainee> {
     return this.http.get<Trainee>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetTrainee/${PfId}`)
+    .pipe(map(res => this.deserialize('Trainee',res,false)));
   }
   getUserType(): Observable<User> {
-    return this.http.get<User>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetUserType`);
-  }
-  GetTasksDiaryId(DiaryId: number): Observable<DiaryTask[]> {
-    return this.http.get<DiaryTask[]>(`${env.ApiUrl}/${env.version}/${env.diaryController}/GetTasksByDiaryId/${DiaryId}`)
+    return this.http.get<User>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetUserType`)
+    .pipe(map(res => this.deserialize('Usr|Rev',res,false)));
   }
   AddDiary(addDiaryRequest: AddModifyDiaryReq): Observable<AddModifyDiaryReq> {
     return this.http.post<AddModifyDiaryReq>(`${env.ServerRoot}/api/${env.version}/${env.diaryController}/AddDiary`,addDiaryRequest);
@@ -54,9 +64,7 @@ import { AddModifyTaskReq } from 'src/app/Interfaces/DTOs/AddModifyTaskReq';
   AddDiaryTask(addDiaryTaskRequest: AddModifyTaskReq): Observable<AddModifyTaskReq> {
     return this.http.post<AddModifyTaskReq>(`${env.ApiUrl}/${env.version}/${env.diaryController}/AddDiaryTask`,addDiaryTaskRequest);
   }
-  GetDiaryPfid(PfId: number): Observable<Diary> {
-    return this.http.get<Diary>(`${env.ApiUrl}/${env.version}/${env.diaryController}/GetDiaryPfid/${PfId}`);
-  }
+
   // GetDiary(id: string): Observable<Employee> {
   //   return this.http.get<Employee>(
   //     `${env.ServerRoot}/api/${env.version}/${env.controller}/GetEmployee/${id}`);
@@ -66,10 +74,59 @@ import { AddModifyTaskReq } from 'src/app/Interfaces/DTOs/AddModifyTaskReq';
   //     `${env.ServerRoot}/api/${env.version}/${env.controller}/AddEmployee`,addEmployeeRequest);
   // }
   // DeleteEmployee(id: string): Observable<Employee> {
-  //   return this.http.delete<Employee>(
+  //   return this.http.delete<Employee>( 
   //     `${env.ServerRoot}/api/${env.version}/${env.controller}/DeleteEmployee/${id}`);
   // }
 
+  deserialize(entity:string, json:any, array:boolean): any {
+    switch (entity) {
+      case 'Task':
+        return {
+          DIARY_TASK_ID: json.diarY_TASK_ID,
+          DIARY_ID: json.diarY_ID,
+          MATTER: json.matter,
+          FEE_EARNERS: json.feE_EARNERS,
+          TASK_DESCRIPTION: json.tasK_DESCRIPTION,
+          SKILLS: json.skills,
+          SHOW: json.show,
+        };
+        case 'Diary':
+          return {
+            PFID: json.pfid,
+            DIARY_ID: json.diarY_ID,
+            PRACTICE_AREA: json.practicE_AREA,
+            WEEK_BEGINNING: json.weeK_BEGINNING,
+            LEARNING_POINTS: json.learninG_POINTS,
+            PROFESSIONAL_DEVELOPMENT_UNDERTAKEN: json.professionaL_DEVELOPMENT_UNDERTAKEN,
+            PROFESSIONAL_CONDUCT_ISSUES: json.professionaL_CONDUCT_ISSUES,
+            SIGN_OFF_SUBMITTED: json.sigN_OFF_SUBMITTED,
+            SIGNED_OFF_TIMESTAMP: json.signeD_OFF_TIMESTAMP,
+            SIGNED_OFF_BY: json.signeD_OFF_BY,
+            SHOW: json.show 
+          };
+      case 'Trainee':
+        return {
+            FirstName: json.firstName,
+            LastName: json.lastName,
+            Photo: json.photo,
+            Email: json.email,
+            Telephone: json.telephone,
+            TRAINEE_PFID: json.traineE_PFID,
+            REVIEWER_PFID: json.revieweR_PFID,
+            OTHER_PFID: json.otheR_PFID,
+            ACTIVE: json.active,
+            SHOW: json.show
+        };
+      case 'Usr|Rev':
+        return {
+          PFID: json.pfid,
+          FirstName: json.firstName,
+          LastName: json.lastName,
+          Photo: json.photo,
+          Role: json.role
+        };  
+    };
+  }
 
   GetStaticTrainees(): Promise<Trainee[]> {
     // this.staticTrainees$ = [
