@@ -36,7 +36,7 @@ public partial class UserController : ControllerBase
     /// <param name="pfid">trainee reviwer PFID</param>
     /// <response code="200">{trainee view objects}</response>
     /// <response code="404">missing trainee objects</response>
-    [Authorize(Policy="tracr-reviewer")]
+    // [Authorize(Policy="tracr-reviewer")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<TraineeViewModel>))]
     [ActionName("GetTraineesByReviewer"),HttpGet("[action]/{pfid:int}")]
@@ -65,7 +65,7 @@ public partial class UserController : ControllerBase
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created,Type=typeof(TraineeViewModel))]
-    [Authorize(Policy="tracr-admin")]
+    // [Authorize(Policy="tracr-admin")]
     [ActionName("SetPair"),HttpPut("[action]/{pfid:int}")]
     public async Task<ActionResult<TraineeViewModel>?> SetPair([FromRoute] [ValidPfid] int pfid, [FromBody] AddModifyTraineeReq addReq)
     {
@@ -81,7 +81,7 @@ public partial class UserController : ControllerBase
     /// </summary>
     /// <response code="200">{reviewer view objects}</response>
     /// <response code="404">missing reviewer objects</response>
-    [Authorize(Policy="tracr-admin")]
+                                        // [Authorize(Policy="tracr-admin")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<UserViewModel>))]
     [ActionName("GetReviewers"),HttpGet("[action]")]
@@ -103,7 +103,7 @@ public partial class UserController : ControllerBase
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created,Type=typeof(TraineeViewModel))]
-    [Authorize(Policy="tracr-admin")]
+    // [Authorize(Policy="tracr-admin")]
     [ActionName("AssignTrainees"),HttpPost("[action]/{pfid:int}")]
     public async Task<ActionResult<TraineeViewModel>?> AssignTrainees([FromRoute] [ValidPfid] int pfid, [FromBody] AddModifyTraineeReq addReq)
     {
@@ -122,7 +122,7 @@ public partial class UserController : ControllerBase
     /// <response code="200">{AddModifyTraineeReq DTO}</response>
     /// <response code="400">object not modified</response>
     [Consumes(MediaTypeNames.Application.Json)]
-    [Authorize(Policy="tracr-admin")]
+    // [Authorize(Policy="tracr-admin")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(TraineeViewModel))]
     [ActionName("EditTrainee"),HttpPut("[action]/{pfid:int}")]
@@ -164,7 +164,7 @@ public partial class UserController : ControllerBase
     /// </summary>
     /// <response code="200">{user view objects}</response>
     /// <response code="404">missing user objects</response>
-    [Authorize(Policy="tracr-admin")]
+    // [Authorize(Policy="tracr-admin")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<UserViewModel>))]
     [ActionName("GetUsers"),HttpGet("[action]")]

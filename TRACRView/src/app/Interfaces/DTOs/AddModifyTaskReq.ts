@@ -1,9 +1,9 @@
-import { SkillDTO } from "./SkillDTO";
 
 export interface AddModifyTaskReq {
-    diaryId: number,
-    skills?: SkillDTO[]|null,
-    matter: string|null,
-    taskDescription?: string|null,
-    show?: boolean,
+    DIARY_ID: number|null,
+    SKILLS?: string|null,
+    MATTER?: string|null,
+    FEE_EARNERS?: string|null,
+    TASK_DESCRIPTION?: string|null,
+    SHOW?: string|null,
 }

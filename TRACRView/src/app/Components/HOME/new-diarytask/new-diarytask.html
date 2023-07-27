@@ -1,5 +1,5 @@
 <h5 style="white-space: nowrap;">Create a new task for the week
-    <span [style.color]="'rgb(13, 202, 240)'"><strong>{{ diary?.weekBeginning }}</strong></span>?
+    <span [style.color]="'rgb(13, 202, 240)'"><strong>{{ diary?.WEEK_BEGINNING }}</strong></span>?
 </h5>
 <form [formGroup]="taskForm">
     <label>Matter:</label>
@@ -17,4 +17,4 @@
     </select> -->
     <input formControlName="skills" class="form-control" type="text">
 </form>
-<div style="position: relative;top:66px;left:7px;"><h6>Diary ID: <span class="text-info" [style]="diary?.diaryId | fontSize : '20px'">{{ diary?.diaryId }}</span></h6></div>
+<div style="position: relative;top:66px;left:7px;"><h6>Diary ID: <span class="text-info" [style]="diary?.DIARY_ID?.toString()! | fontSize : '20px'">{{ diary?.DIARY_ID }}</span></h6></div>

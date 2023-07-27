@@ -1,7 +1,7 @@
 export interface User {
-    otherPfid: number,
-    firstName?: string|null,
-    lastName?: string|null,
-    photo?: string|null,
-    role: string
+    PFID: number,
+    FirstName?: string|null,
+    LastName?: string|null,
+    Photo?: string|null,
+    Role: string
 }

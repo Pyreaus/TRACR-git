@@ -1,10 +1,10 @@
-import { Skill } from "./Skill";
 
 export interface DiaryTask {
-    diaryTaskId: string,
-    diaryId: string,
-    skills?: Skill[]|null,
-    matter?: string|null,
-    taskDescription?: string|null,
-    Show?: boolean|null,
+    DIARY_TASK_ID: number|null,
+    DIARY_ID: number|null,
+    MATTER?: string|null,
+    FEE_EARNERS?: string|null,
+    TASK_DESCRIPTION?: string|null,
+    SKILLS?: string|null,
+    SHOW?: string|null,
 }

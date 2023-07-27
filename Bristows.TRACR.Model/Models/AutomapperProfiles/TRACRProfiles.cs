@@ -35,7 +35,11 @@ public class TRACRProfiles : Profile
             ).ForMember((dest) => dest.ACTIVE, (opt) => opt.MapFrom((src) => src.ACTIVE)
             ).ForMember((dest) => dest.SHOW, (opt) => opt.MapFrom((src) => src.SHOW));
         CreateMap<Trainee, TraineeViewModel>()
-           .ForMember((dest) => dest.TRAINEE_PFID , (opt) => opt.Ignore());
+           .ForMember((dest) => dest.Photo, (opt) => opt.Ignore()
+           ).ForMember((dest) => dest.Telephone, (opt) => opt.Ignore()
+           ).ForMember((dest) => dest.Email, (opt) => opt.Ignore()
+           ).ForMember((dest) => dest.FirstName, (opt) => opt.Ignore()
+           ).ForMember((dest) => dest.LastName, (opt) => opt.Ignore());
         CreateMap<AddModifyDiaryReq, Diary>()
             .ForMember((dest) => dest.SIGNED_OFF_TIMESTAMP, 
             (opt) => opt.MapFrom((src, dest) => ((src.SIGN_OFF_SUBMITTED == "true") && 

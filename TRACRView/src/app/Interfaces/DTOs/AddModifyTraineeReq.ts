@@ -1,5 +1,5 @@
 export interface AddModifyTraineeReq {
-    reviewerPfid: number,
-    active: boolean,
-    show: boolean
+    REVIEWER_PFID: string|null,
+    ACTIVE: string|null,
+    SHOW: string|null
 }

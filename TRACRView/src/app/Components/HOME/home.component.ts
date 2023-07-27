@@ -33,13 +33,13 @@ export class HOMEComponent implements OnInit, AfterViewInit {
   rowSelected!: string;
   barVisible!: boolean;
   activeItem: any;
-  diary: Diary = {diaryId: '', pfid: 0, weekBeginning: '',learningPoints: '',professionalDevelopmentUndertaken: '',professionalConductIssues: '',signOffSubmitted: false, signedOffBy: '',show: true}
+  diary: Diary = {DIARY_ID: 0, PFID: '', PRACTICE_AREA: '', WEEK_BEGINNING: '',LEARNING_POINTS: '',PROFESSIONAL_DEVELOPMENT_UNDERTAKEN: '',PROFESSIONAL_CONDUCT_ISSUES: '',SIGN_OFF_SUBMITTED: 'false', SIGNED_OFF_BY: '',SHOW: ''}
   currentDiary!: Diary;
   selectedReviewer$!: User;
   traineeToEdit!: Trainee;
   userType$: BehaviorSubject<UserType> = new BehaviorSubject<UserType>(UserType.Unauthorized);
   currentReviewer$!: string | null | undefined;
-  currentReviewerPfid$!: undefined | number;
+  currentReviewerPfid$!: undefined | string;
   date!: Date[];
   tasks$!: DiaryTask[];
   trainees$!: Trainee[];
@@ -69,26 +69,28 @@ export class HOMEComponent implements OnInit, AfterViewInit {
     ) {
     [this.rowSelected,this.barVisible] = ['cal',true];
     this.diaryForm = this.fb.group({
-      diaryId: [{ value: '', disabled: true }, Validators.required],
-      WeekBeginning: [null, Validators.required],
-      learningPoints: [null, Validators.required],
-      ProfessionalDevelopmentUndertaken: [null, Validators.required],
-      ProfessionalConductIssues: [null, Validators.required],
-      SignOffSubmitted: [false, Validators.required],
-      SignedOffBy: [null],
-      Show: [true, Validators.required]
+      DIARY_ID: [{ value: '', disabled: true }, Validators.required],
+      WEEK_BEGINNING: [null, Validators.required],
+      LEARNING_POINTS: [null, Validators.required],
+      PRACTICE_AREA: [null, Validators.required],
+      PROFESSIONAL_DEVELOPMENT_UNDERTAKEN: [null, Validators.required],
+      PROFESSIONAL_CONDUCT_ISSUES: [null, Validators.required],
+      SIGN_OFF_SUBMITTED: [false, Validators.required],
+      SIGNED_OFF_BY: [null],
+      SHOW: [true, Validators.required]
     });
   }
   onSubmitNewDiary(): void {
       this.diaryReq = {
-        pfid: this.user$.otherPfid,
-        weekBeginning: this!.dateRange,
-        LearningPoints: this.diaryForm.value.learningPoints,
-        ProfessionalDevelopmentUndertaken: this.diaryForm.value.ProfessionalDevelopmentUndertaken,
-        ProfessionalConductIssues: this.diaryForm.value.ProfessionalConductIssues,
-        SignOffSubmitted: false,
-        signedOffBy: '',
-        show: true
+        PFID: this.user$.PFID.toString(),
+        WEEK_BEGINNING: this!.dateRange,
+        LEARNING_POINTS: this.diaryForm.value.LEARNING_POINTS,
+        PRACTICE_AREA: this.diaryForm.value.PRACTICE_AREA,
+        PROFESSIONAL_DEVELOPMENT_UNDERTAKEN: this.diaryForm.value.PROFESSIONAL_DEVELOPMENT_UNDERTAKEN,
+        PROFESSIONAL_CONDUCT_ISSUES: this.diaryForm.value.PROFESSIONAL_CONDUCT_ISSUES,
+        SIGN_OFF_SUBMITTED: 'false',
+        SIGNED_OFF_BY: '',
+        SHOW: 'true'
       };
       console.log(this.diaryReq);
       // this.userService.AddDiary(this.diaryReq).subscribe(res => console.log(res));
@@ -103,9 +105,10 @@ export class HOMEComponent implements OnInit, AfterViewInit {
     this.userService.GetUsers().subscribe({
       next: (res) => {
         this.reviewers$ = res;
-        this.reviewers$.forEach(rev => rev.firstName = rev.firstName+' '+rev.lastName);
+        console.info(res[0].FirstName);
+        this.reviewers$.forEach(rev => rev.FirstName = rev.FirstName+' '+rev.LastName);
         const codedPfids = [100]; //Maintenance ---------------
-        this.peopleFiltered$ = res.filter((trn) => !codedPfids.includes(trn.otherPfid));
+        this.peopleFiltered$ = res.filter((trn) => !codedPfids.includes(trn.PFID));
       }, error: (err) => {console.error(err)} });
     this.items = Array.from({ length: 1000 }).map((_, i) =>
       Array.from({ length: 1000 }).map((_j, j) => `Item #${i}_${j}`));
@@ -113,17 +116,20 @@ export class HOMEComponent implements OnInit, AfterViewInit {
       this.userService.getUserType().subscribe({
         next: (res) => {
           this.user$ = res;
-          this.userService.GetTrainee(this.user$.otherPfid).subscribe({
-            next: (res) => {
-              this.currentTrainee$ = res;
-            }, error: (err) => {console.error(err)} });
-          this.user$ ? this.userType$.next(this.user$.role as UserType) : this.userType$.next(UserType.Unauthorized);
+          console.info(res);
+          // this.userService.GetTrainee(this.user$.PFID).subscribe({
+          //   next: (res) => {
+          //     this.currentTrainee$ = res;
+          //   }, error: (err) => {console.error(err)} });
+          this.user$ ? this.userType$.next(this.user$.Role as UserType) : this.userType$.next(UserType.Unauthorized);
+          console.info(this.userType$.value) //dev only - remove
           this.userType$.value === UserType.Admin ? this.resetTrainees() : this.userType$.value === UserType.Reviewer ?
-            this.userService.getTraineesByReviewer(this.user$.otherPfid).subscribe({
+            this.userService.getTraineesByReviewer(this.user$.PFID).subscribe({
               next: (res) => {
                 this.trainees$ = res;
-                this.trainees$.forEach(trn => trn.firstName = trn.firstName+' '+trn.lastName)}, error: (x) => {console.error(x)}
+                this.trainees$.forEach(trn => trn.FirstName = trn.FirstName+' '+trn.LastName)}, error: (x) => {console.error(x)}
             }) : void(0);
+            // this.userType$.next(UserType.Admin); --  dev
         }, error: (err) => {console.error(err)}
       });
     }, 200);
@@ -132,12 +138,12 @@ export class HOMEComponent implements OnInit, AfterViewInit {
     this.userService.GetTrainees().subscribe({
       next: (res) => {
         this.trainees$ = res;
-        this.currentReviewerPfid$ = this.trainees$.find((trn: Trainee) => trn.traineePfid === this.user$.otherPfid)?.reviewerPfid ?? undefined;
-        this.trainees$.forEach(trn => trn.firstName = trn.firstName+' '+trn.lastName)}, error: (err) => {console.error(err)}
+        this.currentReviewerPfid$ = this.trainees$.find((trn: Trainee) => trn.TRAINEE_PFID === this.user$.PFID.toString())?.REVIEWER_PFID ?? undefined;
+        this.trainees$.forEach(trn => trn.FirstName = trn.FirstName+' '+trn.LastName)}, error: (err) => {console.error(err)}
       });
   }
-  getReviewerByPfid(pfid: number): User | undefined {
-    return this.reviewers$.find((rev: User) => rev.otherPfid === pfid);
+  getReviewerByPfid(pfid: string): User | undefined {
+    return this.reviewers$.find((rev: User) => rev.PFID === parseInt(pfid, 10));
   }
   getDiaryTasks(diaryId: number): void {
     this.userService.GetTasksDiaryId(diaryId).subscribe({
@@ -145,13 +151,13 @@ export class HOMEComponent implements OnInit, AfterViewInit {
     });
   }
   updatePairs(reviewer: User,trainee: Trainee): void {
-    const newReq: AddModifyTraineeReq = { reviewerPfid: reviewer.otherPfid, active: true, show: true };
-    this.userService.SetPair(trainee.traineePfid, newReq).subscribe(res => console.info("http response: " + res));
+    const newReq: AddModifyTraineeReq = { REVIEWER_PFID: reviewer.PFID.toString(), ACTIVE: 'true', SHOW: 'true' };
+    this.userService.SetPair(parseInt(trainee.TRAINEE_PFID!, 10), newReq).subscribe(res => console.info("http response: " + res));
     window.location.reload();
   }
   SetPairs(reviewer: User,users: User[]): void {
-    const newReq: AddModifyTraineeReq = { reviewerPfid: reviewer.otherPfid, active: true, show: true };
-    for (let T of users) this.userService.AssignTrainees(T.otherPfid, newReq).subscribe(res => console.log(res));
+    const newReq: AddModifyTraineeReq = { REVIEWER_PFID: reviewer.PFID.toString(), ACTIVE: 'true', SHOW: 'true' };
+    for (let T of users) this.userService.AssignTrainees(T.PFID, newReq).subscribe(res => console.log(res));
     window.location.reload();
   }
   menuVal = 'Current';
@@ -231,10 +237,10 @@ export class HOMEComponent implements OnInit, AfterViewInit {
     this.newDiaryPanel = false;
     this.ViewDiaryPanel = true;   //change to false after dev
     this.currentReviewer$ = 'Peter Johnson'  //fix bug, make new call using this.user$!.otherPfid
-    this.userService.GetDiaryPfid(this.user$!.otherPfid).subscribe({
+    this.userService.GetDiaryPfid(this.user$!.PFID).subscribe({
       next: (res) => {
         this.currentDiary = res;
-        this.getDiaryTasks(parseInt(this.currentDiary.diaryId, 10));
+        this.getDiaryTasks(this.currentDiary.DIARY_ID!);
       },
       error: (err) => {
         console.error(err)
@@ -246,34 +252,35 @@ export class HOMEComponent implements OnInit, AfterViewInit {
   SubmitSignOff(): void {
     this.disableSubmit = true;
     const diaryReq: AddModifyDiaryReq = {
-      pfid: this.user$!.otherPfid,
-      weekBeginning: this.currentDiary.weekBeginning,
-      LearningPoints: this.currentDiary.learningPoints,
-      ProfessionalDevelopmentUndertaken: this.currentDiary.professionalDevelopmentUndertaken,
-      ProfessionalConductIssues: this.currentDiary.professionalConductIssues,
-      SignOffSubmitted: true,
-      signedOffBy: ''
+      PFID: this.user$!.PFID.toString(),
+      WEEK_BEGINNING: this.currentDiary.WEEK_BEGINNING!,
+      LEARNING_POINTS: this.currentDiary.LEARNING_POINTS!,
+      PRACTICE_AREA: this.currentDiary.PRACTICE_AREA!,
+      PROFESSIONAL_DEVELOPMENT_UNDERTAKEN: this.currentDiary.PROFESSIONAL_DEVELOPMENT_UNDERTAKEN!,
+      PROFESSIONAL_CONDUCT_ISSUES: this.currentDiary.PROFESSIONAL_CONDUCT_ISSUES,
+      SIGN_OFF_SUBMITTED: 'true',
+      SIGNED_OFF_BY: 'VALUE HARDOCED FOR DEVELOPMENT - UPDATE'
     }
     console.log(diaryReq);
-    this.userService.EditDiaryPfid(this.user$!.otherPfid,diaryReq).subscribe({
+    this.userService.EditDiaryPfid(this.user$!.PFID,diaryReq).subscribe({
       next: (res) => console.log(res),
       error: (err) => console.error(err)
     });
   }
-  // openUserDiary(traineePfid: number): void {
+  // openUserDiary(traineePfid: string): void {
   //   console.info(`Opening diary for ${traineePfid}`);
   // }
-  openEditView(tPfid: number): void {
-    this.trainees$ = this.trainees$.filter((T: Trainee) => T.traineePfid == tPfid);
+  openEditView(tPfid: string): void {
+    this.trainees$ = this.trainees$.filter((T: Trainee) => T.TRAINEE_PFID == tPfid.toString());
     // console.log(this.trainees$[0] + 'rev: ' + this.getReviewerByPfid(this.trainees$[0].reviewerPfid!)?.firstName);
-    this.traineeToEdit = this.trainees$.filter((T: Trainee) => T.traineePfid === tPfid)[0];
-    this.EditViewPanel = true;
+    this.traineeToEdit = this.trainees$.filter((T: Trainee) => T.TRAINEE_PFID === tPfid.toString())[0];
+    this.EditViewPanel = true
   }
-  openTraineeDiary(tPfid: number): void {
-    this.userService.GetDiaryPfid(tPfid).subscribe({
+  openTraineeDiary(tPfid: string): void {
+    this.userService.GetDiaryPfid(parseInt(tPfid, 10)).subscribe({
       next: (res) => {
         this.currentDiary = res;
-        this.getDiaryTasks(parseInt(this.currentDiary.diaryId, 10));
+        this.getDiaryTasks(this.currentDiary.DIARY_ID!);
       }, error: (err) => console.error(err)
     });
     this.ViewDiaryPanel = true;
@@ -291,7 +298,7 @@ export class HOMEComponent implements OnInit, AfterViewInit {
   taskModalSubmitted(): void {
     this.newDiaryTaskComponent.createNewTask();
     setTimeout(() => {
-      this.getDiaryTasks(parseInt(this.currentDiary.diaryId, 10));
+      this.getDiaryTasks(this.currentDiary.DIARY_ID!);
     }, 1000);
   }
 }
