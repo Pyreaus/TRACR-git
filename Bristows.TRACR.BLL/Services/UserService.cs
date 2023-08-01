@@ -10,19 +10,18 @@ namespace Bristows.TRACR.BLL.Services
 {
     public class UserService : IUserService
     {
+        private readonly UnitOfWork<TRACRContext> TRACRUnitOfWork;
         private readonly IAdminRepository adminRepository;
         private readonly IPeopleRepository peopleRepository;
         private readonly ITraineeRepository traineeRepository;
-        private readonly UnitOfWork<TRACRContext> TRACRUnitOfWork;
 
-        public UserService(IPeopleRepository peopleRepository,
-        UnitOfWork<TRACRContext> TRACRUnitOfWork, IAdminRepository adminRepository,
-        ITraineeRepository traineeRepository)
+        public UserService(UnitOfWork<TRACRContext> TRACRUnitOfWork,
+        IPeopleRepository peopleRepository, IAdminRepository adminRepository,ITraineeRepository traineeRepository)
         {
+            this.TRACRUnitOfWork = TRACRUnitOfWork ?? throw new ArgumentNullException(nameof(TRACRUnitOfWork));
             this.peopleRepository = peopleRepository ?? throw new ArgumentNullException(nameof(peopleRepository));
             this.adminRepository = adminRepository ?? throw new ArgumentNullException(nameof(adminRepository));
             this.traineeRepository = traineeRepository ?? throw new ArgumentNullException(nameof(traineeRepository));
-            this.TRACRUnitOfWork = TRACRUnitOfWork ?? throw new ArgumentNullException(nameof(TRACRUnitOfWork));
         }
         public async Task<PeopleFinderUser?> GetByDomainAsync([ValidWinUser] string domainUsername) => await peopleRepository.FirstOrDefaultAsync(u => u.WinUser == domainUsername);
         public async Task<PeopleFinderUser?> GetPFUserAsync([ValidPfid] int pfid) => await peopleRepository.FirstOrDefaultAsync(u => u.PFID == pfid);

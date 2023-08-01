@@ -9,19 +9,19 @@ namespace Bristows.TRACR.Model.Models.ValidationAttributes
         {
             if (value is int)
             {
-                int pfid = (int)value;
-                return ValidatePfid(pfid, validationContext);
+                string pfidString = ((int)value).ToString();
+                return ValidatePfidString(pfidString, validationContext);
             }
-            else if (value is string pfidString)
-            {
-                if (int.TryParse(pfidString, out int pfid)) return ValidatePfid(pfid, validationContext);
-            }
-            return new ValidationResult($"The field {validationContext.DisplayName} must be an integer between {MinValue} and {MaxValue}.");
+            else if (value is string pfidString) return ValidatePfidString(pfidString, validationContext);
+            return new ValidationResult($"The field {validationContext.DisplayName} must be an integer or a string representing an integer between {MinValue} and {MaxValue}.");
         }
-        private static ValidationResult ValidatePfid(int pfid, ValidationContext validationContext)
+        private ValidationResult ValidatePfidString(string pfidString, ValidationContext validationContext)
         {
-            if (pfid >= MinValue && pfid <= MaxValue) return ValidationResult.Success!;
-            return new ValidationResult($"The field {validationContext.DisplayName} must be an integer between {MinValue} and {MaxValue}.");
+            if (pfidString.Length >= MinValue && pfidString.Length <= MaxValue && int.TryParse(pfidString, out int pfid))
+            {
+                return ValidationResult.Success!;
+            }
+            return new ValidationResult($"The field {validationContext.DisplayName} must be an integer or a string representing an integer between {MinValue} and {MaxValue}.");
         }
     }
 }

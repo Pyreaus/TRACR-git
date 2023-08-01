@@ -1,9 +1,10 @@
 <div class="container-fluid px-5 mt-4" style="max-height: 90vh !important; overflow: hidden;">
     <div class="row">
         <div class="p-0 m-0 col-12 col-xxl-4 col-xl-5 col-lg-6 col-md-7" style="min-height:700px;max-height:700px;">
-            <p-sidebar [(visible)]="barVisible" [blockScroll]="false" [modal]="false" [style]="{width:'495px'}"
+            <p-sidebar [(visible)]="barVisible" [blockScroll]="false" [modal]="false" [style]="{width:'510px'}"
                 [showCloseIcon]="false" dismissableMask="true">
                 <div class="row">
+                    <div class="btn" (click)="reload()" *ngIf="(userType$|async)=='Reviewer';" style="z-index:10000;position:absolute;top:89px;height:44px;width:200px;left:39px;"></div>
                     <div class="col ps-2 mt-5" *ngIf="(userType$|async)=='Unauthorized';">
                         <p-messages severity="error">
                             <ng-template pTemplate>
@@ -46,6 +47,27 @@
                             <div></div>
                         </div>
                         <div class="col ps-2 pe-3 m-0 mt-0">
+                            <div *ngIf="(userType$ | async)?.toLowerCase() === 'reviewer' && menuVal === 'Current' && (step === 2 || step === 3);" class="ps-0 position-relative">
+                                <div class="row overlay d-none d-md-flex" [style.left]="overlayMax" style="width:58px;position:absolute;z-index:1000;top:120px;">
+                                    <div class="col-12 overlay2" [class]="A" (click)="selected(1,true)" style="min-height:55px;margin-top:4px;"></div>
+                                    <div class="col-12 overlay2" [class]="B" (click)="selected(2,true)" style="min-height:57px;margin-top:1px;"></div>
+                                    <div class="col-12 overlay2" [class]="C" (click)="selected(3,true)" style="min-height:56px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="D" (click)="selected(4,true)" style="min-height:57px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="E" (click)="selected(5,true)" style="min-height:59px;margin-top:1px;"></div>
+                                </div>
+                                <div class="row overlay d-md-none d-md-flex" style="width:57px;position:absolute;z-index:1000;left:15px;top:105px;">
+                                    <div class="col-12 overlay2" [class]="A" (click)="selected(1,true)" style="min-height:41px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="B" (click)="selected(2,true)" style="min-height:40px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="C" (click)="selected(3,true)" style="min-height:41px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="D" (click)="selected(4,true)" style="min-height:43px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="E" (click)="selected(5,true)" style="min-height:60px;margin-top:0px;"></div>
+                                </div>
+                                <div class="card p-0 d-flex justify-content-center align-items-center"
+                                 style="margin-top:40px !important;border-color:#00000000;background-color:#00000000;">
+                                <p-calendar #calendarElement [(ngModel)]="date" [disabledDays]="[0,1,2,3,4,5,6]" class="max-w-full" 
+                                [inline]="true" [styleClass]="rowSelected" [showWeek]="true" class="cal" [firstDayOfWeek]="1"></p-calendar>
+                                </div>
+                            </div>
                             <p-divider align="left">
                                 <div class="inline-flex align-items-center" *ngIf="(userType$|async)=='Trainee';">
                                     <i class="pi pi-calendar me-2 text-info"></i><b class="text-info">select week:</b>
@@ -67,7 +89,7 @@
                                         drop down lists below and then click 'Save Changes'.</p>
                                 </div>
                             </div>
-                            <!-- (((((((((((((((((())))))))))))))))))-->
+                            <!-- ((((((((((((((((((region))))))))))))))))))-->
                             <div class="card flex justify-content-center mt-0 mb-5"
                                 *ngIf="(userType$|async)=='Admin'&&menuVal=='New';"
                                 style="background-color:#00000000;margin-top:34px!important;">
@@ -83,8 +105,7 @@
                                 style="background-color: #00000000;margin-top:55px !important;max-height:5px !important;">
                                 <span class="p-float-label" style="min-width:459px">
                                     <p-multiSelect [options]="peopleFiltered$" [(ngModel)]="selectedTrainees"
-                                        placeholder="Select Trainees" defaultLabel="Select trainees"
-                                        optionLabel="FirstName">
+                                        placeholder="Select Trainees" defaultLabel="Select trainees" optionLabel="FirstName">
                                         <ng-template let-value pTemplate="peopleFiltered$">
                                             <div class="flex align-items-center gap-2"
                                                 *ngFor="let trainee of reviewers$">
@@ -111,7 +132,6 @@
                                         type="button">Save Changes</button>
                                 </div>
                             </div>
-                            <!-- region -->
                             <div class="card flex justify-content-center mt-0 mb-5"
                                 *ngIf="(userType$|async)=='Admin'&&menuVal=='Current'&&EditViewPanel==true;"
                                 style="background-color:#00000000;margin-top:34px!important;">
@@ -133,7 +153,6 @@
                                                 <img src="../../../assets/profilePic.png" [class]="'profilePic'" style="width: 18px" />
                                                 <div>{{ trainee.FirstName }}</div>
                                             </div>
-                                            <!-- <div *ngIf="!selectedTrainees">Trainee:</div> -->
                                         </ng-template>
                                         <ng-template let-profile pTemplate="item">
                                             <div class="d-flex align-items-center">
@@ -150,8 +169,17 @@
                                         style="min-height:31px;" type="button">Save Changes</button>
                                 </div>
                             </div>
-                            <!-- region -->
-                            <div class="card bg-dark" *ngIf="(userType$|async)=='Reviewer'&&menuVal=='Current'&&EditViewPanel==false">
+                            <div *ngIf="(trainees$==null||trainees$==undefined)&&((userType$|async)!=='Unauthorized')&&(userType$|async)!=='Admin'&&(userType$|async)!=='Trainee'" class="h-100 pb-5 d-flex align-items-center justify-content-center text-info"
+                            style="margin-top:1vh;">
+                                <strong class="me-3 text-info">Loading...</strong>
+                                <div role="status" class="mb-1 text-info spinner-border" aria-hidden="true"></div>
+                            </div>
+                            <div *ngIf="(userType$|async)=='Unauthorized'" class="h-100 pb-5 d-flex align-items-center justify-content-center text-info"
+                            style="margin-top:1vh;">
+                                <strong class="me-3 text-info">Loading...</strong>
+                                <div role="status" class="mb-1 text-info spinner-border" aria-hidden="true"></div>
+                            </div>
+                            <div class="card bg-dark" *ngIf="(userType$|async)=='Reviewer'&&menuVal=='Current'&&(step==1||step==2||step==3)">
                                 <div class="list-group"
                                     style="height: fit-content;max-height: 460px; overflow-y: scroll;">
                                     <a *ngFor="let trn of trainees$" href="javascript:void(0)"
@@ -167,6 +195,10 @@
                                             <button (click)="openTraineeDiary(trn.TRAINEE_PFID!)" type="button" class="btn btn-secondary btn-sm"
                                             style="float:right !important;position:relative;bottom:13px;">View Diary
                                         </button>
+                                        <div *ngIf="(userType$|async)=='Reviewer'&&menuVal=='Current'&&(step==2||step==3)" type="button"
+                                            style="width:100px;height:40px;float:right !important;z-index:10000;position:relative;bottom:18px;left:90px;background-color:rgb(59, 61, 64);">
+                                            <button [disabled]="openWeekDisabled" [class]="statusColor=='info' ? 'secondary' : 'btn-'+statusColor" (click)="openViewDiary(false)" class="btn btn-secondary btn-sm" style="height:42px;border:2px solid rgb(34, 34, 34);">Open Diary</button>
+                                        </div>
                                     </a>
                                 </div>
                             </div>
@@ -198,35 +230,23 @@
                         </div>
                         <div class="py-0 mb-2 d-flex ps-2 pe-5" *ngIf="(userType$|async)=='Trainee';">
                             <div class="ps-0 position-relative">
-                                <div class="row overlay d-none d-md-flex"
-                                    style="width:57px;position:absolute;z-index:1000;left:16px;top:115px;">
-                                    <div class="col-12 overlay2" (click)="selected(1)"
-                                        style="min-height:58px;margin-top:2px;"></div>
-                                    <div class="col-12 overlay2" (click)="selected(2)"
-                                        style="min-height:57px;margin-top:0px;"></div>
-                                    <div class="col-12 overlay2" (click)="selected(3)"
-                                        style="min-height:56px;margin-top:0px;"></div>
-                                    <div class="col-12 overlay2" (click)="selected(4)"
-                                        style="min-height:56px;margin-top:0px;"></div>
-                                    <div class="col-12 overlay2" (click)="selected(5)"
-                                        style="min-height:62px;margin-top:0px;"></div>
+                                <div class="row overlay d-none d-md-flex" style="width:57px;position:absolute;z-index:1000;left:20px;top:121px;">
+                                    <div class="col-12 overlay2" [class]="A" (click)="selected(1,false)" style="min-height:58px;margin-top:2px;"></div>
+                                    <div class="col-12 overlay2" [class]="B" (click)="selected(2,false)" style="min-height:57px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="C" (click)="selected(3,false)" style="min-height:56px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="D" (click)="selected(4,false)" style="min-height:56px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="E" (click)="selected(5,false)" style="min-height:62px;margin-top:0px;"></div>
                                 </div>
-                                <div class="row overlay d-md-none d-md-flex"
-                                    style="width:57px;position:absolute;z-index:1000;left:15px;top:105px;">
-                                    <div class="col-12 overlay2" (click)="selected(1)"
-                                        style="min-height:41px;margin-top:0px;"></div>
-                                    <div class="col-12 overlay2" (click)="selected(2)"
-                                        style="min-height:40px;margin-top:0px;"></div>
-                                    <div class="col-12 overlay2" (click)="selected(3)"
-                                        style="min-height:41px;margin-top:0px;"></div>
-                                    <div class="col-12 overlay2" (click)="selected(4)"
-                                        style="min-height:41px;margin-top:0px;"></div>
-                                    <div class="col-12 overlay2" (click)="selected(5)"
-                                        style="min-height:60px;margin-top:0px;"></div>
+                                <div class="row overlay d-md-none d-md-flex" style="width:57px;position:absolute;z-index:1000;left:15px;top:105px;">
+                                    <div class="col-12 overlay2" [class]="A" (click)="selected(1,false)" style="min-height:41px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="B" (click)="selected(2,false)" style="min-height:40px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="C" (click)="selected(3,false)" style="min-height:41px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="D" (click)="selected(4,false)" style="min-height:41px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="E" (click)="selected(5,false)" style="min-height:60px;margin-top:0px;"></div>
                                 </div>
                                 <div class="card p-0 d-flex justify-content-center align-items-center"
-                                    style="border-color:#00000000;background-color:#00000000;">
-                                    <p-calendar #calElement [(ngModel)]="date" [disabledDays]="[0,1,2,3,4,5,6]"
+                                    style="border-color:#00000000;background-color:#00000000; overflow-y: hidden !important;overflow-x: hidden !important;">
+                                    <p-calendar #calendarElement [(ngModel)]="date" [disabledDays]="[0,1,2,3,4,5,6]"
                                         class="max-w-full" [inline]="true" [styleClass]="rowSelected" [showWeek]="true"
                                         class="cal" [firstDayOfWeek]="1">
                                     </p-calendar>
@@ -376,35 +396,23 @@
                         </div>
                         <div class="py-0 mb-2 d-flex ps-2 pe-5" *ngIf="(userType$|async)=='Trainee';">
                             <div class="ps-0 position-relative">
-                                <div class="row overlay d-none d-md-flex"
-                                    style="width:57px;position:absolute;z-index:1000;left:16px;top:115px;">
-                                    <div class="col-12 overlay2" (click)="selected(1)"
-                                        style="min-height:58px;margin-top:2px;"></div>
-                                    <div class="col-12 overlay2" (click)="selected(2)"
-                                        style="min-height:57px;margin-top:0px;"></div>
-                                    <div class="col-12 overlay2" (click)="selected(3)"
-                                        style="min-height:56px;margin-top:0px;"></div>
-                                    <div class="col-12 overlay2" (click)="selected(4)"
-                                        style="min-height:56px;margin-top:0px;"></div>
-                                    <div class="col-12 overlay2" (click)="selected(5)"
-                                        style="min-height:62px;margin-top:0px;"></div>
+                                <div class="row overlay d-none d-md-flex" style="width:57px;position:absolute;z-index:1000;left:16px;top:115px;">
+                                    <div class="col-12 overlay2" [class]="A" (click)="selected(1,false)" style="min-height:58px;margin-top:2px;"></div>
+                                    <div class="col-12 overlay2" [class]="B" (click)="selected(2,false)" style="min-height:57px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="C" (click)="selected(3,false)" style="min-height:56px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="D" (click)="selected(4,false)" style="min-height:56px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="E" (click)="selected(5,false)" style="min-height:62px;margin-top:0px;"></div>
                                 </div>
-                                <div class="row overlay d-md-none d-md-flex"
-                                    style="width:57px;position:absolute;z-index:1000;left:15px;top:105px;">
-                                    <div class="col-12 overlay2" (click)="selected(1)"
-                                        style="min-height:41px;margin-top:0px;"></div>
-                                    <div class="col-12 overlay2" (click)="selected(2)"
-                                        style="min-height:40px;margin-top:0px;"></div>
-                                    <div class="col-12 overlay2" (click)="selected(3)"
-                                        style="min-height:41px;margin-top:0px;"></div>
-                                    <div class="col-12 overlay2" (click)="selected(4)"
-                                        style="min-height:41px;margin-top:0px;"></div>
-                                    <div class="col-12 overlay2" (click)="selected(5)"
-                                        style="min-height:60px;margin-top:0px;"></div>
+                                <div class="row overlay d-md-none d-md-flex" style="width:57px;position:absolute;z-index:1000;left:15px;top:105px;">
+                                    <div class="col-12 overlay2" [class]="A" (click)="selected(1,false)" style="min-height:41px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="B" (click)="selected(2,false)" style="min-height:40px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="C" (click)="selected(3,false)" style="min-height:41px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="D" (click)="selected(4,false)" style="min-height:41px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2" [class]="E" (click)="selected(5,false)" style="min-height:60px;margin-top:0px;"></div>
                                 </div>
                                 <div class="card p-0 d-flex justify-content-center align-items-center"
                                     style="border-color:#00000000;background-color:#00000000;">
-                                    <p-calendar #calElement [(ngModel)]="date" [disabledDays]="[0,1,2,3,4,5,6]"
+                                    <p-calendar #calendarElement [(ngModel)]="date" [disabledDays]="[0,1,2,3,4,5,6]"
                                         class="max-w-full" [inline]="true" [styleClass]="rowSelected" [showWeek]="true"
                                         class="cal" [firstDayOfWeek]="1"></p-calendar>
                                  </div>
@@ -469,7 +477,7 @@
                                                 is required</span>
                                         </div>
                                         <div class="form-group mb-2">
-                                            <label class="label text-light" for="#">Professional Development:</label>
+                                            <label class="label text-light" for="#">Professional Development Undertaken:</label>
                                             <textarea formControlName="PROFESSIONAL_DEVELOPMENT_UNDERTAKEN"
                                                 [(ngModel)]="diary.PROFESSIONAL_DEVELOPMENT_UNDERTAKEN"
                                                 class="bg-dark border-secondary text-light form-control"
@@ -519,13 +527,14 @@
                                                                     <div class="card-header" style="background-color:hsl(215, 18%, 20%);">
                                                                         <b>[Task: {{ i + 1 }}]</b></div>
                                                                     <div class="card-body" style="max-height:104px;background-color:hsl(215, 18%, 20%);overflow:scroll;">
-                                                                        <span><b class="card-text text-light">Description:</b><p class="card-text text-secondary">
+                                                                        <span><b class="card-text text-light">Description:</b><p class="card-text" style="color:#85abb8">
                                                                             {{ task.TASK_DESCRIPTION }}</p></span>
-                                                                        <p></p><span><b class="card-text text-light">Matter:</b><p class="card-text text-secondary">
+                                                                        <p></p><span><b class="card-text text-light">Matter:</b><p class="card-text" style="color:#85abb8">
                                                                             {{ task.MATTER }}</p></span>
-                                                                        <p></p><span><b class="card-text text-light">Skills:</b>
-                                                                            <p *ngFor="let skill of task.SKILLS" class="card-text text-secondary">
-                                                                            {{ skill }}</p></span>
+                                                                        <p></p><span><b class="card-text text-light">Matter:</b><p class="card-text" style="color:#85abb8">
+                                                                            {{ task.FEE_EARNERS }}</p></span>
+                                                                        <p></p><span><b class="card-text text-light">Skills:</b><p class="card-text" style="color:#85abb8">
+                                                                            {{ task.SKILLS }}</p></span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -553,13 +562,14 @@
                                                                     <div class="card-header" style="background-color:hsl(215, 18%, 20%);">
                                                                         <b>[Task: {{ i + 1 }}]</b></div>
                                                                     <div class="card-body" style="max-height:104px;background-color:hsl(215, 18%, 20%);overflow:scroll;">
-                                                                        <span><b class="card-text text-light">Description:</b><p class="card-text text-secondary">
+                                                                        <span><b class="card-text text-light">Description:</b><p class="card-text" style="color:#85abb8">
                                                                             {{ task.TASK_DESCRIPTION }}</p></span>
-                                                                        <p></p><span><b class="card-text text-light">Matter:</b><p class="card-text text-secondary">
+                                                                        <p></p><span><b class="card-text text-light">Matter:</b><p class="card-text" style="color:#85abb8">
                                                                             {{ task.MATTER }}</p></span>
-                                                                        <p></p><span><b class="card-text text-light">Skills:</b>
-                                                                            <p *ngFor="let skill of task.SKILLS" class="card-text text-secondary">
-                                                                            {{ skill }}</p></span>
+                                                                        <p></p><span><b class="card-text text-light">Matter:</b><p class="card-text" style="color:#85abb8">
+                                                                            {{ task.FEE_EARNERS }}</p></span>
+                                                                        <p></p><span><b class="card-text text-light">Skills:</b><p class="card-text" style="color:#85abb8">
+                                                                            {{ task.SKILLS }}</p></span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -582,13 +592,13 @@
                                                         <h5 class="card-title"
                                                             style="padding-left:30px;margin-bottom:9px !important;">
                                                             Diary week: <span
-                                                                style="font-size: small;color: rgb(13, 202, 240);">
-                                                                {{ this.currentDiary.WEEK_BEGINNING }}</span></h5>
+                                                                style="font-size: 14px;color: rgb(13, 202, 240);">
+                                                                {{ this.currentDiary.WEEK_BEGINNING!.slice(0, -9) }}</span></h5>
                                                         <h5 class="position-relative"
                                                             style="bottom:32px;left:370px;margin-bottom:0px !important;">
                                                             Reviewer: <span
-                                                                style="font-size: small;color: rgb(13, 202, 240);">
-                                                                {{ this.currentReviewer$ }}</span></h5>
+                                                                style="font-size: 14px;color: rgb(13, 202, 240);">
+                                                                {{ this.getReviewerByPfid(this.currentDiary.PFID!)?.FirstName! }}</span></h5>
                                                         <div class="p-4 pt-0">
                                                             <div
                                                                 style="overflow-x:hidden !important;overflow-y:scroll;max-height:420px !important;">
@@ -596,7 +606,7 @@
                                                                     style="max-width: 34rem;">
                                                                     <div class="card-header"><b>Practice Area:</b></div>
                                                                     <div class="card-body">
-                                                                        <p class="card-text text-secondary">{{
+                                                                        <p class="card-text" style="color:#d9d9d9">{{
                                                                             this.currentDiary.LEARNING_POINTS
                                                                          }}</p>
                                                                     </div>
@@ -606,16 +616,16 @@
                                                                     <div class="card-header"><b>Learning Points:</b>
                                                                     </div>
                                                                     <div class="card-body">
-                                                                        <p class="card-text text-secondary">{{
+                                                                        <p class="card-text" style="color:#d9d9d9">{{
                                                                             this.currentDiary.LEARNING_POINTS}}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="card text-white bg-dark mb-3"
                                                                     style="max-width: 34rem;">
                                                                     <div class="card-header"><b>Professional
-                                                                            Development:</b></div>
+                                                                            Development Undertaken:</b></div>
                                                                     <div class="card-body">
-                                                                        <p class="card-text text-secondary">{{
+                                                                        <p class="card-text" style="color:#d9d9d9">{{
                                                                             this.currentDiary.PROFESSIONAL_DEVELOPMENT_UNDERTAKEN
                                                                             }}</p>
                                                                     </div>
@@ -625,7 +635,7 @@
                                                                     <div class="card-header"><b>Professional Conduct
                                                                             Issues:</b></div>
                                                                     <div class="card-body">
-                                                                        <p class="card-text text-secondary">{{
+                                                                        <p class="card-text" style="color:#d9d9d9">{{
                                                                             this.currentDiary.PROFESSIONAL_CONDUCT_ISSUES
                                                                             }}</p>
                                                                     </div>
@@ -655,12 +665,12 @@
                                                     <h5 class="card-title"
                                                         style="padding-left:30px;margin-bottom:9px !important;">
                                                         Diary week: <span
-                                                            style="font-size: small;color: rgb(13, 202, 240);">
-                                                            {{ this.currentDiary.WEEK_BEGINNING }}</span></h5>
+                                                            style="font-size: 14px;color: rgb(13, 202, 240);">
+                                                            {{ this.currentDiary.WEEK_BEGINNING!.slice(0, -9) }}</span></h5>
                                                     <h5 class="position-relative"
                                                         style="bottom:32px;left:370px;margin-bottom:0px !important;">
                                                         Reviewer: <span
-                                                            style="font-size: small;color: rgb(13, 202, 240);">
+                                                            style="font-size: 14px;color: rgb(13, 202, 240);">
                                                             {{ this.getReviewerByPfid(this.currentDiary.PFID!)?.FirstName!  }} (you)</span></h5>
                                                     <div class="p-4 pt-0">
                                                         <div
@@ -669,7 +679,7 @@
                                                                 style="max-width: 34rem;">
                                                                 <div class="card-header"><b>Practice Area:</b></div>
                                                                 <div class="card-body">
-                                                                    <p class="card-text text-secondary">{{
+                                                                    <p class="card-text" style="color:#d9d9d9">{{
                                                                         this.currentDiary.LEARNING_POINTS
                                                                      }}</p>
                                                                 </div>
@@ -679,16 +689,16 @@
                                                                 <div class="card-header"><b>Learning Points:</b>
                                                                 </div>
                                                                 <div class="card-body">
-                                                                    <p class="card-text text-secondary">{{
+                                                                    <p class="card-text" style="color:#d9d9d9">{{
                                                                         this.currentDiary.LEARNING_POINTS}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card text-white bg-dark mb-3"
                                                                 style="max-width: 34rem;">
                                                                 <div class="card-header"><b>Professional
-                                                                        Development:</b></div>
+                                                                        Development Undertaken:</b></div>
                                                                 <div class="card-body">
-                                                                    <p class="card-text text-secondary">{{
+                                                                    <p class="card-text" style="color:#d9d9d9">{{
                                                                         this.currentDiary.PROFESSIONAL_DEVELOPMENT_UNDERTAKEN
                                                                         }}</p>
                                                                 </div>
@@ -698,7 +708,7 @@
                                                                 <div class="card-header"><b>Professional Conduct
                                                                         Issues:</b></div>
                                                                 <div class="card-body">
-                                                                    <p class="card-text text-secondary">{{
+                                                                    <p class="card-text" style="color:#d9d9d9">{{
                                                                         this.currentDiary.PROFESSIONAL_CONDUCT_ISSUES
                                                                         }}</p>
                                                                 </div>
@@ -734,18 +744,19 @@
                                     style="border-style:dashed !important;">
                                     Step 2: Click the button below to open the week
                                 </h3>
-                                <button class="btn btn-info mt-2" (click)="openNewDiary()">Open Week</button>
+                                <button class="btn btn-info mt-2" (click)="openViewDiary(true)">Open Week</button>
                             </p-panel>
                         </div>
                         <div class="card flex justify-content-center align-items-center d-flex"
                             *ngIf="(userType$|async)=='Reviewer'&&menuVal=='Current'&&step==2;"
                             style="border-color:#00000000;background-color:#00000000;">
                             <p-panel header="Training Contract Record" [toggleable]="true">
-                                <h3 class="border border-striped border-info p-5 text-secondary"
+                                <h3 [class]="'border-'+statusColor" class="border border-striped p-5 text-secondary"
                                     style="border-style:dashed !important;">
                                     Step 2: Click the button below to open the week
                                 </h3>
-                                <button class="btn btn-info mt-2" (click)="step=3">Open Week</button>
+                                <button [disabled]="openWeekDisabled" [class]="'btn-'+statusColor"
+                                (click)="openViewDiary(false)" class="btn mt-2">Open Week</button>
                             </p-panel>
                         </div>
                         <div class="card flex justify-content-center align-items-center d-flex"

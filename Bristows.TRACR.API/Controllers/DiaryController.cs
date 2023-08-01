@@ -29,15 +29,48 @@ public partial class DiaryController : ControllerBase
     #endregion
 
     /// <summary>
+    /// GET: api/{version}/Diary/GetSkills
+    /// </summary>
+    /// <response code="200">{skill view objects}</response>
+    /// <response code="204">missing skill objects</response>
+                                                                    // [Authorize(Policy="tracr-trainee//reviewer")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<Skill>))]
+    [ActionName("GetSkills"),HttpGet("[action]")]
+    public async Task<ActionResult<IEnumerable<Skill?>?>> GetSkills()
+    {
+        IEnumerable<Skill?> skills = await _diaryService.GetSkills();
+        return (skills != null) && (typeof(List<Skill>) == skills!.GetType()) ? Ok(skills) : StatusCode(204);
+    }
+
+    /// <summary>
+    /// GET: api/{version}/Diary/GetDiariesPfid/{pfid}
+    /// </summary>
+    /// <param name="pfid">PFID of diary objects</param>
+    /// <response code="200">{diary view objects}</response>
+    /// <response code="204">missing diary objects</response>
+                                                                        // [Authorize(Policy="tracr-trainee//reviewer")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<DiaryViewModel>))]
+    [ActionName("GetDiariesPfid"),HttpGet("[action]/{pfid:int}")]
+    public async Task<ActionResult<IEnumerable<DiaryViewModel?>?>> GetDiariesPfid([FromRoute] [ValidPfid] int pfid)
+    {
+        IEnumerable<Diary?> diaries = await _diaryService.GetDiariesAsync(pfid);
+        IEnumerable<DiaryViewModel?> diaryVM = _mapper.Map<IEnumerable<Diary?>, IEnumerable<DiaryViewModel>>(diaries!);
+        return (diaryVM != null) && (typeof(List<Diary>) == diaries!.GetType()) ? Ok(diaryVM) : StatusCode(204);
+    }
+    
+    /// <summary>
     /// GET: api/{version}/Diary/GetTasksByDiaryId/{id}
     /// </summary>
     /// <param name="id">ID of diary object</param>
     /// <response code="200">{task view objects}</response>
     /// <response code="204">missing DiaryTask objects</response>
+                                     // [Authorize(Policy="tracr-trainee//reviewer")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<DiaryTaskViewModel>))]
     [ActionName("GetTasksByDiaryId"),HttpGet("[action]/{id:int}")]
-    public async Task<ActionResult<IEnumerable<DiaryTaskViewModel>?>> GetTasksByDiaryId([FromRoute] int id)
+    public async Task<ActionResult<IEnumerable<DiaryTaskViewModel?>?>> GetTasksByDiaryId([FromRoute] int id)
     {
         IEnumerable<DiaryTask?> diaryTasks = await _diaryService.DiaryTasksByDiaryIdAsync(id);
         IEnumerable<DiaryTaskViewModel?> diaryTasksVM = _mapper.Map<IEnumerable<DiaryTask?>, IEnumerable<DiaryTaskViewModel>>(diaryTasks!);
@@ -69,7 +102,7 @@ public partial class DiaryController : ControllerBase
     /// <param name="id">ID of task object</param>
     /// <response code="200">{task view object}</response>
     /// <response code="204">missing DiaryTask object</response>
-    [Authorize(Policy="tracr-trainee")]
+    [Authorize(Policy="tracr-trainee//reviewer")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(DiaryTaskViewModel))]
     [ActionName("GetTaskByTaskId"),HttpGet("[action]/{id:int}")]
@@ -121,28 +154,12 @@ public partial class DiaryController : ControllerBase
     }
 
     /// <summary>
-    /// GET: api/{version}/Diary/GetDiaryPfid/{pfid}
-    /// </summary>
-    /// <param name="pfid">PFID of diary object</param>
-    /// <response code="200">{diary view object}</response>
-    /// <response code="204">missing diary object</response>
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(DiaryViewModel))]
-    [ActionName("GetDiaryPfid"),HttpGet("[action]/{pfid:int}")]
-    public async Task<ActionResult<DiaryViewModel?>> GetDiaryPfid([FromRoute] [ValidPfid] int pfid)
-    {
-        Diary? diary = await _diaryService.GetDiaryByPfidAsync(pfid);
-        DiaryViewModel? diaryVM = _mapper.Map<Diary?, DiaryViewModel>(diary);
-        return (diaryVM != null) && (typeof(Diary) == diary!.GetType()) ? Ok(diaryVM) : StatusCode(204);
-    }
-
-    /// <summary>
     /// POST: api/{version}/Diary/AddDiary
     /// </summary>
     /// <param name="addReq">AddModifyDiaryReq DTO</param>
     /// <response code="201">{ new diary object }</response>
     /// <response code="400">object not created</response>
-                                                     // [Authorize(Policy="tracr-trainee")]
+    [Authorize(Policy="tracr-trainee")]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created,Type=typeof(DiaryViewModel))]
@@ -152,7 +169,7 @@ public partial class DiaryController : ControllerBase
         if (addReq is null) return BadRequest(addReq);
         Diary? newDiary = _diaryService.CreateDiary(_mapper.Map<AddModifyDiaryReq,Diary>(addReq));
         DiaryViewModel diaryVM = _mapper.Map<Diary,DiaryViewModel>(newDiary!);
-        return CreatedAtAction(nameof(GetDiaryPfid), new { pfid = newDiary?.PFID }, diaryVM);
+        return CreatedAtAction(nameof(GetDiariesPfid), new { pfid = newDiary?.PFID }, diaryVM);
     }
 
     /// <summary>

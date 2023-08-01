@@ -1,7 +1,11 @@
 .overlay > *:hover {
     border: 1px solid #09b9d892;
 }
+.btn.btn-info[disabled] { border: 0.5px solid rgba(33, 46, 52, 0.711) !important; background-color: #05d5ff5b;color:#00090a;border-color: rgb(49, 49, 49) !important; }
 :host ::ng-deep {
+    &.p-calendar > .p-datepicker {
+        overflow: hidden;
+    }
     &.cal1 {
         &.p-calendar tbody tr:nth-of-type(1) {
             border: solid 1px #111a24e3;
@@ -12,6 +16,10 @@
         background-color: #1b1e1e;
         }
         tr:nth-of-type(5){td.p-datepicker-weeknumber{ position:relative;height:60px;}
+        }
+        &.p-calendar {
+            overflow-y: hidden;
+            overflow-x: hidden;
         }
         &.p-calendar > .p-datepicker {
             padding-left:1px;
@@ -304,7 +312,7 @@
     &.p-card {
         > * {
             padding: 0px;
-            padding-left: 5px;
+            padding-left: 17px;
             color: #d8d8d8e3;
             margin-top:20px;
         }
@@ -317,7 +325,7 @@
             padding-top: 0px;
             padding-bottom: 10px;
         }
-        max-width: 444px;
+        max-width: 467px;
         p {
         color: rgba(226, 226, 226, 0.819);
         margin:0px;
@@ -403,6 +411,25 @@
             background-color:rgba(110, 110, 110, 0.274);
         }
     }
+}
+.Submitted {
+    background-color: #8f15005c !important;
+    border: 1px solid #fb000092 !important;
+    &:hover { border: 2px solid #fb0000f1 !important; }
+}
+.SignedOff {
+    background-color: #104f0a63 !important;
+    border: 1px solid #008917 !important;
+    &:hover { border: 2px solid #15820b !important; }
+}
+.UnderReview {
+    background-color: #ebff0f3b !important;
+    border: 1px solid #ac9710c2 !important;
+    &:hover { border: 2px solid #ffdd00 !important; }
+}
+.Available {
+    border: 1px solid rgba(122, 24, 15, 0) !important;
+    &:hover { border: 1px solid #09b9d892 !important; }
 }
  
 

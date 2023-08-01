@@ -40,7 +40,7 @@ public partial class UserController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<TraineeViewModel>))]
     [ActionName("GetTraineesByReviewer"),HttpGet("[action]/{pfid:int}")]
-    public async Task<ActionResult<IEnumerable<TraineeViewModel>?>> GetTraineesByReviewer([FromRoute] [ValidPfid] int pfid)
+    public async Task<ActionResult<IEnumerable<TraineeViewModel?>?>> GetTraineesByReviewer([FromRoute] [ValidPfid] int pfid)
     {
         IEnumerable<PeopleFinderUser?> users = await _userService.GetPFUsersAsync();
         IEnumerable<Trainee?> trainees = await _userService.TraineesByReviewerAsync(pfid);
@@ -85,7 +85,7 @@ public partial class UserController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<UserViewModel>))]
     [ActionName("GetReviewers"),HttpGet("[action]")]
-    public async Task<ActionResult<IEnumerable<UserViewModel>?>> GetReviewers()
+    public async Task<ActionResult<IEnumerable<UserViewModel?>?>> GetReviewers()
     {
         IEnumerable<PeopleFinderUser?> reviewers = await _userService.GetReviewersAsync();
         IEnumerable<UserViewModel?> reviewersVM = _mapper.Map<IEnumerable<PeopleFinderUser?>,IEnumerable<UserViewModel>>(reviewers!);
@@ -94,7 +94,7 @@ public partial class UserController : ControllerBase
     }
                                     //------------------------------MAINTENANCE--------------------------------//
     /// <summary>
-    /// PUT: api/{version}/User/AssignTrainees/{pfid}
+    /// POST: api/{version}/User/AssignTrainees/{pfid}
     /// </summary>
     /// <param name="pfid">PFID of trainee</param>
     /// <param name="addReq">AddModifyTraineeReq DTO</param>
@@ -108,10 +108,11 @@ public partial class UserController : ControllerBase
     public async Task<ActionResult<TraineeViewModel>?> AssignTrainees([FromRoute] [ValidPfid] int pfid, [FromBody] AddModifyTraineeReq addReq)
     {
         if ((await _userService.GetPFUserAsync(pfid) is null)||(addReq is null)) return StatusCode(400);
-        Trainee? currentTrainee = await _userService.GetTraineeByPfidAsync(pfid);
-        _userService.AssignTrainees(_mapper.Map(addReq, currentTrainee!));
-        TraineeViewModel traineeVM = _mapper.Map<Trainee,TraineeViewModel>(currentTrainee!);
-        return CreatedAtAction(nameof(GetTraineesByReviewer), new { pfid = currentTrainee?.REVIEWER_PFID }, traineeVM);
+        Trainee? newTrainee = _mapper.Map<AddModifyTraineeReq,Trainee>(addReq!);
+        newTrainee.TRAINEE_PFID = pfid.ToString();
+        _userService.AssignTrainees(newTrainee);   
+        TraineeViewModel traineeVM = _mapper.Map<Trainee,TraineeViewModel>(newTrainee!);
+        return CreatedAtAction(nameof(GetTraineesByReviewer), new { pfid = newTrainee?.REVIEWER_PFID }, traineeVM);
     }
                                     //------------------------------MAINTENANCE--------------------------------//
     /// <summary>
@@ -144,7 +145,7 @@ public partial class UserController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<TraineeViewModel>))]
     [ActionName("GetTrainees"),HttpGet("[action]")]
-    public async Task<ActionResult<IEnumerable<TraineeViewModel>?>> GetTrainees()
+    public async Task<ActionResult<IEnumerable<TraineeViewModel?>?>> GetTrainees()
     {
         IEnumerable<Trainee?> trainees = await _userService.GetTraineesAsync();
         IEnumerable<PeopleFinderUser?> users = await _userService.GetPFUsersAsync();
@@ -168,7 +169,7 @@ public partial class UserController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<UserViewModel>))]
     [ActionName("GetUsers"),HttpGet("[action]")]
-    public async Task<ActionResult<IEnumerable<UserViewModel>?>> GetUsers()
+    public async Task<ActionResult<IEnumerable<UserViewModel?>?>> GetUsers()
     {
         IEnumerable<PeopleFinderUser?> users = await _userService.GetPFUsersAsync();
         IEnumerable<UserViewModel?> usersVM = _mapper.Map<IEnumerable<PeopleFinderUser?>,IEnumerable<UserViewModel>>(users!);

@@ -10,21 +10,24 @@ namespace Bristows.TRACR.BLL.Services
 {
     public class DiaryService : IDiaryService
     {
+        private readonly ISkillRepository skillRepository;
         private readonly IDiaryRepository diaryRepository;
         public readonly IDiaryTaskRepository diaryTaskRepository;
         private readonly UnitOfWork<TRACRContext> TRACRUnitOfWork;
 
-        public DiaryService(IDiaryRepository diaryRepository, UnitOfWork<TRACRContext> TRACRUnitOfWork, IDiaryTaskRepository diaryTaskRepository)
+        public DiaryService(ISkillRepository skillRepository, UnitOfWork<TRACRContext> TRACRUnitOfWork, IDiaryRepository diaryRepository, IDiaryTaskRepository diaryTaskRepository)
         {
+            this.skillRepository = skillRepository ?? throw new ArgumentNullException(nameof(skillRepository));
             this.diaryRepository = diaryRepository ?? throw new ArgumentNullException(nameof(diaryRepository));
             this.diaryTaskRepository = diaryTaskRepository ?? throw new ArgumentNullException(nameof(diaryTaskRepository));
             this.TRACRUnitOfWork = TRACRUnitOfWork ?? throw new ArgumentNullException(nameof(TRACRUnitOfWork));
         }
         #region [Diary methods] - DiaryRepository
+        public async Task<IEnumerable<Skill?>> GetSkills() => await skillRepository.GetAllAsync();
         public Diary? GetDiaryByPfid([ValidPfid] int pfid) => diaryRepository.FirstOrDefault(d => d.PFID == pfid.ToString());
         public async Task<Diary?> GetDiaryByPfidAsync([ValidPfid] int pfid) => await diaryRepository.FirstOrDefaultAsync(d => d.PFID == pfid.ToString());
         public IEnumerable<Diary?> GetDiaries() => diaryRepository.GetAll();
-        public async Task<IEnumerable<Diary?>> GetDiariesAsync() => await diaryRepository.GetAllAsync();
+        public async Task<IEnumerable<Diary?>> GetDiariesAsync([ValidPfid] int pfid) => await diaryRepository.GetManyAsync(d => d.PFID == pfid.ToString());
         public Diary? GetDiaryByDiaryId(int id) => diaryRepository.FirstOrDefault(d => d.DIARY_ID == id);
         public async Task<Diary?> GetDiaryByDiaryIdAsync(int id) => await diaryRepository.FirstOrDefaultAsync(d => d.DIARY_ID == id);
         public Diary? UpdateDiary(Diary diary, bool commit=true)

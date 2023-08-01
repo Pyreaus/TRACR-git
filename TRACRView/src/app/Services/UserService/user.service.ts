@@ -9,6 +9,7 @@ import { AddModifyDiaryReq } from 'src/app/Interfaces/DTOs/AddModifyDiaryReq';
 import { Diary } from 'src/app/Interfaces/Diary';
 import { DiaryTask } from 'src/app/Interfaces/DiaryTask';
 import { AddModifyTaskReq } from 'src/app/Interfaces/DTOs/AddModifyTaskReq';
+import { Skill } from 'src/app/Interfaces/Skill';
 
 @Injectable({
   providedIn: 'root'
@@ -22,41 +23,62 @@ import { AddModifyTaskReq } from 'src/app/Interfaces/DTOs/AddModifyTaskReq';
   }
   GetTasksDiaryId(DiaryId: number): Observable<DiaryTask[]> {
     return this.http.get<DiaryTask[]>(`${env.ApiUrl}/${env.version}/${env.diaryController}/GetTasksByDiaryId/${DiaryId}`)
-    .pipe(map(res => this.deserialize('Usr|Rev',res,true)));
-  }
-  GetDiaryPfid(PfId: number): Observable<Diary> {
-    return this.http.get<Diary>(`${env.ApiUrl}/${env.version}/${env.diaryController}/GetDiaryPfid/${PfId}`)
-    .pipe(map(res => this.deserialize('Usr|Rev',res,false)));
+    .pipe(map((res:DiaryTask[]) => {
+      const diaryTasks: DiaryTask[] = res.map((obj:any) => this.deserialize('Task', obj, true));
+      return diaryTasks;
+    }));
   }
   GetUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetUsers`)
-    .pipe(map(res => this.deserialize('Usr|Rev',res,true)));
+    .pipe(map((res:User[]) => {
+      const users: User[] = res.map((obj:any) => this.deserialize('Usr|Rev', obj, true))
+      return users;
+    }));
+  }
+  GetDiariesPfid(PfId: number): Observable<Diary[]> {
+    return this.http.get<Diary[]>(`${env.ApiUrl}/${env.version}/${env.diaryController}/GetDiariesPfid/${PfId}`)
+     .pipe(map((res:Diary[]) => {
+      const diaries: Diary[] = res.map((obj:any) => this.deserialize('Diary', obj, true))
+      return diaries;
+    }));
+  }
+  getTraineesByReviewer(PfId: number): Observable<Trainee[]> {
+    return this.http.get<Trainee[]>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetTraineesByReviewer/${PfId}`)
+    .pipe(map((res:Trainee[]) => {
+      const trainees: Trainee[] = res.map((obj:any) => this.deserialize('Trainee', obj, true))
+      return trainees;
+    }));
   }
   EditDiaryPfid(PfId: number, addDiaryRequest: AddModifyDiaryReq): Observable<AddModifyDiaryReq> {
     return this.http.put<AddModifyDiaryReq>(`${env.ApiUrl}/${env.version}/${env.diaryController}/EditDiaryPfid/${PfId}`, addDiaryRequest);
   }
-  getTraineesByReviewer(PfId: number): Observable<Trainee[]> {
-    return this.http.get<Trainee[]>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetTraineesByReviewer/${PfId}`)
-    .pipe(map(res => this.deserialize('Usr|Rev',res,true)));
-  }
   AssignTrainees(PfId: number, addReq: AddModifyTraineeReq): Observable<AddModifyTraineeReq> {
     return this.http.post<AddModifyTraineeReq>(`${env.ApiUrl}/${env.version}/${env.usrController}/AssignTrainees/${PfId}`, addReq);
   }
-  GetTrainees(): Observable<Trainee[]> {
-    return this.http.get<Trainee[]>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetTrainees`)
-    .pipe(map(res => this.deserialize('Usr|Rev',res,true)));
-  }
   GetReviewers(): Observable<User[]> {
     return this.http.get<User[]>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetReviewers`)
-    .pipe(map(res => this.deserialize('Usr|Rev',res,true)));
+    .pipe(map((res:User[]) => {
+      const reviewers: User[] = res.map((obj:any) => this.deserialize('Usr|Rev', obj, true))
+      return reviewers
+    }));
+  }
+  GetTrainees(): Observable<Trainee[]> {
+    return this.http.get<Trainee[]>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetTrainees`)
+    .pipe(map((res:Trainee[]) => {
+      const trainees: Trainee[] = res.map((obj:any) => this.deserialize('Trainee', obj, true))
+      return trainees;
+    }));
+  }
+  GetSkills(): Observable<Skill[]> {
+    return this.http.get<Skill[]>(`${env.ApiUrl}/${env.version}/${env.diaryController}/GetSkills`);
   }
   GetTrainee(PfId: number): Observable<Trainee> {
     return this.http.get<Trainee>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetTrainee/${PfId}`)
-    .pipe(map(res => this.deserialize('Trainee',res,false)));
+    .pipe(map(res => this.deserialize('Trainee', res, false)));
   }
   getUserType(): Observable<User> {
     return this.http.get<User>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetUserType`)
-    .pipe(map(res => this.deserialize('Usr|Rev',res,false)));
+    .pipe(map(res => this.deserialize('Usr|Rev', res, false)));
   }
   AddDiary(addDiaryRequest: AddModifyDiaryReq): Observable<AddModifyDiaryReq> {
     return this.http.post<AddModifyDiaryReq>(`${env.ServerRoot}/api/${env.version}/${env.diaryController}/AddDiary`,addDiaryRequest);
@@ -64,19 +86,6 @@ import { AddModifyTaskReq } from 'src/app/Interfaces/DTOs/AddModifyTaskReq';
   AddDiaryTask(addDiaryTaskRequest: AddModifyTaskReq): Observable<AddModifyTaskReq> {
     return this.http.post<AddModifyTaskReq>(`${env.ApiUrl}/${env.version}/${env.diaryController}/AddDiaryTask`,addDiaryTaskRequest);
   }
-
-  // GetDiary(id: string): Observable<Employee> {
-  //   return this.http.get<Employee>(
-  //     `${env.ServerRoot}/api/${env.version}/${env.controller}/GetEmployee/${id}`);
-  // }
-  // AddDiary(addEmployeeRequest: AddModifyEmpReq): Observable<Employee> {
-  //   return this.http.post<Employee>(
-  //     `${env.ServerRoot}/api/${env.version}/${env.controller}/AddEmployee`,addEmployeeRequest);
-  // }
-  // DeleteEmployee(id: string): Observable<Employee> {
-  //   return this.http.delete<Employee>( 
-  //     `${env.ServerRoot}/api/${env.version}/${env.controller}/DeleteEmployee/${id}`);
-  // }
 
   deserialize(entity:string, json:any, array:boolean): any {
     switch (entity) {
