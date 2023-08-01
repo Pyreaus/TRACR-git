@@ -32,8 +32,9 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   step = 1;
+  active!:string;
   overlayMax = '30px';
-  statusColor = 'info';
+  statusColor = ['secondary','info'];
   user$!: User
   diaryReq!: AddModifyDiaryReq;
   viewportMaximum!:boolean;
@@ -62,6 +63,8 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
   usersReviewer$!: User;
   formGroup!: FormGroup;
   diaryForm: FormGroup;
+  signOffSubmitted!: boolean;
+  diarySignedOff!: boolean;
   listenerAttached = false;
   calendarRendered = false;
   openWeekDisabled = true;
@@ -119,7 +122,7 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
       const isMaximized = (window.innerWidth >= window.screen.availWidth) && (window.outerHeight === window.screen.availHeight);
-        if (isMaximized) {this.overlayMax='17px !important'} else {this.overlayMax='10px !important'}
+        if (isMaximized) {this.overlayMax='18px !important'} else {this.overlayMax='11px !important'}
         this.cdRef.detectChanges();
       }
     });
@@ -128,12 +131,21 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
   ngOnDestroy(): void {
     this.userType$.unsubscribe();
   }
+  formatTimestamp(timestamp: string): string {
+    const [inputFormat, outputFormat]: [RegExp,RegExp] = [/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}/,
+    /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{3})/];
+    if (!inputFormat.test(timestamp)) return '';
+    const [, year, month, day, hours, minutes, seconds, milliseconds] = timestamp.match(outputFormat) || [];
+    if (!year || !month || !day || !hours || !minutes || !seconds || !milliseconds) return '';
+    const formattedDateTime = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+    return formattedDateTime;
+  }
   ngOnInit(): void {
     this.userService.GetUsers().subscribe({
       next: (res:User[]) => {
         this.reviewers$ = res;
         this.reviewers$.forEach(rev => rev.FirstName = rev.FirstName+' '+rev.LastName);
-        const codedPfids = [100]; //Maintenance ---------------
+        const codedPfids = [100]; 
         this.peopleFiltered$ = res.filter((trn) => !codedPfids.includes(trn.PFID));
       }, error: (err) => {console.trace(err)} });
     this.items = Array.from({ length: 1000 }).map((_, i) =>
@@ -160,7 +172,6 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
         }
       });
     }, 0);
-    setTimeout(() => {console.log(this.A + this.B + this.C + this.D + this.E)},4000)
   }
   resetTrainees(): void {
     this.userService.GetTrainees().subscribe({
@@ -200,12 +211,12 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
           if (next && prev) {
             this.renderer.listen(next,'click', (event: Event) => {
               this.markCells();
-              [this.statusColor,  this.rowSelected] = ['info', 'cal'];
+              [this.statusColor,  this.rowSelected] = [['secondary','info'], 'cal'];
               this.calendarRendered = false;
             });
             this.renderer.listen(prev,'click', (event: Event) => {
               this.markCells();
-              [this.statusColor,  this.rowSelected] = ['info', 'cal'];
+              [this.statusColor,  this.rowSelected] = [['secondary','info'], 'cal'];
               this.calendarRendered = false;
             });
           }
@@ -225,7 +236,7 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
   ];
   selected(num: number, special: boolean = false, ignore: boolean = false): void {
     let monthNumber: number[] = [1,2,3,4,5,6,7,8,9,10,11,12];
-    this.statusColor = ignore ? this.statusColor : "info";
+    this.statusColor = ignore ? this.statusColor : ['secondary','info'];
     this.openWeekDisabled = ignore ? true : false;
     this.step = ignore ? this.step : 2;
     let month!: number;
@@ -241,33 +252,37 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
     }
     switch (num) {
       case 1:
+        this.active = 'A';
         let [day1w1, day2w1]: [number, number] = [this.elementRef.nativeElement.querySelectorAll(
           '.p-ripple.p-disabled')[special ? 1 : 0].innerHTML.replace(/\D/g,''),
-        this.elementRef.nativeElement.querySelectorAll('.p-ripple.p-disabled')[6].innerHTML.replace(/\D/g,'')
-        ];
+        this.elementRef.nativeElement.querySelectorAll('.p-ripple.p-disabled')[6].innerHTML.replace(/\D/g,'')];
         let startMonth: number = Number(day1w1) < Number(day2w1) ? month : month - 1;
         [weekRange, this.rowSelected] = [[`${day1w1}/${startMonth}/${year}`,
         `${day2w1}/${month}/${year}`],ignore ? this.rowSelected : 'cal1'];
         break;
       case 2:
+        this.active = 'B';
         [weekRange, this.rowSelected] = [[`${this.elementRef.nativeElement.querySelectorAll(
           '.p-ripple.p-disabled')[special ? 8 : 7].innerHTML.replace(/\D/g,'')}/${month}/${year}`,
         `${this.elementRef.nativeElement.querySelectorAll(
           '.p-ripple.p-disabled')[13].innerHTML.replace(/\D/g,'')}/${month}/${year}`], ignore ? this.rowSelected : 'cal2'];
         break
       case 3:
+        this.active = 'C';
         [weekRange, this.rowSelected] = [[`${this.elementRef.nativeElement.querySelectorAll(
           '.p-ripple.p-disabled')[special ? 15 : 14].innerHTML.replace(/\D/g,'')}/${month}/${year}`,
         `${this.elementRef.nativeElement.querySelectorAll('.p-ripple.p-disabled')[20].innerHTML.replace(
           /\D/g,'')}/${month}/${year}`], ignore ? this.rowSelected : 'cal3'];
         break;
       case 4:
+        this.active = 'D';
         [weekRange, this.rowSelected] = [[`${this.elementRef.nativeElement.querySelectorAll(
           '.p-ripple.p-disabled')[special ? 22 : 21].innerHTML.replace(/\D/g,'')}/${month}/${year}`,
           `${this.elementRef.nativeElement.querySelectorAll('.p-ripple.p-disabled')[27].innerHTML.replace(
             /\D/g,'')}/${month}/${year}`],ignore ? this.rowSelected : 'cal4'];
         break;
       case 5:
+        this.active = 'E';
         let [day1w4, day2w4]: [number, number] = [this.elementRef.nativeElement.querySelectorAll(
           '.p-ripple.p-disabled')[special ? 29 : 28].innerHTML.replace(/\D/g,''),
           this.elementRef.nativeElement.querySelectorAll('.p-ripple.p-disabled')[34].innerHTML.replace(/\D/g,'')];
@@ -276,6 +291,7 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
         break;
     }
     this.dateRange = this.reformatStartDate(`${weekRange[0]} - ${weekRange[1]}`);
+    console.log(this.active);
   }
   openNewDiary(): void {
     this.step = 3;
@@ -296,7 +312,7 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
     for (let week of this.weeks) {
       pointer++
       for (let diary of this.userDiaries) {
-        if (diary.WEEK_BEGINNING!.slice(0, -9) == week) {
+        if (diary.WEEK_BEGINNING!.slice(0,-9).toString() == week) {
           switch (pointer) {
             case 1:
               if (diary.SIGNED_OFF_TIMESTAMP != null) {
@@ -344,9 +360,11 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
   openViewDiary(trn:boolean = false): void {
     let match: boolean = false;
     if (trn) for (let diary of this.userDiaries) {
-        if (this.dateRange == diary!.WEEK_BEGINNING!.slice(0, -9)!.toString()!) {
-          console.log(diary.WEEK_BEGINNING!.slice(0, -9)!.toString()! + ' ' + this.dateRange);
+        if (this.dateRange == diary!.WEEK_BEGINNING!.slice(0,-9)!.toString()!) {
+          console.log(diary.WEEK_BEGINNING!.slice(0,-9)!.toString()! + ' ' + this.dateRange);
           this.currentDiary = diary;
+          this.diarySignedOff = diary.SIGNED_OFF_TIMESTAMP != null ? true : false;
+          this.signOffSubmitted = (diary.SIGN_OFF_SUBMITTED=='True')||(diary.SIGN_OFF_SUBMITTED=='true') ? true : false;
           this.getDiaryTasks(this.currentDiary.DIARY_ID!)
           this.newDiaryPanel = false;
           this.ViewDiaryPanel = true;
@@ -363,8 +381,10 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
     }) : void(0);
     if (trn == false) {
       for (let diary of this.userDiaries) {
-        if (this.dateRange == diary!.WEEK_BEGINNING!.slice(0, -9)!.toString()!) {
+        if (this.dateRange == diary!.WEEK_BEGINNING!.slice(0,-9)!.toString()!) {
           this.currentDiary = diary;
+          this.diarySignedOff = diary.SIGNED_OFF_TIMESTAMP != null ? true : false;
+          this.signOffSubmitted = (diary.SIGN_OFF_SUBMITTED=='True')||(diary.SIGN_OFF_SUBMITTED=='true') ? true : false;
           this.getDiaryTasks(this.currentDiary.DIARY_ID!)
           this.newDiaryPanel = false;
           this.ViewDiaryPanel = true;
@@ -372,7 +392,7 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
         }
         if (match) break;
       }
-      if (!match) this.statusColor = "danger";
+      if (!match) this.statusColor = ["secondary","danger"];
       this.trainees$ = this.trainees$.filter((T: Trainee) => T.TRAINEE_PFID == this.currentTraineePfid$!.toString());
     }
   }
@@ -380,18 +400,45 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.disableSubmit = true;
     const diaryReq: AddModifyDiaryReq = {
       PFID: this.user$!.PFID.toString(),
-      WEEK_BEGINNING: this.currentDiary.WEEK_BEGINNING!.toString(),
+      WEEK_BEGINNING: this.currentDiary.WEEK_BEGINNING!.slice(0,-9)!.toString()!,
       LEARNING_POINTS: this.currentDiary.LEARNING_POINTS!,
       PRACTICE_AREA: this.currentDiary.PRACTICE_AREA!,
       PROFESSIONAL_DEVELOPMENT_UNDERTAKEN: this.currentDiary.PROFESSIONAL_DEVELOPMENT_UNDERTAKEN!,
       PROFESSIONAL_CONDUCT_ISSUES: this.currentDiary.PROFESSIONAL_CONDUCT_ISSUES,
-      SIGN_OFF_SUBMITTED: 'true',
-      SIGNED_OFF_BY: 'VALUE HARDOCED FOR DEVELOPMENT - UPDATE'
+      SIGN_OFF_SUBMITTED: 'True',
+      SIGNED_OFF_BY: null
     }
     console.log(diaryReq);
-    this.userService.EditDiaryPfid(this.user$!.PFID,diaryReq).subscribe({
+    this.userService.EditDiaryById(this.currentDiary.DIARY_ID!,diaryReq).subscribe({
       next: (res) => console.log(res),
       error: (err) => console.error(err)
+    });
+  }
+  SignOff(trnDiary: Diary): void {
+    if (this.diarySignedOff || !this.signOffSubmitted) return void(0);
+    this.diarySignedOff = true;
+    const diaryReq: AddModifyDiaryReq = {
+      PFID: trnDiary.PFID!,
+      WEEK_BEGINNING: trnDiary.WEEK_BEGINNING!.slice(0,-9)!.toString()!,
+      LEARNING_POINTS: trnDiary.LEARNING_POINTS!,
+      PRACTICE_AREA: trnDiary.PRACTICE_AREA!,
+      PROFESSIONAL_DEVELOPMENT_UNDERTAKEN: trnDiary.PROFESSIONAL_DEVELOPMENT_UNDERTAKEN!,
+      PROFESSIONAL_CONDUCT_ISSUES: trnDiary.PROFESSIONAL_CONDUCT_ISSUES,
+      SIGN_OFF_SUBMITTED: 'True',
+      SIGNED_OFF_BY: this.user$!.PFID.toString()
+    }
+    this.userService.EditDiaryById(trnDiary.DIARY_ID!,diaryReq).subscribe({
+      next: (_) => {
+        this.userService.GetDiariesPfid(parseInt(this.currentTraineePfid$!,10)).subscribe({
+          next: (res: Diary[]) => {
+            this.userDiaries = res;
+            this.currentDiary = this.currentDiary.DIARY_ID ? this.userDiaries.find((d: Diary) =>
+             d.DIARY_ID === this.currentDiary.DIARY_ID)! : this.userDiaries[0];
+            this.markCells();
+          }, error: (err) => console.trace(err)
+        });
+        setTimeout(() => this.markCells(), 2000)
+      }, error: (err) => console.trace(err)
     });
   }
   openEditView(tPfid: string): void {

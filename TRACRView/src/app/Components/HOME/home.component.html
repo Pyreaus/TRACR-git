@@ -48,12 +48,12 @@
                         </div>
                         <div class="col ps-2 pe-3 m-0 mt-0">
                             <div *ngIf="(userType$ | async)?.toLowerCase() === 'reviewer' && menuVal === 'Current' && (step === 2 || step === 3);" class="ps-0 position-relative">
-                                <div class="row overlay d-none d-md-flex" [style.left]="overlayMax" style="width:58px;position:absolute;z-index:1000;top:120px;">
-                                    <div class="col-12 overlay2" [class]="A" (click)="selected(1,true)" style="min-height:55px;margin-top:4px;"></div>
-                                    <div class="col-12 overlay2" [class]="B" (click)="selected(2,true)" style="min-height:57px;margin-top:1px;"></div>
-                                    <div class="col-12 overlay2" [class]="C" (click)="selected(3,true)" style="min-height:56px;margin-top:0px;"></div>
-                                    <div class="col-12 overlay2" [class]="D" (click)="selected(4,true)" style="min-height:57px;margin-top:0px;"></div>
-                                    <div class="col-12 overlay2" [class]="E" (click)="selected(5,true)" style="min-height:59px;margin-top:1px;"></div>
+                                <div class="row overlay d-none d-md-flex" [style.left]="overlayMax" style="width:57px;position:absolute;z-index:1000;top:120px;">
+                                    <div class="col-12 overlay2 AA" [class]="A+' '+active" (click)="selected(1,true)" style="min-height:57px;margin-top:6px;"></div>
+                                    <div class="col-12 overlay2 BB" [class]="B+' '+active" (click)="selected(2,true)" style="min-height:57px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2 CC" [class]="C+' '+active" (click)="selected(3,true)" style="min-height:56px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2 DD" [class]="D+' '+active" (click)="selected(4,true)" style="min-height:57px;margin-top:0px;"></div>
+                                    <div class="col-12 overlay2 EE" [class]="E+' '+active" (click)="selected(5,true)" style="min-height:59px;margin-top:1px;"></div>
                                 </div>
                                 <div class="row overlay d-md-none d-md-flex" style="width:57px;position:absolute;z-index:1000;left:15px;top:105px;">
                                     <div class="col-12 overlay2" [class]="A" (click)="selected(1,true)" style="min-height:41px;margin-top:0px;"></div>
@@ -109,15 +109,15 @@
                                         <ng-template let-value pTemplate="peopleFiltered$">
                                             <div class="flex align-items-center gap-2"
                                                 *ngFor="let trainee of reviewers$">
-                                                <img src="../../../assets/profilePic.png" [class]="'profilePic'"
-                                                    style="width: 18px" />
+                                                <img [class]="'profilePic'"
+                                                    style="width:35px;height:32px;" />
                                                 <div>{{ trainee.FirstName }}</div>
                                             </div>
                                             <div *ngIf="!selectedTrainees">Select Trainees</div>
                                         </ng-template>
                                         <ng-template let-profile pTemplate="item">
                                             <div class="d-flex align-items-center">
-                                                <img src="../../../assets/profilePic.png"
+                                                <img
                                                     style="border-radius: 20%; width: 18px; margin-right: 5px;" />
                                                 <div>{{ profile.FirstName }}</div>
                                             </div>
@@ -150,14 +150,14 @@
                                     [placeholder]="this.trainees$[0].FirstName!" defaultLabel="Select trainees" optionLabel="FirstName">
                                         <ng-template let-value pTemplate="peopleFiltered$">
                                             <div class="flex align-items-center gap-2" *ngFor="let trainee of reviewers$">
-                                                <img src="../../../assets/profilePic.png" [class]="'profilePic'" style="width: 18px" />
+                                                <img [class]="'profilePic'" style="width:35px;height:32px;" />
                                                 <div>{{ trainee.FirstName }}</div>
                                             </div>
                                         </ng-template>
                                         <ng-template let-profile pTemplate="item">
                                             <div class="d-flex align-items-center">
-                                                <img src="../../../assets/profilePic.png"
-                                                    style="border-radius: 20%; width: 18px; margin-right: 5px;" />
+                                                <img
+                                                    style="border-radius: 20%; width:35px;height:32px; margin-right: 5px;" />
                                                 <div>{{ profile.FirstName }}</div>
                                             </div>
                                         </ng-template>
@@ -187,17 +187,16 @@
                                         style="background-color:rgb(59, 61, 64);border:1px solid rgba(78, 78, 78, 0.762);">
                                         <div class="d-flex w-100 pt-2 justify-content-between">
                                             <h5 class="mb-1 text-light" style="margin-right:2px;">{{ trn.FirstName }}</h5>
-                                            <small class="text-success"
-                                                style="margin-right:10px;margin-left:45px;">Active</small><img
-                                                src="../../../assets/profilePic.png"
-                                                style="border-radius: 20%; width: 28px;height:25px;margin-right:auto;position:relative;left:-90px;" />
+                                            <small style="color:#2eb81cd9!important;margin-right:10px;margin-left:48px;">Active</small><img
+                                                [src]="trn.Photo"
+                                                style="border-radius: 20%; width:35px;height:32px;margin-right:auto;position:relative;left:-90px;" />
                                             </div><small class="text-muted">Reviewer: {{ this.user$.FirstName! + ' ' + this.user$.LastName! }}</small>
                                             <button (click)="openTraineeDiary(trn.TRAINEE_PFID!)" type="button" class="btn btn-secondary btn-sm"
                                             style="float:right !important;position:relative;bottom:13px;">View Diary
                                         </button>
                                         <div *ngIf="(userType$|async)=='Reviewer'&&menuVal=='Current'&&(step==2||step==3)" type="button"
                                             style="width:100px;height:40px;float:right !important;z-index:10000;position:relative;bottom:18px;left:90px;background-color:rgb(59, 61, 64);">
-                                            <button [disabled]="openWeekDisabled" [class]="statusColor=='info' ? 'secondary' : 'btn-'+statusColor" (click)="openViewDiary(false)" class="btn btn-secondary btn-sm" style="height:42px;border:2px solid rgb(34, 34, 34);">Open Diary</button>
+                                            <button [disabled]="openWeekDisabled" [class]="statusColor[0]" (click)="openViewDiary(false)" class="btn btn-secondary btn-sm" style="height:42px;border:2px solid rgb(34, 34, 34);">Open Diary</button>
                                         </div>
                                     </a>
                                 </div>
@@ -212,10 +211,9 @@
                                         <div class="d-flex w-100 pt-2 justify-content-between">
                                             <h5 class="mb-1 text-light" style="margin-right:2px;">{{ trn.FirstName }}
                                             </h5>
-                                            <small class="text-success"
-                                                style="margin-right:10px;margin-left:45px;">Active</small><img
-                                                src="../../../assets/profilePic.png"
-                                                style="border-radius: 20%; width: 28px;height:25px;margin-right:auto;position:relative;left:-90px;" />
+                                            <small style="color:#2eb81cd9!important;margin-right:10px;margin-left:45px;">Active</small><img
+                                                [src]="trn.Photo"
+                                                style="border-radius: 20%;width:35px;height:32px;margin-right:auto;position:relative;left:-90px;" />
                                         </div>
                                         <span
                                             *ngIf="trn.REVIEWER_PFID !== null && trn.REVIEWER_PFID !== undefined && getReviewerByPfid(trn.REVIEWER_PFID) as reviewer">
@@ -346,16 +344,16 @@
                                         <ng-template let-value pTemplate="peopleFiltered$">
                                             <div class="flex align-items-center gap-2"
                                                 *ngFor="let trainee of peopleFiltered$">
-                                                <img src="../../../assets/profilePic.png" [class]="'profilePic'"
-                                                    style="width: 18px" />
+                                                <img [class]="'profilePic'"
+                                                    style="width:35px;height:32px;" />
                                                 <div>{{ trainee.FirstName }}</div>
                                             </div>
                                             <div *ngIf="!selectedTrainees">Select Trainees</div>
                                         </ng-template>
                                         <ng-template let-profile pTemplate="item">
                                             <div class="d-flex align-items-center">
-                                                <img src="../../../assets/profilePic.png"
-                                                    style="border-radius: 20%; width: 18px; margin-right: 5px;" />
+                                                <img
+                                                    style="border-radius: 20%; width:35px;height:32px; margin-right: 5px;" />
                                                 <div>{{ profile.FirstName }}</div>
                                             </div>
                                         </ng-template>
@@ -378,10 +376,9 @@
                                         <div class="d-flex w-100 pt-2 justify-content-between">
                                             <h5 class="mb-1 text-light" style="margin-right:2px;">{{ trn.FirstName }}
                                             </h5>
-                                            <small class="text-success"
-                                                style="margin-right:10px;margin-left:45px;">Active</small><img
-                                                src="../../../assets/profilePic.png"
-                                                style="border-radius: 20%; width: 28px;height:25px;margin-right:auto;position:relative;left:-90px;" />
+                                            <small style="color:#2eb81cd9!important;margin-right:10px;margin-left:45px;">Active</small><img
+                                                [src]="trn.Photo"
+                                                style="border-radius: 20%; width:35px;height:32px;margin-right:auto;position:relative;left:-90px;" />
                                         </div>
                                         <span
                                             *ngIf="trn.REVIEWER_PFID !== null && trn.REVIEWER_PFID !== undefined && getReviewerByPfid(trn.REVIEWER_PFID) as reviewer">
@@ -424,9 +421,9 @@
             </p-sidebar>
         </div>
         <div class="d-md-block d-none ps-xl-4 p-0 ps-lg-0 ps-md-4 col-xxl-8 col-11 col-xl-7 col-lg-6 col-md-5"
-            style="overflow-x:hidden !important;overflow-y:scroll !important;max-height:86vh !important;">
+            style="overflow-x:hidden !important;overflow-y:hidden !important;max-height:86vh !important;">
             <div class="row">
-                <div class="col">
+                <div class="col" style="padding-top:60px;">
                     <div *ngIf="(userType$|async)=='Unauthorized'; else landing;"
                         class="h-100 pb-5 d-flex align-items-center justify-content-center text-info"
                         style="margin-top:27vh;">
@@ -719,9 +716,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button (click)="SubmitSignOff()" [disabled]="disableSubmit"
-                                        href="javascript:void(0);" class="btn btn-warning"
-                                        style="float:left;position:relative;bottom:32px;width:645px;">Sign off diary</button>
+                                    <button (click)="SignOff(this.currentDiary)" [disabled]="!signOffSubmitted"
+                                        href="javascript:void(0);" [class]="signOffSubmitted&&!diarySignedOff ? 'mt-0' : 'mt-3'" [style.background-color]="signOffSubmitted&&!diarySignedOff ? '#ffc107!important' : '#05d5ff5b!important'" class="btn"
+                                        style="float:left;position:relative;bottom:32px;width:645px;max-height: fit-content;"><span *ngIf="signOffSubmitted&&!diarySignedOff"><b>Sign off diary</b></span></button>
                                 </div>
                             </p-panel>
                         </div>
@@ -751,11 +748,11 @@
                             *ngIf="(userType$|async)=='Reviewer'&&menuVal=='Current'&&step==2;"
                             style="border-color:#00000000;background-color:#00000000;">
                             <p-panel header="Training Contract Record" [toggleable]="true">
-                                <h3 [class]="'border-'+statusColor" class="border border-striped p-5 text-secondary"
-                                    style="border-style:dashed !important;">
-                                    Step 2: Click the button below to open the week
+                                <h3 [class]="'border-'+statusColor[1]" class="border border-striped p-5 text-secondary"
+                                    style="border-style:dashed !important;"><span [style.color]="statusColor[1] == 'info' ? '#6c757d!important' : '#ed5d5d6d!important'">
+                                    {{ statusColor[1] == 'info' ? "Step 2: Click the button below to open the week" : "Step 2: the trainee hasn't created a diary for this date" }}</span>
                                 </h3>
-                                <button [disabled]="openWeekDisabled" [class]="'btn-'+statusColor"
+                                <button [disabled]="openWeekDisabled" [class]="'btn-'+statusColor[1]" [style.border]="'1px solid '+ statusColor[1] == 'secondary' ? '#ed5d5d6d' : 'secondary'"
                                 (click)="openViewDiary(false)" class="btn mt-2">Open Week</button>
                             </p-panel>
                         </div>
@@ -792,4 +789,8 @@
             </div>
         </div>
     </div>
+    <div class="bg-danger" *ngIf="(userType$|async)=='Reviewer'&&step==3&&signOffSubmitted&&!diarySignedOff" style="position:absolute;right:0px;top:46px;width:100vw;max-height:22px;overflow-x: hidden;overflow-y:hidden;"><p class="text-light" style="float:left;padding-left:524px;overflow-x: hidden;overflow-y:hidden;">Submitted for sign off. Changes can still be made to this week until it has been signed off</p></div>
+    <div class="bg-success" *ngIf="(userType$|async)=='Reviewer'&&step==3&&diarySignedOff" style="position:absolute;right:0px;top:46px;width:90vw;max-height:22px;overflow-x: hidden;">
+        <p class="text-light" style="float:left;margin-left:340px;overflow-x: hidden;">Signed off by<b>
+            {{ this.user$.FirstName! + ' ' + this.user$.LastName! }}</b> on {{ formatTimestamp(this.currentDiary.SIGNED_OFF_TIMESTAMP!) }}</p></div>
 </div>

@@ -173,9 +173,9 @@ public partial class DiaryController : ControllerBase
     }
 
     /// <summary>
-    /// PUT: api/{version}/Diary/EditDiaryPfid/{pfid}
+    /// PUT: api/{version}/Diary/EditDiaryById/{pfid}
     /// </summary>
-    /// <param name="pfid">PFID of diary object</param>
+    /// <param name="id">DiaryId of diary object</param>
     /// <param name="modifyReq">AddModifyDiaryReq DTO</param>
     /// <response code="200">{diary view object}</response>
     /// <response code="400">object not modified</response>
@@ -183,14 +183,15 @@ public partial class DiaryController : ControllerBase
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(DiaryViewModel))]
-    [ActionName("EditDiaryPfid"),HttpPut("[action]/{pfid:int}")]
-    public async Task<ActionResult<DiaryViewModel?>> EditDiaryPfid([FromRoute] [ValidPfid] int pfid, [FromBody] AddModifyDiaryReq modifyReq)
+    [ActionName("EditDiaryById"),HttpPut("[action]/{id:int}")]
+    public async Task<ActionResult<DiaryViewModel?>> EditDiaryById([FromRoute] int id, [FromBody] AddModifyDiaryReq modifyReq)
     {
-        Diary? diary = await _diaryService.GetDiaryByPfidAsync(pfid);
+        Diary? diary = await _diaryService.GetDiaryByDiaryIdAsync(id);
         if ((diary is null)||(modifyReq is null)) return BadRequest(modifyReq);
         DiaryViewModel? diaryVM = _mapper.Map<Diary, DiaryViewModel>(diary!);
         _mapper.Map(modifyReq, diary);
-        this._diaryService.UpdateDiary(diary!);
+        diary.SIGNED_OFF_TIMESTAMP = (diary.SIGNED_OFF_BY is null)||(diary.SIGNED_OFF_BY is "") ? null : DateTime.Now;
+        _diaryService.UpdateDiary(diary!);
         return Ok(diaryVM);
     }
 

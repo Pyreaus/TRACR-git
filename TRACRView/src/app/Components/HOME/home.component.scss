@@ -341,7 +341,7 @@
     > :first-child {
         margin-top: 40px;
         white-space: nowrap !important;
-        color:rgb(13, 202, 240);
+        color:rgb(175 175 175);
         font-weight: bolder;
         font-size: larger;
     }
@@ -413,26 +413,27 @@
     }
 }
 .Submitted {
-    background-color: #8f15005c !important;
-    border: 1px solid #fb000092 !important;
-    &:hover { border: 2px solid #fb0000f1 !important; }
+    background-color: #8f150067 !important;
+    border: 2px solid #15161766  !important;
+    &:hover { border: 1px solid #fb0000cd !important; }
+    &.AA.A, &.BB.B, &.CC.C, &.DD.D, &.EE.E { border: 1px solid #fb0000cd !important; }
 }
 .SignedOff {
-    background-color: #104f0a63 !important;
-    border: 1px solid #008917 !important;
-    &:hover { border: 2px solid #15820b !important; }
+    background-color: #0c790292 !important;
+    border: 2px solid #15161766  !important;
+    &:hover { border: 1px solid #13cf02c0 !important; }
+    &.AA.A, &.BB.B, &.CC.C, &.DD.D, &.EE.E { border: 1px solid #13cf02c0 !important; }
 }
 .UnderReview {
-    background-color: #ebff0f3b !important;
-    border: 1px solid #ac9710c2 !important;
-    &:hover { border: 2px solid #ffdd00 !important; }
+    background-color: #d4e70365 !important;
+    border: 2px solid #15161766  !important;
+    &:hover { border: 1px solid #dff303cf !important; }
+    &.AA.A, &.BB.B, &.CC.C, &.DD.D, &.EE.E { border: 1px solid #dff303cf !important; }
 }
 .Available {
-    border: 1px solid rgba(122, 24, 15, 0) !important;
-    &:hover { border: 1px solid #09b9d892 !important; }
+    border: 1px solid rgba(15, 60, 122, 0) !important;
+    &:hover { border: 1px solid #2c2c2cd7 !important; }
 }
- 
-
 /* .p-calendar.cal
 {
     margin-top: 100px;

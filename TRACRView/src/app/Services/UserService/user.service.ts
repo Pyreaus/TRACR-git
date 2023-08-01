@@ -49,8 +49,8 @@ import { Skill } from 'src/app/Interfaces/Skill';
       return trainees;
     }));
   }
-  EditDiaryPfid(PfId: number, addDiaryRequest: AddModifyDiaryReq): Observable<AddModifyDiaryReq> {
-    return this.http.put<AddModifyDiaryReq>(`${env.ApiUrl}/${env.version}/${env.diaryController}/EditDiaryPfid/${PfId}`, addDiaryRequest);
+  EditDiaryById(DiaryId: number, addDiaryRequest: AddModifyDiaryReq): Observable<AddModifyDiaryReq> {
+    return this.http.put<AddModifyDiaryReq>(`${env.ApiUrl}/${env.version}/${env.diaryController}/EditDiaryById/${DiaryId}`, addDiaryRequest);
   }
   AssignTrainees(PfId: number, addReq: AddModifyTraineeReq): Observable<AddModifyTraineeReq> {
     return this.http.post<AddModifyTraineeReq>(`${env.ApiUrl}/${env.version}/${env.usrController}/AssignTrainees/${PfId}`, addReq);
