@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "echo 'Starting the application' && ng serve -o --port 5200",
+    "dev": "echo 'Starting the application in development mode' && ng serve -o --port 5200 --configuration development",
     "build": "echo 'Building the application' && ng build",
     "watch": "echo 'Watching the application' && ng build --watch --configuration development",
     "test": "echo 'Testing the application' && ng test"
@@ -19,8 +20,10 @@
     "@angular/platform-browser-dynamic": "^16.0.2",
     "@angular/router": "^16.0.2",
     "bootstrap-icons": "^1.10.5",
+    "chart.js": "^4.3.3",
     "google-libphonenumber": "^3.2.32",
     "intl-tel-input": "^18.1.6",
+    "ng2-charts": "^5.0.3",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
     "primeng": "^16.0.0-rc.2",

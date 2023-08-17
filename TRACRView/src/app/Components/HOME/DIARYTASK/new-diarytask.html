@@ -1,0 +1,30 @@
+<div *ngIf="!diary||!skills$||!feeEarners$||(modalOpen=='Edit'&&!task); else modalBody" class="h-100 pb-2 d-flex align-items-center justify-content-center text-info" style="margin-top:1vh;">
+    <strong class="me-3 text-info">Loading...</strong>
+    <div role="status" class="mb-1 text-info spinner-border" aria-hidden="true"></div>
+</div>
+<ng-template #modalBody>
+    <h5 *ngIf="modalOpen=='New'; else modifyTask;" style="white-space: nowrap;">Create new task for week beginning: 
+    <span [style.color]="'rgb(13, 202, 240)'"><strong>{{ diary?.WEEK_BEGINNING!.slice(0, -9) }}</strong></span>?</h5>
+    <ng-template #modifyTask>
+        <h5 style="white-space: nowrap;">Modify task for week beginning: 
+        <span class="text-warning">
+        <strong>{{ diary?.WEEK_BEGINNING!.slice(0, -9) }}</strong></span>?</h5>
+    </ng-template>
+    <form [formGroup]="taskForm">
+        <label>Matter:</label>
+        <input formControlName="MATTER" pInputText [tooltipZIndex]="'1000000'" class="form-control mb-2" type="text" tooltipPosition="bottom" pTooltip="Brief description of the matter (e.g Pharma Agreement or Commercial Lease etc). Do not use client names.">
+        <label>Fee Earners:</label>
+        <p-multiSelect [options]="feeEarners$" [(ngModel)]="selectedFeeEarners" formControlName="FEE_EARNERS"
+        placeholder="Select Fee Earners" defaultLabel="Select trainees" optionLabel="FirstName"></p-multiSelect>
+        <label class="mt-3">Task Description:</label>
+        <textarea formControlName="TASK_DESCRIPTION" class="form-control" id="taskFormControlDescription" rows="3"></textarea>
+        <br>
+        <label>Skills:</label>
+        <p-multiSelect [options]="skills$" [(ngModel)]="selectedSkills" formControlName="SKILLS" class="mb-2"
+        placeholder="Select Skills" defaultLabel="Select trainees" optionLabel="skilL_NAME"></p-multiSelect>
+    </form>
+    <div style="position:relative;top:66px;left:7px;">
+        <span><h6 class="me-3 d-inline-block">[Diary ID: <span [style]="diary?.DIARY_ID?.toString()! | fontSize : '15px'">{{ diary?.DIARY_ID }}</span>]</h6>
+        <h6 *ngIf="modalOpen=='Edit'" class="d-inline-block">[Task ID: <span [style]="task?.DIARY_TASK_ID?.toString()! | fontSize : '15px'">{{ task?.DIARY_TASK_ID }}</span>]</h6></span>
+    </div>
+</ng-template>

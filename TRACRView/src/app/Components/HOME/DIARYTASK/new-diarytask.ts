@@ -1,12 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Diary } from 'src/app/Interfaces/Diary';
-import { DiaryTask } from 'src/app/Interfaces/DiaryTask';
 import { UserService } from 'src/app/Services/UserService/user.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AddModifyTaskReq } from 'src/app/Interfaces/DTOs/AddModifyTaskReq';
 import { User } from 'src/app/Interfaces/User';
 import { Skill } from 'src/app/Interfaces/Skill';
-// import { SkillDTO } from 'src/app/Interfaces/DTOs/SkillDTO';
+import { DiaryTask } from 'src/app/Interfaces/DiaryTask';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AddModifyTaskReq } from 'src/app/Interfaces/DTOs/AddModifyTaskReq';
 
 @Component({
   selector: 'new-diarytask',
@@ -22,6 +21,8 @@ import { Skill } from 'src/app/Interfaces/Skill';
 })
 export class NewDiaryTaskComponent implements OnInit {
   @Input() diary!: Diary;
+  @Input() task!: DiaryTask | null;
+  @Input() modalOpen!: string;
   @Output() valueChanged = new EventEmitter<boolean>();
 
   public taskForm!: FormGroup;
@@ -42,19 +43,27 @@ export class NewDiaryTaskComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    this.taskForm.controls['MATTER'].setValue('');
+    this.taskForm.controls['TASK_DESCRIPTION'].setValue('');
+    this.selectedFeeEarners = [];
+    this.selectedSkills = [];
     this.userService.GetUsers().subscribe({
-      next: (res:User[]) => {
+      next: (res: User[]) => {
         this.feeEarners$ = res
-        this.feeEarners$.forEach(usr => usr.FirstName = usr.FirstName+' '+usr.LastName)
-      }, error: (err) => console.trace(err)
+        const existingFE: string[] = this.task!.FEE_EARNERS!.split(',').map((fe) => fe.trim());
+        const existingSkills: string[] = this.task!.SKILLS!.split(',').map((skill) => skill.trim());
+        this.selectedFeeEarners = this.feeEarners$.filter(user => existingFE.includes(user.PFID.toString()));
+        this.selectedSkills = this.skills$.filter(skill => existingSkills.includes(skill.skilL_ID.toString()));
+        this.feeEarners$.forEach(usr => usr.FirstName = usr.FirstName+' '+usr.LastName);
+        this.taskForm.controls['TASK_DESCRIPTION'].setValue(this.task!.TASK_DESCRIPTION?.toString());
+        this.taskForm.controls['MATTER'].setValue(this.task!.MATTER?.toString());
+      }, error: (err: any) => console.trace(err)
     })
     this.userService.GetSkills().subscribe({
-      next: (res:Skill[]) => this.skills$ = res
-      , error: (err) => console.trace(err)
+      next: (res: Skill[]) => this.skills$ = res, error: (err: any) => console.trace(err)
     })
   }
   createNewTask(): void {
-    console.log(this.diary.DIARY_ID)
     if (this.taskForm.valid) {
       let skills: string[] = [];
       let feeEarners: string[] = [];
@@ -64,9 +73,17 @@ export class NewDiaryTaskComponent implements OnInit {
       this.taskRequest.DIARY_ID = this.diary.DIARY_ID!;
       this.taskRequest.FEE_EARNERS = feeEarners.join(", ")
       this.taskRequest.SKILLS = skills.join(", ")
-      this.taskRequest.TASK_DESCRIPTION = this.taskForm.value.TASK_DESCRIPTION;
       this.taskRequest.SHOW = 'true';
-      this.userService.AddDiaryTask(this.taskRequest).subscribe((res:any) => console.log(res));
+      this.taskRequest.TASK_DESCRIPTION = this.taskForm.value.TASK_DESCRIPTION;
+      if (this.modalOpen == 'New') {
+        this.userService.AddDiaryTask(this.taskRequest).subscribe({
+          next: (res: AddModifyTaskReq) => console.trace(res), error: (err: any) => console.trace(err)
+        });
+      } else if (this.modalOpen == 'Edit') {
+        this.userService.ModifyDiaryTask(this.task?.DIARY_TASK_ID!,this.taskRequest).subscribe({
+          next: (res: AddModifyTaskReq) => console.trace(res), error: (err: any) => console.trace(err)
+        });
+      }
     }
   }
 }

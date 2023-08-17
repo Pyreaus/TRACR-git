@@ -8,4 +8,7 @@ body {
     height: 100%;
     font-family: var(--font-family);
     background-color: #292e34d1;
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+    /* background-color: #212529; */
 }

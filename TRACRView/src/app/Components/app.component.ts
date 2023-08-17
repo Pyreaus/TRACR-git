@@ -4,7 +4,9 @@ import { PrimeNGConfig } from 'primeng/api';
 @Component({
   selector: 'app-root',
   template: `
+  <div style="height: 3.25rem; position: fixed; top: 0; width: 100%; z-index: 1000;">
   <app-navbar></app-navbar>
+  </div>
   <router-outlet></router-outlet>`,
   styleUrls: ['./app.component.css']
 })

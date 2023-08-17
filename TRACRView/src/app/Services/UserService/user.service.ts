@@ -80,13 +80,18 @@ import { Skill } from 'src/app/Interfaces/Skill';
     return this.http.get<User>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetUserType`)
     .pipe(map(res => this.deserialize('Usr|Rev', res, false)));
   }
+  ModifyDiaryTask(DiaryId: number, addModifyTaskRequest: AddModifyTaskReq): Observable<AddModifyTaskReq> {
+    return this.http.put<AddModifyTaskReq>(`${env.ApiUrl}/${env.version}/${env.diaryController}/EditTaskByTaskId/${DiaryId}`,addModifyTaskRequest);
+  }
   AddDiary(addDiaryRequest: AddModifyDiaryReq): Observable<AddModifyDiaryReq> {
     return this.http.post<AddModifyDiaryReq>(`${env.ServerRoot}/api/${env.version}/${env.diaryController}/AddDiary`,addDiaryRequest);
   }
   AddDiaryTask(addDiaryTaskRequest: AddModifyTaskReq): Observable<AddModifyTaskReq> {
     return this.http.post<AddModifyTaskReq>(`${env.ApiUrl}/${env.version}/${env.diaryController}/AddDiaryTask`,addDiaryTaskRequest);
   }
-
+  DeleteTask(TaskId: number): Observable<DiaryTask> {
+    return this.http.delete<DiaryTask>(`${env.ApiUrl}/${env.version}/${env.diaryController}/DeleteTaskByTaskId/${TaskId}`);
+  }
   deserialize(entity:string, json:any, array:boolean): any {
     switch (entity) {
       case 'Task':
@@ -138,52 +143,7 @@ import { Skill } from 'src/app/Interfaces/Skill';
   }
 
   GetStaticTrainees(): Promise<Trainee[]> {
-    // this.staticTrainees$ = [
-    //   {
-    //     "traineeId": 1,
-    //     "firstName": "",
-    //     "lastName": "",
-    //     "email": null,
-    //     "telephone": null,
-    //     "photo": "http://bnetsource/uploads/photos/",
-    //     "traineePfid": 12345,
-    //     "reviewerPfid": 54321,
-    //     "active": true
-    //   },
-    //   {
-    //     "traineeId": 2,
-    //     "firstName": "",
-    //     "lastName": "",
-    //     "email": null,
-    //     "telephone": null,
-    //     "photo": "http://bnetsource/uploads/photos/",
-    //     "traineePfid": 23456,
-    //     "reviewerPfid": 65432,
-    //     "active": true
-    //   },
-    //   {
-    //     "traineeId": 3,
-    //     "firstName": "",
-    //     "lastName": "",
-    //     "email": null,
-    //     "telephone": null,
-    //     "photo": "http://bnetsource/uploads/photos/",
-    //     "traineePfid": 34567,
-    //     "reviewerPfid": 76543,
-    //     "active": true
-    //   },
-    //   {
-    //     "traineeId": 4,
-    //     "firstName": "",
-    //     "lastName": "",
-    //     "email": null,
-    //     "telephone": null,
-    //     "photo": "http://bnetsource/uploads/photos/",
-    //     "traineePfid": 45343,
-    //     "reviewerPfid": 87654,
-    //     "active": true
-    //   },
-    // ];
+    // this.staticTrainees$ = []
     return Promise.resolve(this.staticTrainees$);
   }
 }
