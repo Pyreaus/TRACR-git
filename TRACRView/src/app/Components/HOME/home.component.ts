@@ -5,7 +5,7 @@ import { UserService } from 'src/app/Services/UserService/user.service';
 import { DiaryTask } from 'src/app/Interfaces/DiaryTask';
 import { Skill } from 'src/app/Interfaces/Skill';
 import { Diary } from 'src/app/Interfaces/Diary';
-import { BehaviorSubject, Observable, forkJoin, from } from 'rxjs';
+import { BehaviorSubject, combineLatest, forkJoin, switchMap } from 'rxjs';
 import { AddModifyTraineeReq } from 'src/app/Interfaces/DTOs/AddModifyTraineeReq';
 import { AddModifyDiaryReq } from 'src/app/Interfaces/DTOs/AddModifyDiaryReq';
 import { HostListener, ViewChild, ViewEncapsulation, Renderer2, ChangeDetectorRef, ViewContainerRef, 
@@ -39,6 +39,7 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   step = 1;
   statusColor = ['secondary','info'];
+  datefont = 'Segoe UI';
   user$!: User
   active!:string;
   activeItem: any;
@@ -54,9 +55,11 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
   userType$: BehaviorSubject<UserType> = new BehaviorSubject<UserType>(UserType.Unauthorized);
   diary: Diary = {DIARY_ID: 0,PFID: '',PRACTICE_AREA: '',WEEK_BEGINNING: '',LEARNING_POINTS: '',PROFESSIONAL_DEVELOPMENT_UNDERTAKEN: '',
   PROFESSIONAL_CONDUCT_ISSUES: '',SIGN_OFF_SUBMITTED: 'false',SIGNED_OFF_BY: '',SHOW: ''}
+  skillsWithOccurrences!: { skill: Skill; occurrences: number }[] | null;
   currentReviewer$!: string | null | undefined;
   currentReviewerPfid$!: undefined | string;
   currentTraineePfid$!: undefined | string;
+  currentReviewerPhoto: string | null | undefined = null;
   date!: Date[];
   skills$!: Skill[];
   tasks$!: DiaryTask[];
@@ -67,11 +70,11 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
   selectedTrainees!: User[];
   displayTasks$!: DiaryTask[];
   taskSkillColors!: string[][];
+  defaultUserReviewer$!: User;
   currentTrainee$!: Trainee;
-  occurences: number[] = [];
+  occurrences: number[] = [];
   monthDiaries: Diary[] = [];
   reviewers$: User[] = [];
-  skillArray: Skill[] = []
   weeks: string[] = []; 
   items: string[][] = [];
   dateRange!:string;
@@ -142,6 +145,11 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.userService.AddDiary(this.diaryReq).subscribe((res: AddModifyDiaryReq) => console.trace(res));
       setTimeout(() => this.reload(), 1000);
   }
+  taskSkillsColor(skill: string): string {
+    let color: string = '';
+    this.skills$.forEach((SKL) => { if (SKL.skilL_NAME === skill) color = SKL.colour! });
+    return color;
+  }
   transformSkills(value: string[][] | undefined, skills: Skill[]): void {
     if (value) {
       let [refArray, skillArray]: [Skill[], string[][][]] = [[], value.map(innerArray =>
@@ -149,25 +157,30 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
       skillArray.forEach((monthArray: string[][]) => {
         monthArray.forEach((weekArray: string[]) => {
           weekArray.forEach((skillList: string) => {
-            let skillObj: Skill | undefined = skills.find((s: Skill) => s.skilL_NAME === skillList.trim());
+            let skillObj: Skill | undefined = skills.find((s: Skill) => s.skilL_ID === Number(skillList));
             if (skillObj) refArray.push(skillObj);
           });
         });
-       });
-      this.occurences = refArray.map((skill: Skill) => refArray.filter((s: Skill) => s.skilL_NAME === skill.skilL_NAME).length);
-      this.skillArray = refArray.filter((skill: Skill, index: number) => refArray.findIndex((s: Skill) => 
-      s.skilL_NAME === skill.skilL_NAME) === index);
+      });
+      const occurrenceMap = new Map<number, number>();
+      refArray.forEach((skill: Skill) => {
+        (occurrenceMap.has(Number(skill.skilL_ID))) ? occurrenceMap.set(Number(skill.skilL_ID), 
+        occurrenceMap.get(Number(skill.skilL_ID))! + 1) : occurrenceMap.set(Number(skill.skilL_ID), 1);
+      });
+      this.occurrences = skills.map((skill: Skill) =>
+      occurrenceMap.get(Number(skill.skilL_ID)) || 0);
+      this.skillsWithOccurrences = skills.map((skill: Skill) =>
+      ({ skill, occurrences: this.occurrences[skills.findIndex(s => s.skilL_ID === skill.skilL_ID)] }));
     }
   }
   setMonthSkills(): void {
     let monthSkills: string[][] = [];
     const diaryTaskObservables = this.monthDiaries.map((D: Diary) => this.userService.GetTasksDiaryId(D.DIARY_ID!));
-    forkJoin(diaryTaskObservables).subscribe((res: DiaryTask[][]) => {
-      res.forEach((res: DiaryTask[]) => {
-        const diarySkills: string[] = res.map((DT: DiaryTask) => DT.SKILLS!);
-        monthSkills.push(diarySkills);
-      });
-      this.transformSkills(monthSkills, this.skills$);
+    forkJoin([this.userService.GetSkills(), ...diaryTaskObservables]).subscribe((results: any[]) => {
+      const skillsArray: Skill[] = results[0];
+      const diaryTaskSkills: string[][] = results.slice(1).map((res: DiaryTask[]) => res.map((DT: DiaryTask) => DT.SKILLS!));
+      monthSkills = diaryTaskSkills;
+      this.transformSkills(monthSkills, skillsArray);
     });
   }
   transformPfid(obj: string, opt: string): string {
@@ -181,17 +194,6 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
         return transformed;
     } else return "";  
   }
-  taskSkillsColor(skill: string): string {
-    let color: string = '';
-    this.skills$.forEach((SKL) => { if (SKL.skilL_NAME === skill) color = SKL.colour! });
-    return color;
-  }
-  openTaskModal(opt: number, displayTask?: DiaryTask): void {
-    opt == 0 ? [this.modalOpenNew, this.modalOpenEdit] = [true, false] : opt == 1 ? [
-    this.modalOpenNew, this.modalOpenEdit, this.currentTask] = [
-    false, true, this.tasks$.find((DT) => DT.DIARY_TASK_ID == displayTask?.DIARY_TASK_ID)!] : void(0);
-    this.newDiaryTaskComponent.ngOnInit()
-  }
   getDiaryTasks(diaryId: number): void {
     this.tasksVisible = false;
     const [getTasks$, getSkills$] = [
@@ -202,8 +204,14 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
         this.displayTasks$ = tasks.map((DT) => ({ ...DT, FEE_EARNERS: 
         this.transformPfid(DT.FEE_EARNERS!, 'FE'), SKILLS: this.transformPfid(DT.SKILLS!, 'skill') }));
         this.tasksVisible = true;
-      }, error: (err: any) => console.trace(err)
+      }, error: (err:any) => console.trace(err)
     });
+  }
+  openTaskModal(opt: number, displayTask?: DiaryTask): void {
+    opt == 0 ? [this.modalOpenNew, this.modalOpenEdit] = [true, false] : opt == 1 ? [
+    this.modalOpenNew, this.modalOpenEdit, this.currentTask] = [
+    false, true, this.tasks$.find((DT) => DT.DIARY_TASK_ID == displayTask?.DIARY_TASK_ID)!] : void(0);
+    this.newDiaryTaskComponent.ngOnInit()
   }
   formatTimestamp(timestamp: string): string {
     const [inputFormat, outputFormat]: [RegExp,RegExp] = [
@@ -226,7 +234,7 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
         this.reviewers$.forEach(rev => rev.FirstName = rev.FirstName + ' ' + rev.LastName);
         const codedPfids = [100]; 
         this.peopleFiltered$ = res.filter((trn) => !codedPfids.includes(trn.PFID));
-      }, error: (err: any) => {console.trace(err)} });
+      }, error: (err:any) => {console.trace(err)} });
     this.items = Array.from({ length: 1000 }).map((_, i) =>
       Array.from({ length: 1000 }).map((_j, j) => `index$: ${i}_${j}`));
     setTimeout(() => {
@@ -237,8 +245,9 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
           this.userService.GetDiariesPfid(this.user$!.PFID).subscribe({
             next: (res: Diary[]) => {
               this.userDiaries = res;
-            }, error: (err: any) => console.trace(err)
+            }, error: (err:any) => console.trace(err)
           });
+          this.userType$.value === UserType.Trainee ? this.getReviewer(this.user$!.PFID.toString()) : 
           this.userType$.value === UserType.Admin ? this.resetTrainees() : this.userType$.value === UserType.Reviewer ?
             this.userService.getTraineesByReviewer(this.user$.PFID).subscribe({
               next: (res: Trainee[]) => {
@@ -246,7 +255,7 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
                 this.trainees$.forEach(trn => trn.FirstName = trn.FirstName + ' ' + trn.LastName)
               }, error: (x) => console.trace(x)
             }) : void(0);
-        }, error: (err: any) => console.trace(err)
+        }, error: (err:any) => console.trace(err)
       });
     }, 0);
   }
@@ -265,27 +274,37 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
       next: (res: Trainee[]) => {
         this.trainees$ = res;
         this.currentReviewerPfid$ = this.trainees$.find((trn: Trainee) => trn.TRAINEE_PFID === this.user$.PFID.toString())?.REVIEWER_PFID ?? undefined;
-        this.trainees$.forEach(trn => trn.FirstName = trn.FirstName+' '+trn.LastName)}, error: (err: any) => {console.error(err)}
+        this.trainees$.forEach(trn => trn.FirstName = trn.FirstName+' '+trn.LastName)}, error: (err:any) => {console.error(err)}
       });
   }
   updatePairs(reviewer: User,trainee: Trainee): void {
     const newReq: AddModifyTraineeReq = { REVIEWER_PFID: reviewer.PFID.toString(), ACTIVE: 'true', SHOW: 'true' };
-    this.userService.SetPair(parseInt(trainee.TRAINEE_PFID!, 10), newReq).subscribe((res: AddModifyTraineeReq) => console.trace(`api response: ${res}`));
+    this.userService.SetPair(parseInt(trainee.TRAINEE_PFID!, 10), newReq).subscribe((res: AddModifyTraineeReq) => 
+    console.trace(`api response: ${res}`));
     setTimeout(() => {this.reload()}, 100);
   }
   SetPairs(reviewer: User,users: User[]): void {
     const newReq: AddModifyTraineeReq = { REVIEWER_PFID: reviewer.PFID.toString(), ACTIVE: 'true', SHOW: 'true' };
-    for (let T of users) this.userService.AssignTrainees(T.PFID, newReq).subscribe((res: AddModifyTraineeReq) => console.trace(res));
+    for (let T of users) this.userService.AssignTrainees(T.PFID, newReq).subscribe((res: AddModifyTraineeReq) => 
+    console.trace(`api response: ${res}`));
     setTimeout(() => {this.reload()}, 100);
   }
-  getReviewerByPfid(pfid: string): User | undefined {
+  getReviewer(pfid: string): void {
+    this.userService.GetUserReviewer(parseInt(pfid, 10)).subscribe({ 
+      next: (res: User) => {
+        this.currentReviewerPhoto = this.reviewers$.find((rev: User) => rev.PFID === res.PFID)?.Photo!;
+        this.defaultUserReviewer$ = res;
+      }, error: (err:any) => console.trace(err) 
+    })
+  }
+  getReviewerByRevPfid(pfid: string): User | undefined {
     return this.reviewers$.find((rev: User) => rev.PFID === parseInt(pfid, 10));
   }
-    deleteTask(displayTask?: DiaryTask): void {
-      let task = this.tasks$.find((DT) => DT.DIARY_TASK_ID == displayTask?.DIARY_TASK_ID)!;
-      this.userService.DeleteTask(task.DIARY_TASK_ID!).subscribe({ next: (res: DiaryTask) => 
-        console.log(res), error: (err: any) => console.error(err)
-      });
+  deleteTask(displayTask?: DiaryTask): void {
+    let task = this.tasks$.find((DT) => DT.DIARY_TASK_ID == displayTask?.DIARY_TASK_ID)!;
+    this.userService.DeleteTask(task.DIARY_TASK_ID!).subscribe({ next: (res: DiaryTask) => 
+      console.log(res), error: (err:any) => console.error(err)
+     });
     setTimeout(() => {this.getDiaryTasks(this.currentDiary.DIARY_ID!)}, 1000);
   }
   openNewDiary(): void {
@@ -295,12 +314,13 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.newDiaryPanel = true;
     },10);
   }
-  markCells(): void {
+  markCells(special = false): void {
     let pointer = 0;
     this.weeks = [];
     this.monthDiaries = [];
     for (let i = 0; i < 5; i++) {
-      this.userType$.value === UserType.Reviewer ? this.selected(i+1,true,true) : this.selected(i+1,false,true);
+      this.ViewDiaryPanel = special ? this.ViewDiaryPanel : false;
+      this.userType$.value === UserType.Reviewer ? this.selected(i+1,true,true,true) : this.selected(i+1,false,true,true);
       this.weeks.push(this.dateRange);
     }
     [this.A,this.B,this.C,this.D,this.E,] = [status.Available,
@@ -355,6 +375,7 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
     console.log('finished: ' + this.A + this.B + this.C + this.D + this.E);
   }
   openViewDiary(trn:boolean = false): void {
+    this.skillsWithOccurrences = null;
     let match: boolean = false;
     if (trn) for (let diary of this.userDiaries) {
         if (this.dateRange == diary!.WEEK_BEGINNING!.slice(0,-9)!.toString()!) {
@@ -393,8 +414,9 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
       if (!match) this.statusColor = ["secondary","danger"];
       this.trainees$ = this.trainees$.filter((T: Trainee) => T.TRAINEE_PFID == this.currentTraineePfid$!.toString());
     }
-    this.cdRef.detectChanges();
     this.setMonthSkills();
+    this.cdRef.detectChanges();
+    this.getReviewer(this.currentDiary.PFID!);
   }
   SubmitSignOff(diary?: Diary | null): void {
     if (diary && diary !== undefined){
@@ -419,9 +441,9 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
             this.currentDiary = this.currentDiary.DIARY_ID ? this.userDiaries.find((d:Diary) => 
             (d.DIARY_ID === this.currentDiary.DIARY_ID))! : this.userDiaries[0];
             setTimeout(() => this.markCells(), 200)
-          }, error: (err: any) => console.trace(err)
+          }, error: (err:any) => console.trace(err)
         });
-      }, error: (err: any) => console.trace(err)
+      }, error: (err:any) => console.trace(err)
     });
   }
   SignOff(trnDiary: Diary): void {
@@ -445,9 +467,9 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
             this.currentDiary = this.currentDiary.DIARY_ID ? this.userDiaries.find((d:Diary) =>
             (d.DIARY_ID === this.currentDiary.DIARY_ID))! : this.userDiaries[0];
             setTimeout(() => this.markCells(), 200)
-          }, error: (err: any) => console.trace(err)
+          }, error: (err:any) => console.trace(err)
         });
-      }, error: (err: any) => console.trace(err)
+      }, error: (err:any) => console.trace(err)
     });
   }
   openEditView(tPfid: string): void {
@@ -456,11 +478,13 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.EditViewPanel = true
   }
   openTraineeDiary(tPfid: string): void {
+    this.getReviewer(tPfid);
+    this.skillsWithOccurrences = null;
     this.trainees$ = this.trainees$.filter((T: Trainee) => T.TRAINEE_PFID === tPfid);
     this.userService.GetDiariesPfid(parseInt(tPfid, 10)).subscribe({
       next: (res: Diary[]) => {
         [this.userDiaries, this.currentTraineePfid$] = [res, tPfid];
-      }, error: (err: any) => console.error(err)
+      }, error: (err:any) => console.error(err)
     }); 
     this.setMonthSkills();
     this.ViewDiaryPanel = true;
@@ -492,15 +516,15 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
           let [next, prev] = [this.elementRef.nativeElement.querySelectorAll('.p-datepicker-next')[0],
           this.elementRef.nativeElement.querySelectorAll('.p-datepicker-prev')[0]];
           this.calendarRendered = true;
-          this.markCells();
+          this.markCells(true);
           if (next && prev) {
             this.renderer.listen(next,'click', (event: Event) => {
-              this.markCells();
+              this.markCells(true);
               [this.statusColor,  this.rowSelected] = [['secondary','info'], 'cal'];
               this.calendarRendered = false;
             });
             this.renderer.listen(prev,'click', (event: Event) => {
-              this.markCells();
+              this.markCells(true);
               [this.statusColor,  this.rowSelected] = [['secondary','info'], 'cal'];
               this.calendarRendered = false;
             });
@@ -508,6 +532,23 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
         }
       }
     }, 1000)
+  }
+  reload(): void {
+    window.location.reload();
+  }
+  reset(): void {
+    this.sc.scrollToIndex(0,'smooth')
+  }
+  transformYYYY(dateString: string): string {
+    const date = new Date(dateString);
+    return date.getFullYear().toString();
+  }
+  padZero(value: number): string {
+    return value.toString().padStart(2, "0");
+  }
+  transformDD(dateString: string): string {
+    const date = new Date(dateString);
+    return date.getDate().toString().padStart(2, '0');
   }
   menuVal = 'Current';
   stateOptions2: any[] = [
@@ -519,17 +560,20 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
     { label: 'Past', menuVal: 'Past', constant: true },
     { label: 'New', menuVal: 'New'}
   ];
-  reload(): void {
-    window.location.reload();
+  transformDayName(dateString: string): string {
+    const date = new Date(dateString);
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 
+    'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return daysOfWeek[date.getDay()];
   }
-  reset(): void {
-    this.sc.scrollToIndex(0,'smooth')
+  abbreviatedMonthName(dateString: string): string {
+    const date = new Date(dateString);
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May',
+    'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return months[date.getMonth()];
   }
-  padZero(value: number): string {
-    return value.toString().padStart(2, "0");
-  }
-  selected(num: number, special: boolean = false, ignore: boolean = false): void {
-    this.ViewDiaryPanel = false;
+  selected(num: number, special: boolean = false, ignore: boolean = false, preserve = false): void {
+    this.ViewDiaryPanel = preserve ? this.ViewDiaryPanel : false;
     let monthNumber: number[] = [1,2,3,4,5,6,7,8,9,10,11,12];
     this.statusColor = ignore ? this.statusColor : ['secondary','info'];
     this.openWeekDisabled = ignore ? true : false;

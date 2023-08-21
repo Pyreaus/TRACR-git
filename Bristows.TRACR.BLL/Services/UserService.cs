@@ -51,6 +51,12 @@ namespace Bristows.TRACR.BLL.Services
             }
             return reviewers;
         }
+        public async Task<PeopleFinderUser?> ReviewerByTraineeAsync([ValidPfid] int pfid)
+        {
+            Trainee? reviewerPartial = await traineeRepository.FirstOrDefaultAsync(trn => trn.TRAINEE_PFID == pfid.ToString());
+            PeopleFinderUser? reviewer = await peopleRepository.FirstOrDefaultAsync(usr => usr.PFID.ToString() == reviewerPartial!.REVIEWER_PFID);
+            return reviewer;
+        }
         public void DeleteTrainee(Expression<Func<Trainee, bool>> predicate, bool commit=true)
         {
             traineeRepository.Delete(predicate);

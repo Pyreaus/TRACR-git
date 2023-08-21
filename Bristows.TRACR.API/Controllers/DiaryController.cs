@@ -33,7 +33,7 @@ public partial class DiaryController : ControllerBase
     /// </summary>
     /// <response code="200">{skill view objects}</response>
     /// <response code="204">missing skill objects</response>
-                                                                    // [Authorize(Policy="tracr-trainee//reviewer")]
+                                                                    // [Authorize(Policy="tracr-trainee//tracr-reviewer")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<Skill>))]
     [ActionName("GetSkills"),HttpGet("[action]")]
@@ -49,7 +49,7 @@ public partial class DiaryController : ControllerBase
     /// <param name="pfid">PFID of diary objects</param>
     /// <response code="200">{diary view objects}</response>
     /// <response code="204">missing diary objects</response>
-                                                                        // [Authorize(Policy="tracr-trainee//reviewer")]
+                                                                        // [Authorize(Policy="tracr-trainee//tracr-reviewer")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<DiaryViewModel>))]
     [ActionName("GetDiariesPfid"),HttpGet("[action]/{pfid:int}")]
@@ -66,7 +66,7 @@ public partial class DiaryController : ControllerBase
     /// <param name="id">ID of diary object</param>
     /// <response code="200">{task view objects}</response>
     /// <response code="204">missing DiaryTask objects</response>
-                                     // [Authorize(Policy="tracr-trainee//reviewer")]
+                                     // [Authorize(Policy="tracr-trainee//tracr-reviewer")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<DiaryTaskViewModel>))]
     [ActionName("GetTasksByDiaryId"),HttpGet("[action]/{id:int}")]
@@ -102,7 +102,7 @@ public partial class DiaryController : ControllerBase
     /// <param name="id">ID of task object</param>
     /// <response code="200">{task view object}</response>
     /// <response code="204">missing DiaryTask object</response>
-    [Authorize(Policy="tracr-trainee//reviewer")]
+    [Authorize(Policy="tracr-trainee//tracr-reviewer")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(DiaryTaskViewModel))]
     [ActionName("GetTaskByTaskId"),HttpGet("[action]/{id:int}")]

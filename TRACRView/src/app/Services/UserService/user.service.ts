@@ -69,8 +69,9 @@ import { Skill } from 'src/app/Interfaces/Skill';
       return trainees;
     }));
   }
-  GetSkills(): Observable<Skill[]> {
-    return this.http.get<Skill[]>(`${env.ApiUrl}/${env.version}/${env.diaryController}/GetSkills`);
+  GetUserReviewer(PfId: number): Observable<User> {
+    return this.http.get<User>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetUserReviewer/${PfId}`)
+    .pipe(map(res => this.deserialize('Usr|Rev', res, false)));
   }
   GetTrainee(PfId: number): Observable<Trainee> {
     return this.http.get<Trainee>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetTrainee/${PfId}`)
@@ -79,6 +80,9 @@ import { Skill } from 'src/app/Interfaces/Skill';
   getUserType(): Observable<User> {
     return this.http.get<User>(`${env.ApiUrl}/${env.version}/${env.usrController}/GetUserType`)
     .pipe(map(res => this.deserialize('Usr|Rev', res, false)));
+  }
+  GetSkills(): Observable<Skill[]> {
+    return this.http.get<Skill[]>(`${env.ApiUrl}/${env.version}/${env.diaryController}/GetSkills`);
   }
   ModifyDiaryTask(DiaryId: number, addModifyTaskRequest: AddModifyTaskReq): Observable<AddModifyTaskReq> {
     return this.http.put<AddModifyTaskReq>(`${env.ApiUrl}/${env.version}/${env.diaryController}/EditTaskByTaskId/${DiaryId}`,addModifyTaskRequest);

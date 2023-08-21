@@ -13,11 +13,12 @@ namespace Bristows.TRACR.BLL.Services.Interfaces
         public Trainee? UpdateTrainee(Trainee trainee, bool commit=true);
         public Task<PeopleFinderUser?> GetByDomainAsync(string domainUsername);
         public Task<IEnumerable<Trainee?>> GetTraineesAsync();
-        public Task<Trainee?> GetTraineeByPfidAsync([ValidPfid] int pfid);
-        public Task<IEnumerable<Trainee?>> TraineesByReviewerAsync([ValidPfid] int pfid);
         public Task<IEnumerable<PeopleFinderUser?>> GetPFUsersAsync();
-        public Task<PeopleFinderUser?> GetPFUserAsync([ValidPfid] int pfid);
         public Task<IEnumerable<PeopleFinderUser?>> GetReviewersAsync();
+        public Task<IEnumerable<Trainee?>> TraineesByReviewerAsync([ValidPfid] int pfid);
+        public Task<PeopleFinderUser?> ReviewerByTraineeAsync([ValidPfid] int pfid);
+        public Task<PeopleFinderUser?> GetPFUserAsync([ValidPfid] int pfid);
+        public Task<Trainee?> GetTraineeByPfidAsync([ValidPfid] int pfid);
         public Task<bool> IsAdminPfidAsync([ValidPfid] int pfid);
         public Task<bool> IsReviewerPfidAsync([ValidPfid] int pfid);
         public Task<bool> IsTraineePfidAsync([ValidPfid] int pfid);
