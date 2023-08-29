@@ -15,7 +15,7 @@
                                     <div class="card rounded-circle border border-dark" style="min-height:130px;width:130px;background-color:#0a0b0c47;">
                                         <b style="color:#3a3d41f6;padding-left:32px;padding-top:20px;" 
                                         [style.font-family]="datefont">{{ transformDayName(this.currentDiary.WEEK_BEGINNING!.slice(0, -9)) }}</b>
-                                        <h1 style="padding-left:35px;position:relative;bottom:7px;font-size:48px;color:#3a3d41f6;" [style.font-family]="'Courier New'">
+                                        <h1 style="padding-left:35px;position:relative;bottom:7px;font-size:48px;color:#047f8df6;" [style.font-family]="'Courier New'">
                                             <b>{{ transformDD(this.currentDiary.WEEK_BEGINNING!.slice(0, -9) )}}</b></h1>
                                         <b [style.font-family]="datefont" style="padding-left:25px;position:relative;bottom:26px;color:#3a3d41f6;">
                                             {{ abbreviatedMonthName(this.currentDiary.WEEK_BEGINNING!.slice(0, -9)) }}, {{ transformYYYY(this.currentDiary.WEEK_BEGINNING!.slice(0, -9)) }}</b>
@@ -103,20 +103,20 @@
                                             <div style="z-index:11;position:relative;bottom:40px;min-width:620px;max-width:716px;" class="panel"><p-panel [collapsed]="true"
                                                 *ngIf="(userType$|async)=='Reviewer'&&ViewDiaryPanel&&step==3" header="TRACR | Tasks"
                                                 [toggleable]="true">
-                                                <div style="height:fit-content;max-height: 400px;overflow-x: hidden;">
+                                                <div style="height:fit-content;max-height: 400px;overflow-x: hidden;overflow-y:scroll!important;">
                                                     <h5 class="ms-3 text-light">View Tasks:</h5>
-                                                    <div class="row" style="min-width: 700px;">
+                                                    <div class="row" style="min-width: 600px;">
                                                         <div class="col-sm-12">
-                                                            <div class="card" style="background-color:hsl(215, 18%, 20%);">
-                                                                <div class="card-body">
-                                                                    <div class="p-4 pt-0">
+                                                            <div class="card task-box" style="background-color:hsl(215, 18%, 20%);">
+                                                                <div class="card-body" style="max-width: 700px;">
+                                                                    <div class="p-4 p-xxl-1 pt-0">
                                                                         <div class="d-flex row" style="background-color:hsl(217, 18%, 20%);">
                                                                             <div *ngIf="!tasksVisible; else diaryTasks" class="h-100 mt-4 pe-5 pb-2 d-flex align-items-center justify-content-center text-info" style="margin-top:1vh;">
                                                                                 <strong class="me-3 text-info">Loading...</strong>
                                                                                 <div role="status" class="mb-0 text-info spinner-border" aria-hidden="true"></div>
                                                                             </div>
                                                                             <ng-template #diaryTasks>
-                                                                                <div *ngFor="let displayTask of displayTasks$;let i = index" class="card col-6 py-2 me-4 mb-3 text-white bg-dark"
+                                                                                <div *ngFor="let displayTask of displayTasks$;let i = index" class="card task col-6 py-2 me-4 mb-3 text-white bg-dark"
                                                                                     style="max-width: 280px;overflow-y: scrollable;overflow-x: hidden;">
                                                                                     <div class="card-header" style="background-color:hsl(215, 18%, 20%);">
                                                                                         <span><b class="me-2">[Task: {{ i + 1 }}]</b>
@@ -133,7 +133,7 @@
                                                                                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
                                                                                             /></svg></button>
                                                                                         </span></div>
-                                                                                    <div class="card-body" style="max-height:205px;background-color:hsl(215, 18%, 20%);overflow-x:scroll;">
+                                                                                    <div class="card-body" style="max-height:205px;background-color:hsl(215, 18%, 20%);overflow-y:scroll;">
                                                                                         <span><b class="card-text text-info">Description:</b><p class="card-text" style="color:#85abb8">
                                                                                             {{ displayTask.TASK_DESCRIPTION }}</p></span>
                                                                                         <p></p><span><b class="card-text text-info">Matter:</b><p class="card-text" style="color:#85abb8">
@@ -170,13 +170,13 @@
                                                                             style="font-size: 15px;color: rgb(13, 202, 240);">
                                                                             {{ this.currentDiary.WEEK_BEGINNING!.slice(0, -9) }}</span></h5>
                                                                     <h5 class="position-relative"
-                                                                        style="bottom:32px;left:323px;margin-bottom:0px !important;">
+                                                                        style="bottom:32px;left:310px;margin-bottom:0px !important;">
                                                                         Reviewer: <span
                                                                             style="font-size: 16px;color: rgb(13, 202, 240);">
                                                                             {{ defaultUserReviewer$.FirstName!+' '+defaultUserReviewer$.LastName! }}</span></h5>
-                                                                    <div class="p-4 pt-0">
+                                                                    <div class="pb-4 px-0 pt-0">
                                                                         <div
-                                                                            style="overflow-x:hidden !important;overflow-y:scroll;max-height:479px !important;">
+                                                                            style="overflow-x:hidden !important;overflow-y:scroll;max-height:397px !important;padding-right:10px;">
                                                                             <div class="card text-white mb-3" [ngStyle]="{'background-color':!diarySignedOff?'#2f3947f2':'#32486375'}"
                                                                                 style="max-width: 34rem;">
                                                                                 <div class="card-header" [ngStyle]="{'background-color': diarySignedOff?'#93a1b175':'#22272b63'}"><b>Practice Area:</b><button *ngIf="!diarySignedOff" style="float:right;padding-top:0px!important;padding-bottom:1px!important" class="px-1 btn text-info">
@@ -238,8 +238,8 @@
                                                             </div>
                                                         </div>
                                                         <button (click)="SubmitSignOff(this.currentDiary)" [disabled]="disableSubmit"
-                                                        href="javascript:void(0);" [class]="signOffSubmitted&&!diarySignedOff ? 'mt-0' : 'mt-3'" [style.background-color]="!diarySignedOff ? '#7693a3!important' : '#05d5ff5b!important'" class="btn"
-                                                        style="float:left;position:relative;bottom:32px;width:645px;max-height: fit-content;">
+                                                        href="javascript:void(0);" [class]="!diarySignedOff ? 'mt-0' : 'mt-3'" [style.background-color]="!diarySignedOff ? '#44637d!important' : '#05d5ff5b!important'" class="btn"
+                                                        style="float:left;position:relative;bottom:32px;width:562px;max-height: fit-content;">
                                                         <span *ngIf="!diarySignedOff"><b> {{ disableSubmit ? 'Submitted' : 'Submit for sign off' }}</b></span>
                                                         </button>
                                                     </div>
@@ -249,7 +249,7 @@
                                             *ngIf="(userType$|async)=='Reviewer'&&step==3;" [header]="'TRACR | View Diary'"
                                             [toggleable]="true">
                                             <div *ngIf="ViewDiaryPanel"
-                                                style="height:fit-content;height:550px;overflow-y: none;">
+                                                style="height:fit-content;padding-bottom: 10px;overflow-y: none;">
                                                 <div class="row" style="min-width: 500px;">
                                                     <div class="col-sm-12">
                                                         <div class="card" style="background-color:rgb(42, 50, 61);">
@@ -259,14 +259,14 @@
                                                                     Diary week: <span
                                                                         style="font-size: 14px;color: rgb(13, 202, 240);">
                                                                         {{ this.currentDiary.WEEK_BEGINNING!.slice(0, -9) }}</span></h5>
-                                                                <h5 class="position-relative ps-xxl-3 ps-5"
-                                                                    style="bottom:32px;left:370px;margin-bottom:0px !important;">
+                                                                <h5 class="position-relative"
+                                                                    style="bottom:32px;left:310px;margin-bottom:0px !important;">
                                                                     Reviewer: <span
                                                                         style="font-size: 14px;color: rgb(13, 202, 240);">
                                                                         {{ this.getReviewerByRevPfid(this.currentDiary.PFID!)?.FirstName!  }} (you)</span></h5>
-                                                                <div class="p-4 pt-0">
+                                                                <div class="pb-4 px-0 pt-0">
                                                                     <div
-                                                                        style="overflow-x:hidden !important;overflow-y:scroll;max-height:420px !important;">
+                                                                        style="overflow-x:hidden !important;overflow-y:scroll;max-height:397px !important;padding-right:10px;">
                                                                         <div class="card text-white mb-3" [ngStyle]="{'background-color':!diarySignedOff?'#2f3947f2':'#32486375'}"
                                                                             style="max-width: 34rem;">
                                                                             <div class="card-header" [ngStyle]="{'background-color': diarySignedOff?'#93a1b175':'#22272b63'}"><b>Practice Area:</b><button *ngIf="!diarySignedOff" style="float:right;padding-top:0px!important;padding-bottom:1px!important" class="px-1 btn text-info">
@@ -328,8 +328,8 @@
                                                     </div>
                                                 </div>
                                                 <button (click)="SignOff(this.currentDiary)" [disabled]="!signOffSubmitted" href="javascript:void(0);"
-                                                    [class]="signOffSubmitted&&!diarySignedOff ? 'mt-0' : 'mt-3'" [style.background-color]="signOffSubmitted&&!diarySignedOff ? '#ffc107!important' : '#05d5ff5b!important'" class="btn"
-                                                    style="float:left;position:relative;bottom:32px;width:645px;max-height: fit-content;">
+                                                    [class]="signOffSubmitted&&!diarySignedOff ? 'mt-0' : 'mt-3'" [style.background-color]="signOffSubmitted&&!diarySignedOff ? '#f75d5da1!important' : '#05d5ff5b!important'" class="btn"
+                                                    style="float:left;position:relative;bottom:32px;width:562px;max-height: fit-content;">
                                                     <span *ngIf="signOffSubmitted&&!diarySignedOff"><b>Sign off diary</b></span>
                                                 </button>
                                             </div>
@@ -341,14 +341,14 @@
                         <div class="col-12 col-xxl-6">
                             <div class="row">
                                 <div class="d-none d-xxl-block col-xl-4 col-xl-8 ms-xxl-4 mt-2 ms-0" style="padding-top:150px!important;width:540px; float:right;">
-                                    <h2 style="font-size: 25px;color:#0dcaf09e!important" class="ps-5">Noel Rhima | Skills Used</h2>
+                                    <h2 style="font-size: 25px;color:#0dcaf0bf!important;padding-left:55px!important;">Noel Rhima | Skills Used</h2>
                                     <div class="card bg-transparent border-0">
                                         <div *ngIf="!skillsWithOccurrences" class="h-100 d-flex align-items-center justify-content-center text-info" style="position:relative;left:5px;top:125px;">
                                             <strong class="me-3 text-info">Loading...</strong>
                                             <div role="status" class="mb-1 text-info spinner-border" aria-hidden="true"></div>
                                         </div>
                                         <div *ngIf="ViewDiaryPanel&&skillsWithOccurrences" style="z-index:10;width:540px; float:right;" class="pe-xxl-5 pe-0 chart-container">
-                                            <app-chart [skillsWithOccurrences]="skillsWithOccurrences"></app-chart>
+                                            <app-chart [skillsWithOccurrences]="skillsWithOccurrences"></app-chart> 
                                         </div>      
                                     </div>
                                 </div>
@@ -595,7 +595,7 @@
                             </div>
                             <div *ngIf="(userType$ | async)?.toLowerCase() === 'trainee'" class="py-0 mb-2 d-flex ps-2 pe-5">
                                 <div class="ps-0 position-relative">
-                                    <div class="row overlay d-none d-md-flex" [style.left]="overlayMax" style="width:57px;position:absolute;z-index:1000;top:120px;">
+                                    <div class="row overlay d-none d-md-flex" style="left:18px;width:57px;position:absolute;z-index:1000;top:120px;">
                                         <div class="col-12 overlay2 AA" [class]="A+' '+active" 
                                         (click)="selected(1,false)" style="min-height:57px;margin-top:6px;"></div>
                                         <div class="col-12 overlay2 BB" [class]="B+' '+active" 

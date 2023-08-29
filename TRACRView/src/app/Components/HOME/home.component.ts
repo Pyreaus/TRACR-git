@@ -127,9 +127,6 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
       SHOW: [true, Validators.required]
     });
   }
-  sanitize(HTMLcontent: string): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(HTMLcontent);
-  }
   onSubmitNewDiary(): void {
       this.diaryReq = {
         PFID: this.user$.PFID.toString(),
@@ -143,7 +140,12 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
         SHOW: 'true'
       };
       this.userService.AddDiary(this.diaryReq).subscribe((res: AddModifyDiaryReq) => console.trace(res));
-      setTimeout(() => this.reload(), 1000);
+      setTimeout(() => {
+        this.reload(), 1000
+      });
+  }
+  sanitize(HTMLcontent: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(HTMLcontent);
   }
   taskSkillsColor(skill: string): string {
     let color: string = '';
@@ -487,7 +489,7 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
       }, error: (err:any) => console.error(err)
     }); 
     this.setMonthSkills();
-    this.ViewDiaryPanel = true;
+    // this.ViewDiaryPanel = true;
     this.step = 2;
   }
   reformatDate(date: string): string {
