@@ -1,0 +1,17 @@
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\bin\Production\net7.0\Bristows.TRACR.DAL.deps.json
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\bin\Production\net7.0\Bristows.TRACR.DAL.runtimeconfig.json
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\bin\Production\net7.0\Bristows.TRACR.DAL.dll
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\bin\Production\net7.0\Bristows.TRACR.DAL.pdb
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\bin\Production\net7.0\Bristows.TRACR.Model.dll
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\bin\Production\net7.0\Bristows.TRACR.Model.pdb
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\obj\Production\net7.0\Bristows.TRACR.DAL.csproj.AssemblyReference.cache
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\obj\Production\net7.0\Bristows.TRACR.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\obj\Production\net7.0\Bristows.TRACR.DAL.AssemblyInfoInputs.cache
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\obj\Production\net7.0\Bristows.TRACR.DAL.AssemblyInfo.cs
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\obj\Production\net7.0\Bristows.TRACR.DAL.csproj.CoreCompileInputs.cache
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\obj\Production\net7.0\Bristows.TRACR.DAL.csproj.CopyComplete
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\obj\Production\net7.0\Bristows.TRACR.DAL.dll
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\obj\Production\net7.0\refint\Bristows.TRACR.DAL.dll
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\obj\Production\net7.0\Bristows.TRACR.DAL.pdb
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\obj\Production\net7.0\Bristows.TRACR.DAL.genruntimeconfig.cache
+C:\Devops\Bristows.TRACR-Git\Bristows.TRACR.DAL\obj\Production\net7.0\ref\Bristows.TRACR.DAL.dll
