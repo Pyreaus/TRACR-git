@@ -217,8 +217,8 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   formatTimestamp(timestamp: string): string {
     const [inputFormat, outputFormat]: [RegExp,RegExp] = [
-      /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}/,
-    /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{3})/];
+      /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{1,3}/,
+    /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{1,3})/];
     if (!inputFormat.test(timestamp)) return '';
     const [, year, month, day, hours, minutes, seconds, milliseconds] = timestamp.match(outputFormat) || [];
     if (!year || !month || !day || !hours || 
