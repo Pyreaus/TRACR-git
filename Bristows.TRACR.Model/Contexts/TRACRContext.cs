@@ -28,7 +28,7 @@ namespace Bristows.TRACR.Model.Contexts
         {
             // modelBuilder.Entity<PeopleFinderUser>().ToView("PeopleFinderUser").HasKey(x=>x.PFID);
 
-            //--- uncomment to apply the cutom configurations for each entity (or as needed).
+            //--- uncomment to apply the cutom configurations for each entity (or as needed).         ref: https://www.learnentityframeworkcore.com/migrations
             // modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());            
         }
     }
