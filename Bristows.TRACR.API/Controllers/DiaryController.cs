@@ -15,7 +15,7 @@ namespace Bristows.TRACR.API.Controllers;
 [Produces(MediaTypeNames.Application.Json)]
 [ProducesResponseType(StatusCodes.Status401Unauthorized)]
 [Route("api/v1/[controller]")]
-public partial class DiaryController : ControllerBase
+public sealed partial class DiaryController : ControllerBase
 {
     #region [Infrastructure]
     private readonly IMapper _mapper;
@@ -31,9 +31,9 @@ public partial class DiaryController : ControllerBase
     /// <summary>
     /// GET: api/{version}/Diary/GetSkills
     /// </summary>
-    /// <response code="200">{skill view objects}</response>
-    /// <response code="204">missing skill objects</response>
-                                                                    // [Authorize(Policy="tracr-trainee//tracr-reviewer")]
+    /// <response code="200"><see cref="IEnumerable{Skill}"/> objects</response>
+    /// <response code="204"><see cref="IEnumerable{Skill}"/> objects not found</response>
+    // [Authorize(Policy="tracr-trainee//tracr-reviewer")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<Skill>))]
     [ActionName("GetSkills"),HttpGet("[action]")]
@@ -47,9 +47,9 @@ public partial class DiaryController : ControllerBase
     /// GET: api/{version}/Diary/GetDiariesPfid/{pfid}
     /// </summary>
     /// <param name="pfid">PFID of diary objects</param>
-    /// <response code="200">{diary view objects}</response>
-    /// <response code="204">missing diary objects</response>
-                                                                        // [Authorize(Policy="tracr-trainee//tracr-reviewer")]
+    /// <response code="200"><see cref="IEnumerable{DiaryViewModel}"/> objects</response>
+    /// <response code="204"><see cref="IEnumerable{DiaryViewModel}"/> objects not found</response>
+    // [Authorize(Policy="tracr-trainee//tracr-reviewer")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<DiaryViewModel>))]
     [ActionName("GetDiariesPfid"),HttpGet("[action]/{pfid:int}")]
@@ -64,9 +64,9 @@ public partial class DiaryController : ControllerBase
     /// GET: api/{version}/Diary/GetTasksByDiaryId/{id}
     /// </summary>
     /// <param name="id">ID of diary object</param>
-    /// <response code="200">{task view objects}</response>
-    /// <response code="204">missing DiaryTask objects</response>
-                                     // [Authorize(Policy="tracr-trainee//tracr-reviewer")]
+    /// <response code="200"><see cref="IEnumerable{DiaryTaskViewModel}"/> objects </response>
+    /// <response code="204"><see cref="IEnumerable{DiaryTaskViewModel}"/> objects not found</response>
+    // [Authorize(Policy="tracr-trainee//tracr-reviewer")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<DiaryTaskViewModel>))]
     [ActionName("GetTasksByDiaryId"),HttpGet("[action]/{id:int}")]
@@ -81,8 +81,8 @@ public partial class DiaryController : ControllerBase
     /// POST: api/{version}/Diary/AddDiaryTask
     /// </summary>
     /// <param name="addReq">AddModifyDiaryTaskReq DTO</param>
-    /// <response code="201">{ new diaryTask object }</response>
-    /// <response code="400">object was not created</response>
+    /// <response code="400"><see cref="DiaryTask"/> object not created</response>
+    /// <response code="201"><see cref="DiaryTaskViewModel"/> object</response>
     [Consumes(MediaTypeNames.Application.Json)]
     [Authorize(Policy="tracr-trainee")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -100,8 +100,8 @@ public partial class DiaryController : ControllerBase
     /// GET: api/{version}/Diary/GetTaskByTaskId/{id}
     /// </summary>
     /// <param name="id">ID of task object</param>
-    /// <response code="200">{task view object}</response>
-    /// <response code="204">missing DiaryTask object</response>
+    /// <response code="200"><see cref="DiaryTaskViewModel"/> object</response>
+    /// <response code="204"><see cref="DiaryTaskViewModel"/> object not found</response>
     [Authorize(Policy="tracr-trainee//tracr-reviewer")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(DiaryTaskViewModel))]
@@ -118,8 +118,8 @@ public partial class DiaryController : ControllerBase
     /// </summary>
     /// <param name="id">ID of task object</param>
     /// <param name="modifyReq">AddModifyDiaryTaskReq DTO</param>
-    /// <response code="200">{task view object}</response>
-    /// <response code="400">object not modified</response>
+    /// <response code="400"><see cref="DiaryTask"/> object not modified</response>
+    /// <response code="200"><see cref="DiaryTaskViewModel"/> object</response>
     [Authorize(Policy="tracr-trainee")]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -139,8 +139,8 @@ public partial class DiaryController : ControllerBase
     /// DELETE: api/{version}/Diary/DeleteTaskByTaskId/{id}
     /// </summary>
     /// <param name="id">ID of task object</param>
-    /// <response code="204">invlaid id</response>
-    /// <response code="200">object deleted</response>
+    /// <response code="200"><see cref="DiaryTask"/> object deleted</response>
+    /// <response code="204"><see cref="DiaryTask"/> object not deleted</response>
     [Authorize(Policy="tracr-trainee")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -157,8 +157,8 @@ public partial class DiaryController : ControllerBase
     /// POST: api/{version}/Diary/AddDiary
     /// </summary>
     /// <param name="addReq">AddModifyDiaryReq DTO</param>
-    /// <response code="201">{ new diary object }</response>
-    /// <response code="400">object not created</response>
+    /// <response code="400"><see cref="Diary"/> object not created</response>
+    /// <response code="201"><see cref="DiaryViewModel"/> object</response>
     [Authorize(Policy="tracr-trainee")]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -177,8 +177,8 @@ public partial class DiaryController : ControllerBase
     /// </summary>
     /// <param name="id">DiaryId of diary object</param>
     /// <param name="modifyReq">AddModifyDiaryReq DTO</param>
-    /// <response code="200">{diary view object}</response>
-    /// <response code="400">object not modified</response>
+    /// <response code="400"><see cref="Diary"/> object not modified</response>
+    /// <response code="200"><see cref="DiaryViewModel"/> object</response>
     [Authorize(Policy="tracr-trainee")]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

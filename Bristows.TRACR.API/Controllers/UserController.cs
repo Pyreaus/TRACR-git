@@ -15,7 +15,7 @@ namespace Bristows.TRACR.API.Controllers;
 [Produces(MediaTypeNames.Application.Json)]
 [ProducesResponseType(StatusCodes.Status401Unauthorized)]
 [Route("api/v1/[controller]")]
-public partial class UserController : ControllerBase
+public sealed partial class UserController : ControllerBase
 {
     #region [Infrastructure]
     private readonly IMapper _mapper;
@@ -31,13 +31,34 @@ public partial class UserController : ControllerBase
     #endregion
 
     /// <summary>
+    /// GET: api/{version}/User/GetReviewers
+    /// </summary>
+    /// <response code="200"><see cref="IEnumerable{UserViewModel}"/> objects</response>
+    /// <response code="204"><see cref="IEnumerable{UserViewModel}"/> objects not found</response>
+    [Authorize(Policy="tracr-admin")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<UserViewModel>))]
+    [ActionName("GetReviewers"),HttpGet("[action]")]
+    public async Task<ActionResult<IEnumerable<UserViewModel?>?>> GetReviewers()
+    {
+        IEnumerable<PeopleFinderUser?> reviewers = await _userService.GetReviewersAsync();
+        IEnumerable<UserViewModel?> reviewersVM = _mapper.Map<IEnumerable<PeopleFinderUser?>,IEnumerable<UserViewModel>>(reviewers!);
+        foreach(UserViewModel? rev in reviewersVM) 
+        {
+            rev!.Role = "Reviewer";
+            rev!.Photo = (bnetUrl + rev!.Photo?.ToString()) ?? "../../../assets/profilePic.png";
+        }
+        return (reviewersVM != null) && (typeof(List<PeopleFinderUser>) == reviewers!.GetType()) ? Ok(reviewersVM) : StatusCode(204);
+    }
+
+    /// <summary>
     /// GET: api/{version}/User/GetTraineesByReviewer/{pfid}
     /// </summary>
-    // / <param name="pfid">trainee reviwer PFID</param>
-    /// <response code="200">{trainee view objects}</response>
-    /// <response code="404">missing trainee objects</response>
-    /// <response code="500">operation failed</response>
-    // [Authorize(Policy="tracr-reviewer")]
+    /// <param name="pfid">trainee reviwer PFID</param>
+    /// <response code="500">internal error</response>
+    /// <response code="404"><see cref="IEnumerable{TraineeViewModel}"/> objects not found</response>
+    /// <response code="200"><see cref="IEnumerable{TraineeViewModel}"/> objects</response>
+    [Authorize(Policy="tracr-reviewer")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<TraineeViewModel>))]
@@ -60,11 +81,11 @@ public partial class UserController : ControllerBase
     /// PUT: api/{version}/User/SetPair/{pfid}
     /// </summary>
     /// <param name="pfid">PFID of trainee</param>
-    /// <param name="addReq">AddModifyTraineeReq DTO</param>
-    /// <response code="201">{ new trainee object }</response>
-    /// <response code="400">object not created</response>
-    /// <response code="500">operation failed</response>
-                 // [Authorize(Policy="tracr-admin")]
+    /// <param name="addReq">request DTO</param>
+    /// <response code="500">internal error</response>
+    /// <response code="400"><see cref="Trainee"/> not modified</response>
+    /// <response code="201"><see cref="Trainee"/> modified</response>
+    // [Authorize(Policy="tracr-admin")]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -80,35 +101,14 @@ public partial class UserController : ControllerBase
     }
 
     /// <summary>
-    /// GET: api/{version}/User/GetReviewers
-    /// </summary>
-    /// <response code="200">{reviewer view objects}</response>
-    /// <response code="204">missing reviewer objects</response>
-                                        // [Authorize(Policy="tracr-admin")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<UserViewModel>))]
-    [ActionName("GetReviewers"),HttpGet("[action]")]
-    public async Task<ActionResult<IEnumerable<UserViewModel?>?>> GetReviewers()
-    {
-        IEnumerable<PeopleFinderUser?> reviewers = await _userService.GetReviewersAsync();
-        IEnumerable<UserViewModel?> reviewersVM = _mapper.Map<IEnumerable<PeopleFinderUser?>,IEnumerable<UserViewModel>>(reviewers!);
-        foreach(UserViewModel? rev in reviewersVM) 
-        {
-            rev!.Role = "Reviewer";
-            rev!.Photo = (bnetUrl + rev!.Photo?.ToString()) ?? "../../../assets/profilePic.png";
-        }
-        return (reviewersVM != null) && (typeof(List<PeopleFinderUser>) == reviewers!.GetType()) ? Ok(reviewersVM) : StatusCode(204);
-    }
-
-    /// <summary>
     /// POST: api/{version}/User/AssignTrainees/{pfid}
     /// </summary>
+    /// <param name="addReq">request DTO</param>
     /// <param name="pfid">PFID of trainee</param>
-    /// <param name="addReq">AddModifyTraineeReq DTO</param>
-    /// <response code="201">{ new trainee object }</response>
-    /// <response code="400">object not created</response>
-    /// <response code="500">operation failed</response>
-                                                         // [Authorize(Policy="tracr-admin")]
+    /// <response code="500">internal error</response>
+    /// <response code="201"><see cref="TraineeViewModel"/> object</response>
+    /// <response code="400"><see cref="TraineeViewModel"/> object not created</response>
+    [Authorize(Policy="tracr-admin")]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -128,11 +128,11 @@ public partial class UserController : ControllerBase
     /// PUT: api/{version}/User/EditTrainee/{pfid}
     /// </summary>
     /// <param name="pfid">PFID of trainee</param>
-    /// <param name="modifyReq">AddModifyTraineeReq DTO</param>
-    /// <response code="200">{AddModifyTraineeReq DTO}</response>
-    /// <response code="400">object not modified</response>
-    [Consumes(MediaTypeNames.Application.Json)]
+    /// <param name="modifyReq">request DTO</param>
+    /// <response code="200"><see cref="AddModifyTraineeReq"/> object modified</response>
+    /// <response code="400"><see cref="Trainee"/> object not modified</response>
     // [Authorize(Policy="tracr-admin")]
+    [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(TraineeViewModel))]
     [ActionName("EditTrainee"),HttpPut("[action]/{pfid:int}")]
@@ -167,10 +167,10 @@ public partial class UserController : ControllerBase
     /// GET: api/{version}/User/GetUserReviewer
     /// </summary>
     /// <param name="pfid">PFID of trainee</param>
-    /// <response code="200">{ reviewer view object }</response>
-    /// <response code="400">missing reviewer object</response>
-    /// <response code="500">operation failed</response>
-                                        // [Authorize(Policy="tracr-trainee//tracr-reviewer")]
+    /// <response code="500">internal error</response>
+    /// <response code="200"><see cref="UserViewModel"/> object</response>
+    /// <response code="400"><see cref="UserViewModel"/> object not found</response>
+    // [Authorize(Policy="tracr-trainee//tracr-reviewer")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(UserViewModel))]
@@ -189,9 +189,9 @@ public partial class UserController : ControllerBase
     /// <summary>
     /// GET: api/{version}/User/GetTrainees
     /// </summary>
-    /// <response code="200">{trainee view objects}</response>
-    /// <response code="404">missing trainee objects</response>
-                                                // [Authorize(Policy="tracr-admin")]
+    /// <response code="200"><see cref="IEnumerable{TraineeViewModel}"/> objects</response>
+    /// <response code="404"><see cref="IEnumerable{TraineeViewModel}"/> objects not found</response>
+    // [Authorize(Policy="tracr-admin")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<TraineeViewModel>))]
     [ActionName("GetTrainees"),HttpGet("[action]")]
@@ -213,8 +213,8 @@ public partial class UserController : ControllerBase
     /// <summary>
     /// GET: api/{version}/User/GetUsers
     /// </summary>
-    /// <response code="200">{user view objects}</response>
-    /// <response code="204">missing user objects</response>
+    /// <response code="200"><see cref="UserViewModel"/> objects</response>
+    /// <response code="204"><see cref="UserViewModel"/> objects not found</response>
     // [Authorize(Policy="tracr-admin")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<UserViewModel>))]
@@ -230,9 +230,9 @@ public partial class UserController : ControllerBase
     /// <summary>
     /// GET: api/{version}/User/GetUserType
     /// </summary>
-    /// <response code="200">{user view objects}</response>
+    /// <response code="500">internal error</response>
     /// <response code="511">unauthorized client</response>
-    /// <response code="500">operation failed</response>
+    /// <response code="200"><see cref="UserViewModel"/> object</response>
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status511NetworkAuthenticationRequired)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(UserViewModel))]

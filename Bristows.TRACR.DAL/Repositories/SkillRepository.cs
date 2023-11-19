@@ -6,7 +6,7 @@ using Bristows.TRACR.Model.Models.Entities;
 
 namespace Bristows.TRACR.DAL.Repositories
 {
-    public class SkillRepository : RepositoryBase<Skill, TRACRContext, SkillRepository>, ISkillRepository  //IEmployeeRepo implemented in RepoBase
+    public sealed class SkillRepository : RepositoryBase<Skill, TRACRContext, SkillRepository>, ISkillRepository  //IEmployeeRepo implemented in RepoBase
     {
         public SkillRepository(IDbFactory<TRACRContext> dbFactory, ILogger<SkillRepository> logger) : base(dbFactory, logger)
         {

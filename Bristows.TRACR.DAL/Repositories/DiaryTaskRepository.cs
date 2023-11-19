@@ -6,7 +6,7 @@ using Bristows.TRACR.Model.Models.Entities;
 
 namespace Bristows.TRACR.DAL.Repositories
 {
-    public class DiaryTaskRepository : RepositoryBase<DiaryTask, TRACRContext, DiaryTaskRepository>, IDiaryTaskRepository  //IEmployeeRepo implemented in RepoBase
+    public sealed class DiaryTaskRepository : RepositoryBase<DiaryTask, TRACRContext, DiaryTaskRepository>, IDiaryTaskRepository  //IEmployeeRepo implemented in RepoBase
     {
         public DiaryTaskRepository(IDbFactory<TRACRContext> dbFactory, ILogger<DiaryTaskRepository> logger) : base(dbFactory, logger)
         {

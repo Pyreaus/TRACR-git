@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Bristows.TRACR.API.TESTDEV;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddLogging();
@@ -55,6 +56,13 @@ builder.Services.AddSession();
 builder.Services.AddScoped<IAuthorizationHandler, AdminRequirementHandler>();
 builder.Services.AddScoped<IAuthorizationHandler, ReviewerRequirementHandler>();
 builder.Services.AddScoped<IAuthorizationHandler, TraineeRequirementHandler>();
+
+//    DI PRACTICE ----------------------------------
+// builder.Services.AddTransient<ITransientCounterDependancy, TransientCounterDependancy>();
+// builder.Services.AddScoped<IScopedCounterDependancy, ScopedCounterDependancy>();
+// builder.Services.AddSingleton<ISingletonCounterDependancy, SingletonCounterDependancy>(); 
+//    DI PRACTICE ----------------------------------
+
 
 // builder.Services.AddAuthentication(options =>
 // {

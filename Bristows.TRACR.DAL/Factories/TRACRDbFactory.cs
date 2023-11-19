@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Bristows.TRACR.DAL.Factories
 {
-    public class TRACRDbFactory : Disposable, IDbFactory<TRACRContext>
+    public sealed class TRACRDbFactory : Disposable, IDbFactory<TRACRContext>
     {
         TRACRContext dbContext;
         private readonly IConfiguration configuration;
@@ -29,10 +29,11 @@ namespace Bristows.TRACR.DAL.Factories
             {
                 var connectionString = configuration.GetConnectionString("TRACREntities");
                 optionsBuilder.UseSqlServer(connectionString);
+                logger.LogWarning("Using DEV connection");
             }
             else
             {
-                logger.LogWarning("Using prod connection");
+                logger.LogWarning("Using PROD connection");
                 var connectionString = configuration.GetConnectionString("TRACREntities");
                 optionsBuilder.UseSqlServer(connectionString);
             }

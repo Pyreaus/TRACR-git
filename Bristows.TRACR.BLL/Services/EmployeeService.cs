@@ -7,7 +7,7 @@ using Bristows.TRACR.DAL.Infrastructure;
 
 namespace Bristows.TRACR.BLL.Services
 {
-    public class EmployeeService : IEmployeeService
+    public sealed class EmployeeService : IEmployeeService
     {
         private readonly IEmployeeRepository employeeRepository;
         private readonly UnitOfWork<TRACRContext> TRACRUnitOfWork;

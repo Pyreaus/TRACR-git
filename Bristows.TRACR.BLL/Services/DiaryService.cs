@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace Bristows.TRACR.BLL.Services
 {
-    public class DiaryService : IDiaryService
+    public sealed class DiaryService : IDiaryService
     {
         private readonly ISkillRepository skillRepository;
         private readonly IDiaryRepository diaryRepository;

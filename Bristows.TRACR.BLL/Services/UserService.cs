@@ -8,7 +8,7 @@ using Bristows.TRACR.Model.Models.ValidationAttributes;
 
 namespace Bristows.TRACR.BLL.Services
 {
-    public class UserService : IUserService
+    public sealed class UserService : IUserService
     {
         private readonly UnitOfWork<TRACRContext> TRACRUnitOfWork;
         private readonly IAdminRepository adminRepository;

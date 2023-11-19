@@ -12,7 +12,7 @@ namespace Bristows.TRACR.API.Controllers.Dev;
 [Produces(MediaTypeNames.Application.Json)]
 [ProducesResponseType(StatusCodes.Status401Unauthorized)]
 [Route("api/v1/[controller]")]
-public class EmployeeController : ControllerBase
+public sealed partial class EmployeeController : ControllerBase
 {
     private readonly IMapper _mapper;
     private readonly ILogger<EmployeeController> _logger;

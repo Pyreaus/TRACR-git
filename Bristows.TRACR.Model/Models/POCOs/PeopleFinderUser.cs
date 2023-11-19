@@ -1,8 +1,15 @@
 
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+
 namespace Bristows.TRACR.Model.Models.Entities
 {
+    [Keyless]
+    [Table("PFUser", Schema="dbo")]
     public partial class PeopleFinderUser
     {
+        [MaxLength(3)]
         public int? PFID { get; set; } = 0;
         public string? FirstName { get; set; } = string.Empty;
         public string? LastName { get; set; } = string.Empty;
@@ -27,11 +34,12 @@ namespace Bristows.TRACR.Model.Models.Entities
         public bool? ActiveUser { get; set; } = true;
         public bool? Partner { get; set; } = false;
         public bool? Human { get; set; } = false;
-        public DateTime Timestamped { get; set; }
+        public DateTime? Timestamped { get; set; }
         public int? CreatorID { get; set; } = 0;
         public string? Initials { get; set; } = string.Empty;
         public bool? FeeEarner { get; set; } = false;
         public bool? Show { get; set; } = false;
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? FeeEarnerChargeOutRate { get; set; } = 0;
         public string? Upn { get; set; } = string.Empty;
         public DateTime? SabbaticalBeginDate { get; set; }

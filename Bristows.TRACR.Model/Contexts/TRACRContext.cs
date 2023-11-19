@@ -1,3 +1,4 @@
+using System.Reflection;
 using Bristows.TRACR.Model.Models.Entities;
 using Bristows.TRACR.Model.Models.Entities.Employees;
 using Microsoft.EntityFrameworkCore;
@@ -9,13 +10,13 @@ namespace Bristows.TRACR.Model.Contexts
         public TRACRContext(DbContextOptions<TRACRContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {                                       // Fallback connection string in case options are not configured
-                optionsBuilder.UseSqlServer("Server=SRV-SQL04;Database=TRACR_DEV; User ID=DB_USER;Password=intranet;MultipleActiveResultSets=True;Encrypt=False;");
+            if (!optionsBuilder.IsConfigured)    // Fallback connection string in case options are not configured
+            {               // Server=SRV-SQL04;Database=TRACR_DEV; User ID=DB_USER;Password=intranet;MultipleActiveResultSets=True;Encrypt=False;"
+                optionsBuilder.UseSqlServer("conn-string");
             }
             base.OnConfiguring(optionsBuilder);
         }
-        public virtual DbSet<PeopleFinderUser> PFUser { get; set;}
+        public virtual DbSet<PeopleFinderUser> PFUser { get; set; }
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Diary> Diaries { get; set; }
         public virtual DbSet<DiaryTask> DiaryTasks { get; set; }
@@ -25,7 +26,10 @@ namespace Bristows.TRACR.Model.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PeopleFinderUser>().ToView("PeopleFinderUser").HasKey(x=>x.PFID);
+            // modelBuilder.Entity<PeopleFinderUser>().ToView("PeopleFinderUser").HasKey(x=>x.PFID);
+
+            //--- uncomment to apply the cutom configurations for each entity (or as needed).
+            // modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());            
         }
     }
 }

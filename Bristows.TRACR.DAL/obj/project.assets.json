@@ -3833,19 +3833,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\NRhima\\.nuget\\packages\\": {}
+    "/Users/noel/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Devops\\Bristows.TRACR-Git\\Bristows.TRACR.DAL\\Bristows.TRACR.DAL.csproj",
+      "projectUniqueName": "/Users/noel/Desktop/Dev/TRACR/TRACR-git/Bristows.TRACR.DAL/Bristows.TRACR.DAL.csproj",
       "projectName": "Bristows.TRACR.DAL",
-      "projectPath": "C:\\Devops\\Bristows.TRACR-Git\\Bristows.TRACR.DAL\\Bristows.TRACR.DAL.csproj",
-      "packagesPath": "C:\\Users\\NRhima\\.nuget\\packages\\",
-      "outputPath": "C:\\Devops\\Bristows.TRACR-Git\\Bristows.TRACR.DAL\\obj\\",
+      "projectPath": "/Users/noel/Desktop/Dev/TRACR/TRACR-git/Bristows.TRACR.DAL/Bristows.TRACR.DAL.csproj",
+      "packagesPath": "/Users/noel/.nuget/packages/",
+      "outputPath": "/Users/noel/Desktop/Dev/TRACR/TRACR-git/Bristows.TRACR.DAL/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\NRhima\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/noel/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -3857,8 +3857,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Devops\\Bristows.TRACR-Git\\Bristows.TRACR.Model\\Bristows.TRACR.Model.csproj": {
-              "projectPath": "C:\\Devops\\Bristows.TRACR-Git\\Bristows.TRACR.Model\\Bristows.TRACR.Model.csproj"
+            "/Users/noel/Desktop/Dev/TRACR/TRACR-git/Bristows.TRACR.Model/Bristows.TRACR.Model.csproj": {
+              "projectPath": "/Users/noel/Desktop/Dev/TRACR/TRACR-git/Bristows.TRACR.Model/Bristows.TRACR.Model.csproj"
             }
           }
         }
@@ -3911,7 +3911,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
       }
     }
   }

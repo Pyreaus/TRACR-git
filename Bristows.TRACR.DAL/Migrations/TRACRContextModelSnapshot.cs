@@ -24,115 +24,126 @@ namespace Bristows.TRACR.DAL.Migrations
 
             modelBuilder.Entity("Bristows.TRACR.Model.Models.Entities.Admin", b =>
                 {
-                    b.Property<Guid?>("LocalId")
+                    b.Property<int>("AID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool?>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("AdminId")
-                        .HasMaxLength(15)
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("EntryCreated")
-                        .HasColumnType("datetime2");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AID"));
 
-                    b.Property<DateTime?>("LastUpdated")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("ACTIVE_USER")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("OtherPfid")
-                        .HasColumnType("int");
+                    b.Property<string>("ADMIN")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("ReviewerPfid")
-                        .HasMaxLength(15)
-                        .HasColumnType("int");
+                    b.Property<string>("EMAIL")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool?>("Show")
-                        .HasColumnType("bit");
+                    b.Property<string>("FULL_NAME")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("LocalId");
+                    b.Property<string>("ROLE")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.ToTable("Admin", "dbo");
+                    b.Property<string>("WINUSER")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("AID");
+
+                    b.ToTable("ADMINS", "dbo");
                 });
 
             modelBuilder.Entity("Bristows.TRACR.Model.Models.Entities.Diary", b =>
                 {
-                    b.Property<Guid?>("LocalId")
+                    b.Property<int>("DIARY_ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("DiaryId")
-                        .HasMaxLength(5)
                         .HasColumnType("int");
 
-                    b.Property<string>("LearningPoints")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DIARY_ID"));
+
+                    b.Property<string>("LEARNING_POINTS")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Pfid")
-                        .HasMaxLength(5)
-                        .HasColumnType("int");
+                    b.Property<string>("PFID")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("ProfessionalConductIssues")
+                    b.Property<string>("PRACTICE_AREA")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("PROFESSIONAL_CONDUCT_ISSUES")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProfessionalDevelopmentUndertaken")
+                    b.Property<string>("PROFESSIONAL_DEVELOPMENT_UNDERTAKEN")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("Show")
-                        .HasColumnType("bit");
+                    b.Property<string>("SHOW")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool?>("SignOffSubmitted")
-                        .HasColumnType("bit");
+                    b.Property<string>("SIGNED_OFF_BY")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("SignedOffBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("SignedOffTimestamp")
+                    b.Property<DateTime?>("SIGNED_OFF_TIMESTAMP")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("Timestamp")
+                    b.Property<string>("SIGN_OFF_SUBMITTED")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("TIMESTAMP")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("WeekBeginning")
+                    b.Property<DateTime?>("WEEK_BEGINNING")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("LocalId");
+                    b.HasKey("DIARY_ID");
 
-                    b.ToTable("Diary", "dbo");
+                    b.ToTable("DIARY", "dbo");
                 });
 
             modelBuilder.Entity("Bristows.TRACR.Model.Models.Entities.DiaryTask", b =>
                 {
-                    b.Property<Guid?>("LocalId")
+                    b.Property<int>("DIARY_TASK_ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("DiaryId")
-                        .HasMaxLength(5)
                         .HasColumnType("int");
 
-                    b.Property<int>("DiaryTaskId")
-                        .HasMaxLength(5)
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DIARY_TASK_ID"));
+
+                    b.Property<int>("DIARY_ID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Matter")
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                    b.Property<string>("FEE_EARNERS")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("Show")
-                        .HasColumnType("bit");
+                    b.Property<string>("MATTER")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
-                    b.Property<string>("TaskDescription")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<string>("SHOW")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime?>("Timestamp")
+                    b.Property<string>("SKILLS")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TASK_DESCRIPTION")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("TIMESTAMP")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("LocalId");
+                    b.HasKey("DIARY_TASK_ID");
 
-                    b.ToTable("DiaryTask", "dbo");
+                    b.ToTable("DIARY_TASKS", "dbo");
                 });
 
             modelBuilder.Entity("Bristows.TRACR.Model.Models.Entities.Employees.Employee", b =>
@@ -173,131 +184,171 @@ namespace Bristows.TRACR.DAL.Migrations
 
             modelBuilder.Entity("Bristows.TRACR.Model.Models.Entities.PeopleFinderUser", b =>
                 {
-                    b.Property<Guid?>("LocalId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("About")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("ActiveUser")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("CreatorID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DepartmentID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("FeeEarner")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal?>("FeeEarnerChargeOutRate")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("Human")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Initials")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("JobTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("JoinDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OtherPfid")
-                        .HasMaxLength(30)
+                    b.Property<DateTime?>("LeaveDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("LocationID")
                         .HasColumnType("int");
 
-                    b.Property<int>("PfId")
-                        .HasMaxLength(5)
+                    b.Property<DateTime?>("MaternityDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("MaternityDirection")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Mobile")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PFID")
+                        .HasMaxLength(3)
                         .HasColumnType("int");
+
+                    b.Property<bool?>("Partner")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Telephone")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("WinUser")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("LocalId");
-
-                    b.ToTable("PeopleFinderUser", "dbo");
-                });
-
-            modelBuilder.Entity("Bristows.TRACR.Model.Models.Entities.Skill", b =>
-                {
-                    b.Property<Guid?>("LocalId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Colour")
+                    b.Property<string>("PronouncedAs")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("DiaryTaskLocalId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("RoomID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("SabbaticalBeginDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("SabbaticalEndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SecondmentCompanyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("SecondmentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("SecretaryID")
+                        .HasColumnType("int");
 
                     b.Property<bool?>("Show")
                         .HasColumnType("bit");
 
-                    b.Property<string>("SkillDescription")
+                    b.Property<string>("Telephone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Timestamped")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Upn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WinUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("PFUser", "dbo");
+                });
+
+            modelBuilder.Entity("Bristows.TRACR.Model.Models.Entities.Skill", b =>
+                {
+                    b.Property<int?>("SKILL_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("SKILL_ID"));
+
+                    b.Property<string>("COLOUR")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SHOW")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SKILL_DESCRIPTION")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("SkillId")
-                        .HasMaxLength(5)
-                        .HasColumnType("int");
-
-                    b.Property<string>("SkillName")
+                    b.Property<string>("SKILL_NAME")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
-                    b.HasKey("LocalId");
+                    b.HasKey("SKILL_ID");
 
-                    b.HasIndex("DiaryTaskLocalId");
-
-                    b.ToTable("Skill", "dbo");
+                    b.ToTable("SKILLS", "dbo");
                 });
 
             modelBuilder.Entity("Bristows.TRACR.Model.Models.Entities.Trainee", b =>
                 {
-                    b.Property<Guid?>("LocalId")
+                    b.Property<int>("TRAINEE_ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool?>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("EntryCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("LastUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("OtherPfid")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReviewerPfid")
-                        .HasMaxLength(15)
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TRAINEE_ID"));
 
-                    b.Property<bool?>("Show")
-                        .HasColumnType("bit");
+                    b.Property<string>("ACTIVE")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("TraineeId")
-                        .HasMaxLength(15)
-                        .HasColumnType("int");
+                    b.Property<string>("OTHER_PFID")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("TraineePfid")
-                        .HasMaxLength(15)
-                        .HasColumnType("int");
+                    b.Property<string>("REVIEWER_PFID")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("LocalId");
+                    b.Property<string>("SHOW")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.ToTable("Trainee", "dbo");
-                });
+                    b.Property<string>("TRAINEE_PFID")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-            modelBuilder.Entity("Bristows.TRACR.Model.Models.Entities.Skill", b =>
-                {
-                    b.HasOne("Bristows.TRACR.Model.Models.Entities.DiaryTask", null)
-                        .WithMany("Skills")
-                        .HasForeignKey("DiaryTaskLocalId");
-                });
+                    b.HasKey("TRAINEE_ID");
 
-            modelBuilder.Entity("Bristows.TRACR.Model.Models.Entities.DiaryTask", b =>
-                {
-                    b.Navigation("Skills");
+                    b.ToTable("TRAINEES", "dbo");
                 });
 #pragma warning restore 612, 618
         }

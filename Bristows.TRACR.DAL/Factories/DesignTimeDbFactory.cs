@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Bristows.TRACR.DAL.Factories
 {
-    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<TRACRContext>
+    public sealed class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<TRACRContext>
     {
         TRACRContext dbContext;
         public TRACRContext CreateDbContext(string[] args)

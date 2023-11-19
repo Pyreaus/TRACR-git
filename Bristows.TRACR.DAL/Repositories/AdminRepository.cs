@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Bristows.TRACR.DAL.Repositories
 {
-    public class AdminRepository : RepositoryBase<Admin, TRACRContext, AdminRepository>, IAdminRepository  //IEmployeeRepo implemented in RepoBase
+    public sealed class AdminRepository : RepositoryBase<Admin, TRACRContext, AdminRepository>, IAdminRepository  //IEmployeeRepo implemented in RepoBase
     {
         public AdminRepository(IDbFactory<TRACRContext> dbFactory, ILogger<AdminRepository> logger) : base(dbFactory, logger)
         {
