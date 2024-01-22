@@ -52,7 +52,7 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
   selectedReviewer$!: User;
   viewportMaximum!:boolean;
   diaryReq!: AddModifyDiaryReq;
-  userType$: BehaviorSubject<UserType> = new BehaviorSubject<UserType>(UserType.Unauthorized);
+  userType$: BehaviorSubject<UserType> = new BehaviorSubject<UserType>({} as UserType.Unauthorized);
   diary: Diary = {DIARY_ID: 0,PFID: '',PRACTICE_AREA: '',WEEK_BEGINNING: '',LEARNING_POINTS: '',PROFESSIONAL_DEVELOPMENT_UNDERTAKEN: '',
   PROFESSIONAL_CONDUCT_ISSUES: '',SIGN_OFF_SUBMITTED: 'false',SIGNED_OFF_BY: '',SHOW: ''}
   skillsWithOccurrences!: { skill: Skill; occurrences: number }[] | null;
@@ -96,6 +96,8 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
   newDiaryPanel = false;
   ViewDiaryPanel = false;
   EditViewPanel = false;
+  disableCalendar = true;
+  calendarLoaded = false;
   submitted = false;
   trainee = false;
   A: status = status.Available;
@@ -128,9 +130,9 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
     });
   }
   onSubmitNewDiary(): void {
-      this.diaryReq = {
+    this.diaryReq = {
         PFID: this.user$.PFID.toString(),
-        WEEK_BEGINNING: this!.reformatStartDate(this.dateRange),
+        WEEK_BEGINNING: this.dateRange,
         LEARNING_POINTS: this.diaryForm.value.LEARNING_POINTS,
         PRACTICE_AREA: this.diaryForm.value.PRACTICE_AREA,
         PROFESSIONAL_DEVELOPMENT_UNDERTAKEN: this.diaryForm.value.PROFESSIONAL_DEVELOPMENT_UNDERTAKEN,
@@ -139,10 +141,11 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
         SIGNED_OFF_BY: '',
         SHOW: 'true'
       };
+      console.warn(this.diaryReq)
       this.userService.AddDiary(this.diaryReq).subscribe((res: AddModifyDiaryReq) => console.trace(res));
       setTimeout(() => {
-        this.reload(), 1000
-      });
+        this.reload()
+      }, 2000);
   }
   sanitize(HTMLcontent: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(HTMLcontent);
@@ -243,14 +246,22 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.userService.getUserType().subscribe({
         next: (res: User) => {
           this.user$ = res;
-          this.user$ ? this.userType$.next(this.user$.Role as UserType) : this.userType$.next(UserType.Unauthorized);
-          this.userService.GetDiariesPfid(this.user$!.PFID).subscribe({
-            next: (res: Diary[]) => {
-              this.userDiaries = res;
-            }, error: (err:any) => console.trace(err)
-          });
-          this.userType$.value === UserType.Trainee ? this.getReviewer(this.user$!.PFID.toString()) : 
-          this.userType$.value === UserType.Admin ? this.resetTrainees() : this.userType$.value === UserType.Reviewer ?
+          this.user$ ? this.userType$.next(this.user$.Role as UserType) : this.userType$.next(UserType.Unauthorized)
+          if (this.userType$.value !== UserType.Reviewer) {
+            this.calendarLoaded = true;
+            this.cdRef.detectChanges();
+            setTimeout(() => {
+              this.disableCalendar = false;
+              this.markCells();
+            }, 1000);
+            this.userService.GetDiariesPfid(this.user$!.PFID).subscribe({ 
+              next: (res: Diary[]) => this.userDiaries = res,
+              error: (err:any) => console.trace(err)
+            });
+          }
+          this.userType$.value === UserType.Trainee ? 
+          this.getReviewer(this.user$!.PFID.toString()) : this.userType$.value === UserType.Admin ? 
+          this.resetTrainees() : this.userType$.value === UserType.Reviewer ?
             this.userService.getTraineesByReviewer(this.user$.PFID).subscribe({
               next: (res: Trainee[]) => {
                 this.trainees$ = res;
@@ -480,6 +491,12 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.EditViewPanel = true
   }
   openTraineeDiary(tPfid: string): void {
+    this.calendarLoaded = true
+    this.cdRef.detectChanges();
+    setTimeout(() => {
+      this.disableCalendar = false;
+      this.markCells();
+    }, 1000);
     this.getReviewer(tPfid);
     this.skillsWithOccurrences = null;
     this.trainees$ = this.trainees$.filter((T: Trainee) => T.TRAINEE_PFID === tPfid);
@@ -512,7 +529,7 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   ngAfterViewChecked(): void {
     setTimeout(() => {
-      if (!this.calendarRendered) {
+      if (!this.calendarRendered&&!this.disableCalendar) {
         const calendarElement = this.elementRef.nativeElement.querySelector('.p-datepicker-header');
         if (calendarElement) {
           let [next, prev] = [this.elementRef.nativeElement.querySelectorAll('.p-datepicker-next')[0],
@@ -533,6 +550,7 @@ export class HOMEComponent implements OnInit, AfterViewInit, AfterViewChecked {
           }
         }
       }
+    this.cdRef.detectChanges();
     }, 1000)
   }
   reload(): void {

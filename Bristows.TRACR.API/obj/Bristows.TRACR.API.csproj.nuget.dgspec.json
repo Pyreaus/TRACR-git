@@ -53,6 +53,10 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
             "Microsoft.AspNetCore.Authentication.Negotiate": {
               "target": "Package",
               "version": "[7.0.5, )"
@@ -71,7 +75,7 @@
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[5.0.13, )"
+              "version": "[7.0.5, )"
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
@@ -84,6 +88,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
+            },
+            "Swashbuckle.AspNetCore.Filters": {
+              "target": "Package",
+              "version": "[7.0.5, )"
             }
           },
           "imports": [
@@ -215,15 +223,15 @@
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[7.0.5, )"
             },
             "Microsoft.Extensions.Configuration.FileExtensions": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[7.0.5, )"
             },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[7.0.5, )"
             }
           },
           "imports": [
@@ -309,7 +317,7 @@
             },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[7.0.5, )"
             }
           },
           "imports": [

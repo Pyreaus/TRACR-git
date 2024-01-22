@@ -7,7 +7,7 @@ namespace Bristows.TRACR.Model.DTOs
         [Required]
         public int DIARY_ID { get; set; }
         [MaxLength(250)]
-        [RegularExpression(@"^[a-zA-Z\s]+$")]
+        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Invalid format")]
         public string? MATTER { get; set; }
         public string? FEE_EARNERS { get; set; }
         [MaxLength(300)]

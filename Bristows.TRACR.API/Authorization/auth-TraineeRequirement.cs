@@ -5,8 +5,8 @@ using System.Security.Claims;
 
 namespace Bristows.TRACR.API.Authorization
 {
-    public class TraineeRequirement : IAuthorizationRequirement { }
-    public class TraineeRequirementHandler : AuthorizationHandler<TraineeRequirement>
+    internal sealed class TraineeRequirement : IAuthorizationRequirement { }
+    internal sealed partial class TraineeRequirementHandler : AuthorizationHandler<TraineeRequirement>
     {
         private readonly IUserService _userService;
         private readonly ClaimsPrincipal _claimsPrincipal;
@@ -16,9 +16,8 @@ namespace Bristows.TRACR.API.Authorization
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _claimsPrincipal = claimsPrincipal ?? throw new ArgumentNullException(nameof(claimsPrincipal));
             _userService = userService ?? throw new ArgumentNullException(nameof(userService));
-            _logger.LogInformation("----->{CP}",_claimsPrincipal.FindFirst("DomainUsername"));
+            _logger.LogInformation(107, "----->{CP}",_claimsPrincipal.FindFirst("DomainUsername"));
         }
-
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, TraineeRequirement requirement)
         {
             if (_claimsPrincipal.Identity?.IsAuthenticated == true)
@@ -34,7 +33,7 @@ namespace Bristows.TRACR.API.Authorization
                     }
                     else
                     {
-                        _logger.LogWarning("User is not reviewerer");
+                        _logger.LogWarning(108, "User is not reviewerer");
                         context.Fail();
                     }
                 }

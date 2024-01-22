@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Bristows.TRACR.Model.Models.Entities
 {
     [Table("ADMINS", Schema="dbo")]
-    public partial class Admin
+    public sealed partial class Admin
     {
         [Key]
         public int AID { get; set; } = 0;
@@ -13,6 +13,7 @@ namespace Bristows.TRACR.Model.Models.Entities
         [MaxLength(50)]
         public string? FULL_NAME { get; set; } = string.Empty;
         [MaxLength(50)]
+        [EmailAddress(ErrorMessage = "Invalid format")]
         public string? EMAIL { get; set; } = string.Empty;
         [MaxLength(50)]
         public string? ADMIN { get; set; } = string.Empty;

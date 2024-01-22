@@ -11,8 +11,15 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Bristows.TRACR.API.TESTDEV;
+using Bristows.TRACR.API.TESTDEV.DependancyInjection;
+using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Filters;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Bristows.TRACR.API.AuthenticationTemplate;
+using Bristows.TRACR.API.AuthenticationTemplate.Interfaces;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 builder.Services.AddLogging();
 builder.Logging.AddConsole();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -50,6 +57,8 @@ builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<ITraineeRepository, TraineeRepository>();
 builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
 
+builder.Services.AddTransient<IAuthProvider, AuthProvider>();
+
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 
@@ -60,7 +69,7 @@ builder.Services.AddScoped<IAuthorizationHandler, TraineeRequirementHandler>();
 //    DI PRACTICE ----------------------------------
 // builder.Services.AddTransient<ITransientCounterDependancy, TransientCounterDependancy>();
 // builder.Services.AddScoped<IScopedCounterDependancy, ScopedCounterDependancy>();
-// builder.Services.AddSingleton<ISingletonCounterDependancy, SingletonCounterDependancy>(); 
+// builder.Services.AddSingleton<ISingletonCounterDependancy, SingletonCounterDependancy>();
 //    DI PRACTICE ----------------------------------
 
 
@@ -77,6 +86,11 @@ builder.Services.AddScoped<IAuthorizationHandler, TraineeRequirementHandler>();
 //     options.Cookie.SecurePolicy = CookieSecurePolicy.None; // Change this if using HTTPS
 //     options.Cookie.IsEssential = true;
 // });
+
+// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+// builder.Services.ConfigureOptions<JwtOptionsSetup>();
+// builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
+// builder.Services.ConfigureOptions<ServerOptionsSetup>();
 
 // builder.Services.AddAuthentication(options =>
 // {
@@ -102,21 +116,39 @@ builder.Services.AddScoped(provider =>
     var httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();
     return GetClaimsPrincipal(httpContextAccessor);
 });
-// Configure authorization policies
+// Configuring authorization policies
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("tracr-default", policy => policy.RequireAuthenticatedUser());
-    options.AddPolicy("tracr-admin", policy => policy.Requirements.Add(new AdminRequirement()));
-    options.AddPolicy("tracr-trainee", policy => policy.Requirements.Add(new TraineeRequirement()));
-    options.AddPolicy("tracr-reviewer", policy => policy.Requirements.Add(new ReviewerRequirement()));
+    options.AddPolicy("trainee//reviewer", policy => 
+    {
+        policy.Requirements.Add(new TraineeRequirement());
+        policy.Requirements.Add(new ReviewerRequirement());
+    });
+    options.AddPolicy("admin//reviewer", policy => 
+    {
+        policy.Requirements.Add(new AdminRequirement());
+        policy.Requirements.Add(new ReviewerRequirement());
+    });
+    options.AddPolicy("admin", policy => policy.Requirements.Add(new AdminRequirement()));
+    options.AddPolicy("trainee", policy => policy.Requirements.Add(new TraineeRequirement()));
+    options.AddPolicy("reviewer", policy => policy.Requirements.Add(new ReviewerRequirement()));
+});
+builder.Services.AddControllers();
+builder.Services.AddSwaggerGen(options => 
+{
+    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Name = "Authorization"
+    });
+    options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 
-builder.Services.AddControllers();
-builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment()) // Configuring the HTTP request pipeline.
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
@@ -126,8 +158,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseSession();
 app.UseHttpsRedirection();
-app.UseAuthentication();
-app.UseRouting();
-app.UseAuthorization();
-app.MapControllers();
-app.Run();
+app.UseAuthentication();//---------//intercepts arriving requests, inspects the Authorization header and-
+app.UseRouting();                 //-invokes the correct Authentication handler i.e. .AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer()-
+app.UseAuthorization();          //-which will extract information (IsAuthenticated[bool] RoleClaimType, Claims, Tokens etc.) from within HTTPContext.User.Identity/Identities[n]-
+app.MapControllers();           //-those local variables are of type: {HTTPContext: *.DefaultHttpContext}.{User: System.Security.Claims.ClaimsPrincipal}.{Identity: System.Security.Claims.ClaimsIdentity}-
+app.Run();                     //-and the overall job of 'Authentication' is to populate the 'IsAuthenticated' and 'Claims' variables based on whatever information the specific authentication handler invoked is expecting, in this case our handler expects and reads from JSON Web Token.

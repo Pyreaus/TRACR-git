@@ -7,36 +7,38 @@ using System.Net.Mime;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Bristows.TRACR.Model.DTOs;
+using Bristows.TRACR.API.TESTDEV.DependancyInjection;
+using Humanizer;
 
 namespace Bristows.TRACR.API.Controllers;
 
 [ApiController]
- // [Authorize(Policy="tracr-default",AuthenticationSchemes=NegotiateDefaults.AuthenticationScheme)]
 [Produces(MediaTypeNames.Application.Json)]
 [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+// [Authorize(Policy="tracr-default",AuthenticationSchemes=NegotiateDefaults.AuthenticationScheme)]
 [Route("api/v1/[controller]")]
 public sealed partial class DiaryController : ControllerBase
 {
     #region [Infrastructure]
     private readonly IMapper _mapper;
-    private readonly ILogger<DiaryController> _logger;
     private readonly IDiaryService _diaryService;
-    private static T NullArg<T>(T arg) => throw new ArgumentNullException(nameof(arg));
+    private readonly ILogger<DiaryController> _logger;
+    private static TE Ex<TE>() where TE : Exception => throw (TE)Activator.CreateInstance(typeof(TE), "untracked")!;
+    private static TE Ex<TE, ExpectedType>(object? exc=null) where TE : Exception => throw (TE)Activator.CreateInstance(typeof(TE), $"Expected: {typeof(ExpectedType)}", nameof(exc))!;
     public DiaryController(ILogger<DiaryController> logger, IMapper mapper, IDiaryService diaryService)
     {
-        (_diaryService, _logger, _mapper) = (diaryService ?? NullArg<IDiaryService>(diaryService!), logger, mapper);
+        (_diaryService, _logger, _mapper) = (diaryService ?? throw Ex<ArgumentNullException>(), logger, mapper);
     }
     #endregion
 
     /// <summary>
-    /// GET: api/{version}/Diary/GetSkills
+    /// GET: {{host}}/api/{{version}}/Diary/GetSkills
     /// </summary>
-    /// <response code="200"><see cref="IEnumerable{Skill}"/> objects</response>
-    /// <response code="204"><see cref="IEnumerable{Skill}"/> objects not found</response>
-    // [Authorize(Policy="tracr-trainee//tracr-reviewer")]
+    /// <response code="200"><see cref="IEnumerable{Skill}"/>objects</response>
+    /// <response code="204"><see cref="IEnumerable{Skill}"/>objects not found</response>
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<Skill>))]
-    [ActionName("GetSkills"),HttpGet("[action]")]
+    [ActionName("GetSkills"),Authorize(Policy="trainee//reviewer"),HttpGet("[action]")]
     public async Task<ActionResult<IEnumerable<Skill?>?>> GetSkills()
     {
         IEnumerable<Skill?> skills = await _diaryService.GetSkills();
@@ -44,15 +46,14 @@ public sealed partial class DiaryController : ControllerBase
     }
 
     /// <summary>
-    /// GET: api/{version}/Diary/GetDiariesPfid/{pfid}
+    /// GET: {{host}}/api/{{version}}/Diary/GetDiariesPfid/[pfid]
     /// </summary>
     /// <param name="pfid">PFID of diary objects</param>
-    /// <response code="200"><see cref="IEnumerable{DiaryViewModel}"/> objects</response>
-    /// <response code="204"><see cref="IEnumerable{DiaryViewModel}"/> objects not found</response>
-    // [Authorize(Policy="tracr-trainee//tracr-reviewer")]
+    /// <response code="200"><see cref="IEnumerable{DiaryViewModel}"/>objects</response>
+    /// <response code="204"><see cref="IEnumerable{DiaryViewModel}"/>objects not found</response>
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<DiaryViewModel>))]
-    [ActionName("GetDiariesPfid"),HttpGet("[action]/{pfid:int}")]
+    [ActionName("GetDiariesPfid"),Authorize(Policy="trainee//reviewer"),HttpGet("[action]/{pfid:int}")]
     public async Task<ActionResult<IEnumerable<DiaryViewModel?>?>> GetDiariesPfid([FromRoute] [ValidPfid] int pfid)
     {
         IEnumerable<Diary?> diaries = await _diaryService.GetDiariesAsync(pfid);
@@ -61,15 +62,14 @@ public sealed partial class DiaryController : ControllerBase
     }
     
     /// <summary>
-    /// GET: api/{version}/Diary/GetTasksByDiaryId/{id}
+    /// GET: {{host}}/api/{{version}}/Diary/GetTasksByDiaryId/[id]
     /// </summary>
     /// <param name="id">ID of diary object</param>
-    /// <response code="200"><see cref="IEnumerable{DiaryTaskViewModel}"/> objects </response>
-    /// <response code="204"><see cref="IEnumerable{DiaryTaskViewModel}"/> objects not found</response>
-    // [Authorize(Policy="tracr-trainee//tracr-reviewer")]
+    /// <response code="200"><see cref="IEnumerable{DiaryTaskViewModel}"/>objects </response>
+    /// <response code="204"><see cref="IEnumerable{DiaryTaskViewModel}"/>objects not found</response>
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<DiaryTaskViewModel>))]
-    [ActionName("GetTasksByDiaryId"),HttpGet("[action]/{id:int}")]
+    [ActionName("GetTasksByDiaryId"),Authorize(Policy="trainee//reviewer"),HttpGet("[action]/{id:int}")]
     public async Task<ActionResult<IEnumerable<DiaryTaskViewModel?>?>> GetTasksByDiaryId([FromRoute] int id)
     {
         IEnumerable<DiaryTask?> diaryTasks = await _diaryService.DiaryTasksByDiaryIdAsync(id);
@@ -78,34 +78,33 @@ public sealed partial class DiaryController : ControllerBase
     }
 
     /// <summary>
-    /// POST: api/{version}/Diary/AddDiaryTask
+    /// POST: {{host}}/api/{{version}}/Diary/AddDiaryTask
     /// </summary>
-    /// <param name="addReq">AddModifyDiaryTaskReq DTO</param>
-    /// <response code="400"><see cref="DiaryTask"/> object not created</response>
-    /// <response code="201"><see cref="DiaryTaskViewModel"/> object</response>
+    /// <param name="request">AddModifyDiaryTaskReq DTO</param>
+    /// <response code="400"><see cref="DiaryTask"/>object not created</response>
+    /// <response code="201"><see cref="DiaryTaskViewModel"/>object</response>
+    [ValidateAntiForgeryToken]
     [Consumes(MediaTypeNames.Application.Json)]
-    [Authorize(Policy="tracr-trainee")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created,Type=typeof(DiaryTaskViewModel))]
-    [ActionName("AddDiaryTask"),HttpPost("[action]")]
-    public ActionResult<DiaryTaskViewModel?> AddDiaryTask([FromBody] AddModifyDiaryTaskReq addReq)
+    [ActionName("AddDiaryTask"),Authorize(Policy="trainee"),HttpPost("[action]")]
+    public ActionResult<DiaryTaskViewModel?> AddDiaryTask([FromBody] AddModifyDiaryTaskReq request)
     {
-        if (addReq is null) return BadRequest(addReq);
-        DiaryTask? newDiaryTask = _diaryService.CreateDiaryTask(_mapper.Map<AddModifyDiaryTaskReq,DiaryTask>(addReq));
+        if (request is null) return BadRequest(request);
+        DiaryTask? newDiaryTask = _diaryService.CreateDiaryTask(_mapper.Map<AddModifyDiaryTaskReq,DiaryTask>(request));
         DiaryTaskViewModel diaryTaskVM = _mapper.Map<DiaryTask,DiaryTaskViewModel>(newDiaryTask!);
         return CreatedAtAction(nameof(GetTaskByTaskId), new { id = newDiaryTask?.DIARY_ID }, diaryTaskVM);
     }
 
     /// <summary>
-    /// GET: api/{version}/Diary/GetTaskByTaskId/{id}
+    /// GET: {{host}}/api/{{version}}/Diary/GetTaskByTaskId/[id]
     /// </summary>
     /// <param name="id">ID of task object</param>
-    /// <response code="200"><see cref="DiaryTaskViewModel"/> object</response>
-    /// <response code="204"><see cref="DiaryTaskViewModel"/> object not found</response>
-    [Authorize(Policy="tracr-trainee//tracr-reviewer")]
+    /// <response code="200"><see cref="DiaryTaskViewModel"/>object</response>
+    /// <response code="204"><see cref="DiaryTaskViewModel"/>object not found</response>
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(DiaryTaskViewModel))]
-    [ActionName("GetTaskByTaskId"),HttpGet("[action]/{id:int}")]
+    [ActionName("GetTaskByTaskId"),Authorize(Policy="trainee//reviewer"),HttpGet("[action]/{id:int}")]
     public async Task<ActionResult<DiaryTaskViewModel?>> GetTaskByTaskId([FromRoute] int id)
     {
         DiaryTask? diaryTask = await _diaryService.DiaryTaskByTaskIdAsync(id);
@@ -114,37 +113,37 @@ public sealed partial class DiaryController : ControllerBase
     }
 
     /// <summary>
-    /// PUT: api/{version}/Diary/EditTaskByTaskId/{id}
+    /// PUT: {{host}}/api/{{version}}/Diary/EditTaskByTaskId/[id]
     /// </summary>
     /// <param name="id">ID of task object</param>
-    /// <param name="modifyReq">AddModifyDiaryTaskReq DTO</param>
-    /// <response code="400"><see cref="DiaryTask"/> object not modified</response>
-    /// <response code="200"><see cref="DiaryTaskViewModel"/> object</response>
-    [Authorize(Policy="tracr-trainee")]
+    /// <param name="request">AddModifyDiaryTaskReq DTO</param>
+    /// <response code="400"><see cref="DiaryTask"/>object not modified</response>
+    /// <response code="200"><see cref="DiaryTaskViewModel"/>object</response>
+    [ValidateAntiForgeryToken]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(DiaryTaskViewModel))]
-    [ActionName("EditTaskByTaskId"),HttpPut("[action]/{id:int}")]
-    public async Task<ActionResult<DiaryTaskViewModel?>> EditTaskByTaskId([FromRoute] int id, [FromBody] AddModifyDiaryTaskReq modifyReq)
+    [ActionName("EditTaskByTaskId"),Authorize(Policy="trainee"),HttpPut("[action]/{id:int}")]
+    public async Task<ActionResult<DiaryTaskViewModel?>> EditTaskByTaskId([FromRoute] int id, [FromBody] AddModifyDiaryTaskReq request)
     {
         DiaryTask? diaryTask = await _diaryService.DiaryTaskByTaskIdAsync(id);
-        if ((diaryTask is null)||(modifyReq is null)) return BadRequest(modifyReq);
+        if ((diaryTask is null)||(request is null)) return BadRequest(request);
         DiaryTaskViewModel? diaryTaskVM = _mapper.Map<DiaryTask?, DiaryTaskViewModel>(diaryTask);
-        _mapper.Map(modifyReq, diaryTask);
+        _mapper.Map(request, diaryTask);
         this._diaryService.UpdateDiaryTask(diaryTask!);
         return Ok(diaryTaskVM);
     }
 
     /// <summary>
-    /// DELETE: api/{version}/Diary/DeleteTaskByTaskId/{id}
+    /// DELETE: {{host}}/api/{{version}}/Diary/DeleteTaskByTaskId/[id]
     /// </summary>
     /// <param name="id">ID of task object</param>
-    /// <response code="200"><see cref="DiaryTask"/> object deleted</response>
-    /// <response code="204"><see cref="DiaryTask"/> object not deleted</response>
-    [Authorize(Policy="tracr-trainee")]
+    /// <response code="200"><see cref="DiaryTask"/>object deleted</response>
+    /// <response code="204"><see cref="DiaryTask"/>object not deleted</response>
+    [ValidateAntiForgeryToken]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ActionName("DeleteTaskByTaskId"),HttpDelete("[action]/{id:int}")]
+    [ActionName("DeleteTaskByTaskId"),Authorize(Policy="trainee"),HttpDelete("[action]/{id:int}")]
     public async Task<IActionResult> DeleteTaskByTaskId([FromRoute] int id)
     {
         if (await _diaryService.DiaryTaskByTaskIdAsync(id) is null) return StatusCode(204);
@@ -154,57 +153,57 @@ public sealed partial class DiaryController : ControllerBase
     }
 
     /// <summary>
-    /// POST: api/{version}/Diary/AddDiary
+    /// POST: {{host}}/api/{{version}}/Diary/AddDiary
     /// </summary>
-    /// <param name="addReq">AddModifyDiaryReq DTO</param>
-    /// <response code="400"><see cref="Diary"/> object not created</response>
-    /// <response code="201"><see cref="DiaryViewModel"/> object</response>
-    [Authorize(Policy="tracr-trainee")]
+    /// <param name="request">AddModifyDiaryReq DTO</param>
+    /// <response code="400"><see cref="Diary"/>object not created</response>
+    /// <response code="201"><see cref="DiaryViewModel"/>object</response>
+    [ValidateAntiForgeryToken]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created,Type=typeof(DiaryViewModel))]
-    [ActionName("AddDiary"),HttpPost("[action]")]
-    public ActionResult<DiaryViewModel?> AddDiary([FromBody] AddModifyDiaryReq addReq)
+    [ActionName("AddDiary"),Authorize(Policy="trainee"),HttpPost("[action]")]
+    public ActionResult<DiaryViewModel?> AddDiary([FromBody] AddModifyDiaryReq request)
     {
-        if (addReq is null) return BadRequest(addReq);
-        Diary? newDiary = _diaryService.CreateDiary(_mapper.Map<AddModifyDiaryReq,Diary>(addReq));
+        if (request is null) return BadRequest(request);
+        Diary? newDiary = _diaryService.CreateDiary(_mapper.Map<AddModifyDiaryReq,Diary>(request));
         DiaryViewModel diaryVM = _mapper.Map<Diary,DiaryViewModel>(newDiary!);
         return CreatedAtAction(nameof(GetDiariesPfid), new { pfid = newDiary?.PFID }, diaryVM);
     }
 
     /// <summary>
-    /// PUT: api/{version}/Diary/EditDiaryById/{pfid}
+    /// PUT: {{host}}/api/{{version}}/Diary/EditDiaryById/[pfid]
     /// </summary>
     /// <param name="id">DiaryId of diary object</param>
-    /// <param name="modifyReq">AddModifyDiaryReq DTO</param>
-    /// <response code="400"><see cref="Diary"/> object not modified</response>
-    /// <response code="200"><see cref="DiaryViewModel"/> object</response>
-    [Authorize(Policy="tracr-trainee")]
+    /// <param name="request">AddModifyDiaryReq DTO</param>
+    /// <response code="400"><see cref="Diary"/>object not modified</response>
+    /// <response code="200"><see cref="DiaryViewModel"/>object</response>
+    [ValidateAntiForgeryToken] 
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(DiaryViewModel))]
-    [ActionName("EditDiaryById"),HttpPut("[action]/{id:int}")]
-    public async Task<ActionResult<DiaryViewModel?>> EditDiaryById([FromRoute] int id, [FromBody] AddModifyDiaryReq modifyReq)
+    [ActionName("EditDiaryById"),Authorize(Policy="trainee//reviewer"),HttpPut("[action]/{id:int}")]
+    public async Task<ActionResult<DiaryViewModel?>> EditDiaryById([FromRoute] int id, [FromBody] AddModifyDiaryReq request)
     {
         Diary? diary = await _diaryService.GetDiaryByDiaryIdAsync(id);
-        if ((diary is null)||(modifyReq is null)) return BadRequest(modifyReq);
+        if ((diary is null)||(request is null)) return BadRequest(request);
         DiaryViewModel? diaryVM = _mapper.Map<Diary, DiaryViewModel>(diary!);
-        _mapper.Map(modifyReq, diary);
+        _mapper.Map(request, diary);
         diary.SIGNED_OFF_TIMESTAMP = (diary.SIGNED_OFF_BY is null)||(diary.SIGNED_OFF_BY is "") ? null : DateTime.Now;
         _diaryService.UpdateDiary(diary!);
         return Ok(diaryVM);
     }
 
     /// <summary>
-    /// DELETE: api/{version}/Diary/DeleteDiaryPfid/{pfid}
+    /// DELETE: {{host}}/api/{{version}}/Diary/DeleteDiaryPfid/[pfid]
     /// </summary>
     /// <param name="pfid">PFID of diary object</param>
     /// <response code="204">invlaid pfid</response>
     /// <response code="200">object deleted</response>
-    [Authorize(Policy="tracr-trainee")]
+    [ValidateAntiForgeryToken]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ActionName("DeleteDiaryPfid"),HttpDelete("[action]/{pfid:int}")]
+    [ActionName("DeleteDiaryPfid"),Authorize(Policy="trainee"),HttpDelete("[action]/{pfid:int}")]
     public async Task<IActionResult> DeleteDiaryPfid([FromRoute] [ValidPfid] int pfid)
     {
         if (await _diaryService.GetDiaryByPfidAsync(pfid) is null) return StatusCode(204);

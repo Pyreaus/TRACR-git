@@ -401,10 +401,19 @@
                         </div>
                         <div class="d-flex p-0 mt-0 flex-column" style="top:0px;min-height:66vh;">
                             <div class="flex-grow-1 py-0 px-2 d-flex align-items-top" *ngIf="(userType$|async)=='Trainee';">
-                                <div></div>
+                                <div *ngIf="disableCalendar&&calendarLoaded" class="h-10 pb-5 d-flex align-items-center justify-content-center text-info" 
+                                style="position:absolute!important;float:left;margin-top:27vh;margin-left:150px;">
+                                    <strong class="me-3 text-info">Loading...</strong>
+                                    <div role="status" class="mb-1 text-info spinner-border" aria-hidden="true"></div>
+                                </div>
                             </div>
                             <div class="col ps-2 pe-3 m-0 mt-0">
                                 <div *ngIf="(userType$ | async)?.toLowerCase() === 'reviewer' && menuVal === 'Current' && (step === 2 || step === 3);" class="ps-0 position-relative">
+                                    <div *ngIf="disableCalendar&&calendarLoaded" class="h-10 pb-5 d-flex align-items-center justify-content-center text-info" 
+                                            style="position:absolute!important;float:left;margin-top:21vh;margin-left:170px;">
+                                        <strong class="me-3 text-info">Loading...</strong>
+                                        <div role="status" class="mb-1 text-info spinner-border" aria-hidden="true"></div>
+                                    </div>
                                     <div class="row overlay d-none d-md-flex" [style.left]="overlayMax" style="width:57px;position:absolute;z-index:1000;top:120px;">
                                         <div class="col-12 overlay2 AA" [class]="A+' '+active" 
                                         (click)="selected(1,true)" style="min-height:57px;margin-top:6px;"></div>
@@ -429,8 +438,8 @@
                                     </div>
                                     <div class="card p-0 d-flex justify-content-center align-items-center"
                                     style="margin-top:40px !important;border-color:#00000000;background-color:#00000000;">
-                                    <p-calendar #calendarElement [(ngModel)]="date" [disabledDays]="[0,1,2,3,4,5,6]" class="max-w-full" 
-                                    [inline]="true" [styleClass]="rowSelected" [showWeek]="true" class="cal" [firstDayOfWeek]="1">
+                                    <p-calendar #calendarElement [(ngModel)]="date" [disabled]="disableCalendar" [disabledDays]="[0,1,2,3,4,5,6]" class="max-w-full" 
+                                    [inline]="true" [styleClass]="rowSelected" [showWeek]="true" class="cal" [firstDayOfWeek]="1"> 
                                     </p-calendar>
                                     </div>
                                 </div>
@@ -595,7 +604,7 @@
                             </div>
                             <div *ngIf="(userType$ | async)?.toLowerCase() === 'trainee'" class="py-0 mb-2 d-flex ps-2 pe-5">
                                 <div class="ps-0 position-relative">
-                                    <div class="row overlay d-none d-md-flex" style="left:18px;width:57px;position:absolute;z-index:1000;top:120px;">
+                                    <div class="row overlay d-none d-md-flex" style="left:18px;width:57px;position:absolute;z-index:1000;top:113px;">
                                         <div class="col-12 overlay2 AA" [class]="A+' '+active" 
                                         (click)="selected(1,false)" style="min-height:57px;margin-top:6px;"></div>
                                         <div class="col-12 overlay2 BB" [class]="B+' '+active" 
@@ -619,7 +628,7 @@
                                     </div>
                                     <div class="card p-0 d-flex justify-content-center align-items-center"
                                         style="border-color:#00000000;background-color:#00000000; overflow-y: hidden !important;overflow-x: hidden !important;">
-                                        <p-calendar #calendarElement [(ngModel)]="date" [disabledDays]="[0,1,2,3,4,5,6]"
+                                        <p-calendar #calendarElement [(ngModel)]="date" [disabled]="disableCalendar" [disabledDays]="[0,1,2,3,4,5,6]"
                                             class="max-w-full" [inline]="true" [styleClass]="rowSelected" [showWeek]="true"
                                             class="cal" [firstDayOfWeek]="1">
                                         </p-calendar>
@@ -792,7 +801,7 @@
                                     </div>
                                     <div class="card p-0 d-flex justify-content-center align-items-center"
                                         style="border-color:#00000000;background-color:#00000000;">
-                                        <p-calendar #calendarElement [(ngModel)]="date" [disabledDays]="[0,1,2,3,4,5,6]"
+                                        <p-calendar #calendarElement [(ngModel)]="date" [disabledDays]="[0,1,2,3,4,5,6]" [disabled]="disableCalendar"
                                             class="max-w-full" [inline]="true" [styleClass]="rowSelected" [showWeek]="true"
                                             class="cal" [firstDayOfWeek]="1"></p-calendar>
                                     </div>
@@ -808,8 +817,7 @@
                 <div class="row">
                     <div class="col" style="padding-top:10px;">
                         <div *ngIf="(userType$|async)=='Unauthorized'; else landing;"
-                            class="h-100 pb-5 d-flex align-items-center justify-content-center text-info"
-                            style="margin-top:27vh;">
+                            class="h-100 pb-5 d-flex align-items-center justify-content-center text-info" style="margin-top:27vh;">
                             <strong class="me-3 text-info">Loading...</strong>
                             <div role="status" class="mb-1 text-info spinner-border" aria-hidden="true"></div>
                         </div>
@@ -829,12 +837,12 @@
                                             #f="ngForm" style="min-width: 680px;">
                                             <div class="form-group mb-2">
                                                 <label class="label text-light" for="#">Practice Area:</label>
-                                                <input type="text" formControlName="LEARNING_POINTS"
-                                                    [(ngModel)]="diary.LEARNING_POINTS"
+                                                <input type="text" formControlName="PRACTICE_AREA"
+                                                    [(ngModel)]="diary.PRACTICE_AREA"
                                                     class="bg-dark border-secondary text-light form-control"
-                                                    [class.is-invalid]="diaryForm.get('LEARNING_POINTS')?.invalid && (submitted || diaryForm.get('LEARNING_POINTS')?.touched || diaryForm.get('LEARNING_POINTS')?.dirty)"
+                                                    [class.is-invalid]="diaryForm.get('PRACTICE_AREA')?.invalid && (submitted || diaryForm.get('PRACTICE_AREA')?.touched || diaryForm.get('PRACTICE_AREA')?.dirty)"
                                                     required />
-                                                <span *ngIf="diaryForm.get('LEARNING_POINTS')?.errors?.['required']"
+                                                <span *ngIf="diaryForm.get('PRACTICE_AREA')?.errors?.['required']"
                                                     class="invalid-feedback" aria-describedby="basic-addon1">Practice Area is required</span>
                                             </div>
                                             <div class="form-group mb-2">

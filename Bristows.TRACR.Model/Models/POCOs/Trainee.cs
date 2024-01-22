@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Bristows.TRACR.Model.Models.Entities
 {
     [Table("TRAINEES", Schema="dbo")]
-    public partial class Trainee
+    public sealed partial class Trainee
     {
         [Key]
         public int TRAINEE_ID { get; set; } = 0;

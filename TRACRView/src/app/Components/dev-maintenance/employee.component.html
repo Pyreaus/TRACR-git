@@ -1,6 +1,11 @@
 <div *ngIf="!!entity&&!(employees$|async)?.length" class="h-100 pb-5 d-flex align-items-center justify-content-center text-info bg-dark">
-    <strong class="me-3">Loading...</strong>
-    <div class="spinner-border text-info mb-1 " role="status" aria-hidden="true"></div>
+  <p-messages severity="error">
+    <ng-template pTemplate>
+        <div class="ml-2">
+          You have not been given access to this page. Please contact heldpesk.
+        </div>
+    </ng-template>
+</p-messages>
 </div>
 <ng-template #empTable>
 <div [hidden]="!entity||!(employees$|async)?.length" class="container ps-5 mt-4 pb-5" style="max-width:1000px;">

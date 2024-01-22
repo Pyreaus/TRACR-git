@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "v+Vx5V/HSdVJZd+VHGalo5FpbTbIY7eXmqxtVsezyss8YLL4csbKCc90kAvF7YG9OpuW/vI3FS0YRM4cc7BXSA==",
+  "dgSpecHash": "Gdasjk85cv+/odEewYUZjrGYJ3wyZxKf92PtNClx8vyX1zhRZ8zFEKGyHEw2IOcQ/jrFvfwcJUYLUqVPpqcYGw==",
   "success": true,
   "projectFilePath": "/Users/noel/Desktop/Dev/TRACR/TRACR-git/Bristows.TRACR.API/Bristows.TRACR.API.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "/Users/noel/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.aspnetcore.authentication.cookies/2.2.0/microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.aspnetcore.authentication.core/2.2.0/microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/7.0.5/microsoft.aspnetcore.authentication.jwtbearer.7.0.5.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.aspnetcore.authentication.negotiate/7.0.5/microsoft.aspnetcore.authentication.negotiate.7.0.5.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.aspnetcore.connections.abstractions/7.0.5/microsoft.aspnetcore.connections.abstractions.7.0.5.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.aspnetcore.cryptography.internal/7.0.5/microsoft.aspnetcore.cryptography.internal.7.0.5.nupkg.sha512",
@@ -27,7 +28,7 @@
     "/Users/noel/.nuget/packages/microsoft.aspnetcore.http.features/2.2.0/microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.aspnetcore.identity/2.2.0/microsoft.aspnetcore.identity.2.2.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/7.0.5/microsoft.aspnetcore.identity.entityframeworkcore.7.0.5.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.aspnetcore.identity.ui/5.0.13/microsoft.aspnetcore.identity.ui.5.0.13.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.aspnetcore.identity.ui/7.0.5/microsoft.aspnetcore.identity.ui.7.0.5.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.aspnetcore.openapi/7.0.5/microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.aspnetcore.session/2.2.0/microsoft.aspnetcore.session.2.2.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.aspnetcore.webutilities/2.2.0/microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
@@ -45,18 +46,18 @@
     "/Users/noel/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.caching.abstractions/7.0.0/microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.caching.memory/7.0.0/microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.configuration/7.0.0/microsoft.extensions.configuration.7.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.configuration.abstractions/7.0.0/microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.configuration.fileextensions/7.0.0/microsoft.extensions.configuration.fileextensions.7.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.configuration.json/7.0.0/microsoft.extensions.configuration.json.7.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.configuration/8.0.0/microsoft.extensions.configuration.8.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.configuration.fileextensions/8.0.0/microsoft.extensions.configuration.fileextensions.8.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.configuration.json/8.0.0/microsoft.extensions.configuration.json.8.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.dependencyinjection/7.0.0/microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/7.0.0/microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.dependencymodel/7.0.0/microsoft.extensions.dependencymodel.7.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.features/7.0.5/microsoft.extensions.features.7.0.5.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.fileproviders.abstractions/7.0.0/microsoft.extensions.fileproviders.abstractions.7.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.fileproviders.embedded/5.0.13/microsoft.extensions.fileproviders.embedded.5.0.13.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.fileproviders.physical/7.0.0/microsoft.extensions.fileproviders.physical.7.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.filesystemglobbing/7.0.0/microsoft.extensions.filesystemglobbing.7.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.fileproviders.abstractions/8.0.0/microsoft.extensions.fileproviders.abstractions.8.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.fileproviders.embedded/7.0.5/microsoft.extensions.fileproviders.embedded.7.0.5.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.fileproviders.physical/8.0.0/microsoft.extensions.fileproviders.physical.8.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.filesystemglobbing/8.0.0/microsoft.extensions.filesystemglobbing.8.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.hosting.abstractions/2.2.0/microsoft.extensions.hosting.abstractions.2.2.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.identity.core/7.0.5/microsoft.extensions.identity.core.7.0.5.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.identity.stores/7.0.5/microsoft.extensions.identity.stores.7.0.5.nupkg.sha512",
@@ -64,7 +65,7 @@
     "/Users/noel/.nuget/packages/microsoft.extensions.logging.abstractions/7.0.0/microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.objectpool/2.2.0/microsoft.extensions.objectpool.2.2.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.options/7.0.1/microsoft.extensions.options.7.0.1.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.primitives/8.0.0/microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.webencoders/2.2.0/microsoft.extensions.webencoders.2.2.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.identity.client/4.45.0/microsoft.identity.client.4.45.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.identity.client.extensions.msal/2.19.3/microsoft.identity.client.extensions.msal.2.19.3.nupkg.sha512",
@@ -82,7 +83,10 @@
     "/Users/noel/.nuget/packages/microsoft.win32.registry/5.0.0/microsoft.win32.registry.5.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.win32.systemevents/5.0.0/microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
+    "/Users/noel/.nuget/packages/scrutor/3.3.0/scrutor.3.3.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/swashbuckle.aspnetcore/6.5.0/swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/swashbuckle.aspnetcore.filters/7.0.5/swashbuckle.aspnetcore.filters.7.0.5.nupkg.sha512",
+    "/Users/noel/.nuget/packages/swashbuckle.aspnetcore.filters.abstractions/7.0.5/swashbuckle.aspnetcore.filters.abstractions.7.0.5.nupkg.sha512",
     "/Users/noel/.nuget/packages/swashbuckle.aspnetcore.swagger/6.5.0/swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.5.0/swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.5.0/swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",
@@ -114,11 +118,52 @@
     "/Users/noel/.nuget/packages/system.security.principal.windows/5.0.0/system.security.principal.windows.5.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/system.text.encoding/4.3.0/system.text.encoding.4.3.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/system.text.encoding.codepages/5.0.0/system.text.encoding.codepages.5.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/system.text.encodings.web/8.0.0/system.text.encodings.web.8.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/system.text.json/8.0.0/system.text.json.8.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/system.threading.tasks/4.3.0/system.threading.tasks.4.3.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "/Users/noel/.nuget/packages/system.windows.extensions/5.0.0/system.windows.extensions.5.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Bristows.TRACR.DAL depends on Microsoft.Extensions.Configuration (>= 7.0.5) but Microsoft.Extensions.Configuration 7.0.5 was not found. An approximate best match of Microsoft.Extensions.Configuration 8.0.0 was resolved.",
+      "libraryId": "Microsoft.Extensions.Configuration",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    },
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Bristows.TRACR.DAL depends on Microsoft.Extensions.Configuration.FileExtensions (>= 7.0.5) but Microsoft.Extensions.Configuration.FileExtensions 7.0.5 was not found. An approximate best match of Microsoft.Extensions.Configuration.FileExtensions 8.0.0 was resolved.",
+      "libraryId": "Microsoft.Extensions.Configuration.FileExtensions",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    },
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Bristows.TRACR.DAL depends on Microsoft.Extensions.Configuration.Json (>= 7.0.5) but Microsoft.Extensions.Configuration.Json 7.0.5 was not found. An approximate best match of Microsoft.Extensions.Configuration.Json 8.0.0 was resolved.",
+      "libraryId": "Microsoft.Extensions.Configuration.Json",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    },
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Bristows.TRACR.Model depends on Microsoft.Extensions.Configuration.Json (>= 7.0.5) but Microsoft.Extensions.Configuration.Json 7.0.5 was not found. An approximate best match of Microsoft.Extensions.Configuration.Json 8.0.0 was resolved.",
+      "libraryId": "Microsoft.Extensions.Configuration.Json",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    }
+  ]
 }

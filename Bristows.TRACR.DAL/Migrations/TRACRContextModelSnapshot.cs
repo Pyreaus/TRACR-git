@@ -187,7 +187,7 @@ namespace Bristows.TRACR.DAL.Migrations
                     b.Property<string>("About")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("ActiveUser")
+                    b.Property<bool>("ActiveUser")
                         .HasColumnType("bit");
 
                     b.Property<int?>("CreatorID")
@@ -209,9 +209,10 @@ namespace Bristows.TRACR.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("Human")
+                    b.Property<bool>("Human")
                         .HasColumnType("bit");
 
                     b.Property<string>("Initials")
@@ -245,7 +246,7 @@ namespace Bristows.TRACR.DAL.Migrations
                         .HasMaxLength(3)
                         .HasColumnType("int");
 
-                    b.Property<bool?>("Partner")
+                    b.Property<bool>("Partner")
                         .HasColumnType("bit");
 
                     b.Property<string>("Photo")
@@ -285,6 +286,7 @@ namespace Bristows.TRACR.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WinUser")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.ToTable("PFUser", "dbo");

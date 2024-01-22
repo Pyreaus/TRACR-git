@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GCae7osAjVPNPChsIqlvVp1jfLf/0bahecMiGVswmqJtKS9jRblYTN8jI76gI4nNlfEZl5TG2BxNPsvrlC1uRg==",
+  "dgSpecHash": "2Te/TZfAFptfJxzNvI85iM7l5nbC5YW6mBvzfDm2j7QV4IIAM9QLhXJQWR6ekn1iwp72M8ZkIUxmyCiu8raGKw==",
   "success": true,
   "projectFilePath": "/Users/noel/Desktop/Dev/TRACR/TRACR-git/Bristows.TRACR.Model/Bristows.TRACR.Model.csproj",
   "expectedPackageFiles": [
@@ -22,20 +22,20 @@
     "/Users/noel/.nuget/packages/microsoft.entityframeworkcore.tools/7.0.5/microsoft.entityframeworkcore.tools.7.0.5.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.caching.abstractions/7.0.0/microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.caching.memory/7.0.0/microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.configuration/7.0.0/microsoft.extensions.configuration.7.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.configuration.abstractions/7.0.0/microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.configuration.fileextensions/7.0.0/microsoft.extensions.configuration.fileextensions.7.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.configuration.json/7.0.0/microsoft.extensions.configuration.json.7.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.configuration/8.0.0/microsoft.extensions.configuration.8.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.configuration.fileextensions/8.0.0/microsoft.extensions.configuration.fileextensions.8.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.configuration.json/8.0.0/microsoft.extensions.configuration.json.8.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.dependencyinjection/7.0.0/microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/7.0.0/microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.dependencymodel/7.0.0/microsoft.extensions.dependencymodel.7.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.fileproviders.abstractions/7.0.0/microsoft.extensions.fileproviders.abstractions.7.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.fileproviders.physical/7.0.0/microsoft.extensions.fileproviders.physical.7.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.filesystemglobbing/7.0.0/microsoft.extensions.filesystemglobbing.7.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.fileproviders.abstractions/8.0.0/microsoft.extensions.fileproviders.abstractions.8.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.fileproviders.physical/8.0.0/microsoft.extensions.fileproviders.physical.8.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.filesystemglobbing/8.0.0/microsoft.extensions.filesystemglobbing.8.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.logging/7.0.0/microsoft.extensions.logging.7.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.logging.abstractions/7.0.0/microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.extensions.options/7.0.0/microsoft.extensions.options.7.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.extensions.primitives/8.0.0/microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.identity.client/4.45.0/microsoft.identity.client.4.45.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.identity.client.extensions.msal/2.19.3/microsoft.identity.client.extensions.msal.2.19.3.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.identitymodel.abstractions/6.21.0/microsoft.identitymodel.abstractions.6.21.0.nupkg.sha512",
@@ -74,11 +74,22 @@
     "/Users/noel/.nuget/packages/system.security.principal.windows/5.0.0/system.security.principal.windows.5.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/system.text.encoding/4.3.0/system.text.encoding.4.3.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/system.text.encoding.codepages/5.0.0/system.text.encoding.codepages.5.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
-    "/Users/noel/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/system.text.encodings.web/8.0.0/system.text.encodings.web.8.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/system.text.json/8.0.0/system.text.json.8.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/system.threading.tasks/4.3.0/system.threading.tasks.4.3.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "/Users/noel/.nuget/packages/system.windows.extensions/5.0.0/system.windows.extensions.5.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Bristows.TRACR.Model depends on Microsoft.Extensions.Configuration.Json (>= 7.0.5) but Microsoft.Extensions.Configuration.Json 7.0.5 was not found. An approximate best match of Microsoft.Extensions.Configuration.Json 8.0.0 was resolved.",
+      "libraryId": "Microsoft.Extensions.Configuration.Json",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    }
+  ]
 }

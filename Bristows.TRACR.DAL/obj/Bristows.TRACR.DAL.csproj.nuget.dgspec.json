@@ -50,15 +50,15 @@
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[7.0.5, )"
             },
             "Microsoft.Extensions.Configuration.FileExtensions": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[7.0.5, )"
             },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[7.0.5, )"
             }
           },
           "imports": [
@@ -144,7 +144,7 @@
             },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[7.0.5, )"
             }
           },
           "imports": [

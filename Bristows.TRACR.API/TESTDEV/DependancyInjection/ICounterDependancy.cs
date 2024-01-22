@@ -1,5 +1,6 @@
 namespace Bristows.TRACR.API.TESTDEV.DependancyInjection;
-public interface ICounterDependancy
+
+internal interface ICounterDependancy
 {
     int Increment();
     int CurrentCounter { get; }

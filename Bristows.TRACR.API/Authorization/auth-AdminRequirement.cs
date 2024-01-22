@@ -5,8 +5,8 @@ using System.Security.Claims;
 
 namespace Bristows.TRACR.API.Authorization
 {
-    public class AdminRequirement : IAuthorizationRequirement { }
-    public class AdminRequirementHandler : AuthorizationHandler<AdminRequirement>
+    internal sealed class AdminRequirement : IAuthorizationRequirement { }
+    internal sealed partial class AdminRequirementHandler : AuthorizationHandler<AdminRequirement>
     {
         private readonly IUserService _userService;
         private readonly ClaimsPrincipal _claimsPrincipal;
@@ -16,9 +16,8 @@ namespace Bristows.TRACR.API.Authorization
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _claimsPrincipal = claimsPrincipal ?? throw new ArgumentNullException(nameof(claimsPrincipal));
             _userService = userService ?? throw new ArgumentNullException(nameof(userService));
-            _logger.LogInformation("----->{CP}",_claimsPrincipal.FindFirst("DomainUsername"));
+            _logger.LogInformation(103, "----->{CP}",_claimsPrincipal.FindFirst("DomainUsername"));
         }
-
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, AdminRequirement requirement)
         {
             if (_claimsPrincipal.Identity?.IsAuthenticated == true)
@@ -34,7 +33,7 @@ namespace Bristows.TRACR.API.Authorization
                     }
                     else
                     {
-                        _logger.LogWarning("User is not Admin");
+                        _logger.LogWarning(105,"User is not Admin");
                         context.Fail();
                     }
                 }

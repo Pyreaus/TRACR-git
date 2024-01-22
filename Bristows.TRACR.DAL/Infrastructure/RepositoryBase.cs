@@ -23,17 +23,21 @@ namespace Bristows.TRACR.DAL.Infrastructure
             (_dbSet, _logger) = (InitContext.Set<TE>(), logger ?? NullArg<ILogger<TL>>(logger!));
         }
         #region [implementation]
-        public virtual async Task<TE?> FirstOrDefaultAsync(Expression<Func<TE, bool>> predicate,
-            Func<IQueryable<TE>, IIncludableQueryable<TE, object>>? include = null, bool disableTracking =true)
+        public virtual IQueryable<IGrouping<int, TE>> GroupBy(Expression<Func<TE, int>> keySelector) => _dbSet.GroupBy(keySelector);
+        public virtual async Task<IEnumerable<TE?>> GetManyAsync(Expression<Func<TE, bool>> predicate, Func<IQueryable<TE>, IIncludableQueryable<TE, object>>? include = null, bool disableTracking = true)
         {
             IQueryable<TE> query = _dbSet;
             if (disableTracking) query = query.AsNoTracking();
             if (include != null) query = include(query);
-            return await query.FirstOrDefaultAsync(predicate);
+            return await query.Where(predicate).ToListAsync();
         }
-        public virtual IQueryable<IGrouping<int, TE>> GroupBy(Expression<Func<TE, int>> keySelector)
+        public virtual async Task<bool> AnyAsync(Expression<Func<TE, bool>> predicate) => await _dbSet.AnyAsync(predicate);
+        public virtual IEnumerable<TE?> GetAll(Func<IQueryable<TE>, IIncludableQueryable<TE, object>>? include = null, bool disableTracking = true)
         {
-            return _dbSet.GroupBy(keySelector);
+            IQueryable<TE> query = _dbSet;
+            if (disableTracking) query = query.AsNoTracking();
+            if (include != null) query = include(query);
+            return query.ToList().AsEnumerable();
         }
         public virtual void Update(TE entity)
         {
@@ -48,45 +52,40 @@ namespace Bristows.TRACR.DAL.Infrastructure
         public virtual void Delete(TE entity)
         {
             _dbSet.Remove(entity);
-            _logger!.LogInformation("Removed entity");
+            _logger!.LogInformation(101, "Removed entity");
         }
+        public virtual void Add(TE entity) => _dbSet.Add(entity);
         public virtual void Delete(Expression<Func<TE, bool>> predicate)
         {
             IEnumerable<TE> objects = _dbSet.Where(predicate).AsEnumerable();
             foreach (TE obj in objects) _dbSet.Remove(obj);
         }
-        public virtual void Add(TE entity) => _dbSet.Add(entity);
         public virtual bool Any(Expression<Func<TE, bool>> predicate) => _dbSet.Any(predicate);
-        public virtual async Task<bool> AnyAsync(Expression<Func<TE, bool>> predicate) => await _dbSet.AnyAsync(predicate);
-        public virtual TE? FirstOrDefault(Expression<Func<TE, bool>> predicate,
-        Func<IQueryable<TE>, IIncludableQueryable<TE, object>>? include = null, bool disableTracking = true)
+        public virtual IQueryable<TE?> GetAllAsQueryable(Func<IQueryable<TE>, IIncludableQueryable<TE, object>>? include = null, bool disableTracking = true)
+        {
+            IQueryable<TE> query = _dbSet;
+            if (disableTracking) query = query.AsNoTracking();
+            return include != null ? include(query) : query;
+        }
+        public virtual async Task<TE?> FirstOrDefaultAsync(Expression<Func<TE, bool>> predicate, Func<IQueryable<TE>, IIncludableQueryable<TE, object>>? include = null, bool disableTracking =true)
+        {
+            IQueryable<TE> query = _dbSet;
+            if (disableTracking) query = query.AsNoTracking();
+            if (include != null) query = include(query);
+            return await query.FirstOrDefaultAsync(predicate);
+        }
+        public virtual TE? FirstOrDefault(Expression<Func<TE, bool>> predicate, Func<IQueryable<TE>, IIncludableQueryable<TE, object>>? include = null, bool disableTracking = true)
         {
             IQueryable<TE> query = _dbSet;
             if (disableTracking) query = query.AsNoTracking();
             if (include != null) query = include(query);
             return query.FirstOrDefault(predicate);
         }
-        public virtual IEnumerable<TE?> GetAll(Func<IQueryable<TE>,
-        IIncludableQueryable<TE, object>>? include = null, bool disableTracking = true)
-        {
-            IQueryable<TE> query = _dbSet;
-            if (disableTracking) query = query.AsNoTracking();
-            if (include != null) query = include(query);
-            return query.ToList().AsEnumerable();
-        }
-        public virtual IQueryable<TE?> GetAllAsQueryable(
-            Func<IQueryable<TE>, IIncludableQueryable<TE, object>>? include = null, bool disableTracking = true)
-        {
-            IQueryable<TE> query = _dbSet;
-            if (disableTracking) query = query.AsNoTracking();
-            return include != null ? include(query) : query;
-        }
         public virtual async Task<IEnumerable<TE?>> GetAllAsync(bool disableTracking = true)
         {
             return disableTracking ? await _dbSet.AsNoTracking().ToListAsync() : await _dbSet.ToListAsync();
         }
-        public virtual IEnumerable<TE?> GetMany(Expression<Func<TE, bool>>
-        predicate, Func<IQueryable<TE>, IIncludableQueryable<TE, object>>? include = null, bool disableTracking = true)
+        public virtual IEnumerable<TE?> GetMany(Expression<Func<TE, bool>> predicate, Func<IQueryable<TE>, IIncludableQueryable<TE, object>>? include = null, bool disableTracking = true)
         {
             IQueryable<TE> query = _dbSet;
             if (disableTracking) query = query.AsNoTracking();
@@ -99,13 +98,6 @@ namespace Bristows.TRACR.DAL.Infrastructure
             if (disableTracking) query = query.AsNoTracking();
             if (include != null) query = include(query);
             return query.Where(predicate);
-        }
-        public virtual async Task<IEnumerable<TE?>> GetManyAsync(Expression<Func<TE, bool>> predicate, Func<IQueryable<TE>, IIncludableQueryable<TE, object>>? include = null, bool disableTracking = true)
-        {
-            IQueryable<TE> query = _dbSet;
-            if (disableTracking) query = query.AsNoTracking();
-            if (include != null) query = include(query);
-            return await query.Where(predicate).ToListAsync();
         }
         public virtual TE? LastOrDefault(Expression<Func<TE, bool>> predicate, Func<IQueryable<TE?>, IIncludableQueryable<TE, object>>? include = null, bool disableTracking = true)
         {
