@@ -13,18 +13,18 @@ using Humanizer;
 namespace Bristows.TRACR.API.Controllers;
 
 [ApiController]
+[Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 [ProducesResponseType(StatusCodes.Status401Unauthorized)]
 // [Authorize(Policy="tracr-default",AuthenticationSchemes=NegotiateDefaults.AuthenticationScheme)]
-[Route("api/v1/[controller]")]
 public sealed partial class DiaryController : ControllerBase
 {
     #region [Infrastructure]
     private readonly IMapper _mapper;
-    private readonly IDiaryService _diaryService;
     private readonly ILogger<DiaryController> _logger;
-    private static TE Ex<TE>() where TE : Exception => throw (TE)Activator.CreateInstance(typeof(TE), "untracked")!;
-    private static TE Ex<TE, ExpectedType>(object? exc=null) where TE : Exception => throw (TE)Activator.CreateInstance(typeof(TE), $"Expected: {typeof(ExpectedType)}", nameof(exc))!;
+    private readonly IDiaryService _diaryService;
+    private static TE Ex<TE, T>(object? exc) where TE : Exception => throw Activator.CreateInstance(typeof(TE), $"Expected: {typeof(T)}", nameof(exc)) as TE ?? throw new Exception("Exception creation failed");
+    private static TE Ex<TE>(object? exc = null) where TE : Exception => throw Activator.CreateInstance(typeof(TE), "untracked", nameof(exc)) as TE ?? throw new Exception("Exception creation failed");
     public DiaryController(ILogger<DiaryController> logger, IMapper mapper, IDiaryService diaryService)
     {
         (_diaryService, _logger, _mapper) = (diaryService ?? throw Ex<ArgumentNullException>(), logger, mapper);
@@ -38,7 +38,7 @@ public sealed partial class DiaryController : ControllerBase
     /// <response code="204"><see cref="IEnumerable{Skill}"/>objects not found</response>
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<Skill>))]
-    [ActionName("GetSkills"),Authorize(Policy="trainee//reviewer"),HttpGet("[action]")]
+    [ActionName("GetSkills"),Authorize(Policy="trainee/reviewer"),HttpGet("[action]")]
     public async Task<ActionResult<IEnumerable<Skill?>?>> GetSkills()
     {
         IEnumerable<Skill?> skills = await _diaryService.GetSkills();
@@ -53,7 +53,7 @@ public sealed partial class DiaryController : ControllerBase
     /// <response code="204"><see cref="IEnumerable{DiaryViewModel}"/>objects not found</response>
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<DiaryViewModel>))]
-    [ActionName("GetDiariesPfid"),Authorize(Policy="trainee//reviewer"),HttpGet("[action]/{pfid:int}")]
+    [ActionName("GetDiariesPfid"),Authorize(Policy="trainee/reviewer"),HttpGet("[action]/{pfid:int}")]
     public async Task<ActionResult<IEnumerable<DiaryViewModel?>?>> GetDiariesPfid([FromRoute] [ValidPfid] int pfid)
     {
         IEnumerable<Diary?> diaries = await _diaryService.GetDiariesAsync(pfid);
@@ -69,7 +69,7 @@ public sealed partial class DiaryController : ControllerBase
     /// <response code="204"><see cref="IEnumerable{DiaryTaskViewModel}"/>objects not found</response>
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(IEnumerable<DiaryTaskViewModel>))]
-    [ActionName("GetTasksByDiaryId"),Authorize(Policy="trainee//reviewer"),HttpGet("[action]/{id:int}")]
+    [ActionName("GetTasksByDiaryId"),Authorize(Policy="trainee/reviewer"),HttpGet("[action]/{id:int}")]
     public async Task<ActionResult<IEnumerable<DiaryTaskViewModel?>?>> GetTasksByDiaryId([FromRoute] int id)
     {
         IEnumerable<DiaryTask?> diaryTasks = await _diaryService.DiaryTasksByDiaryIdAsync(id);
@@ -104,7 +104,7 @@ public sealed partial class DiaryController : ControllerBase
     /// <response code="204"><see cref="DiaryTaskViewModel"/>object not found</response>
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(DiaryTaskViewModel))]
-    [ActionName("GetTaskByTaskId"),Authorize(Policy="trainee//reviewer"),HttpGet("[action]/{id:int}")]
+    [ActionName("GetTaskByTaskId"),Authorize(Policy="trainee/reviewer"),HttpGet("[action]/{id:int}")]
     public async Task<ActionResult<DiaryTaskViewModel?>> GetTaskByTaskId([FromRoute] int id)
     {
         DiaryTask? diaryTask = await _diaryService.DiaryTaskByTaskIdAsync(id);
@@ -182,14 +182,14 @@ public sealed partial class DiaryController : ControllerBase
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(DiaryViewModel))]
-    [ActionName("EditDiaryById"),Authorize(Policy="trainee//reviewer"),HttpPut("[action]/{id:int}")]
+    [ActionName("EditDiaryById"),Authorize(Policy="trainee/reviewer"),HttpPut("[action]/{id:int}")]
     public async Task<ActionResult<DiaryViewModel?>> EditDiaryById([FromRoute] int id, [FromBody] AddModifyDiaryReq request)
     {
         Diary? diary = await _diaryService.GetDiaryByDiaryIdAsync(id);
         if ((diary is null)||(request is null)) return BadRequest(request);
         DiaryViewModel? diaryVM = _mapper.Map<Diary, DiaryViewModel>(diary!);
         _mapper.Map(request, diary);
-        diary.SIGNED_OFF_TIMESTAMP = (diary.SIGNED_OFF_BY is null)||(diary.SIGNED_OFF_BY is "") ? null : DateTime.Now;
+        diary.SIGNED_OFF_TIMESTAMP = (diary.SIGNED_OFF_BY is null)||(diary.SIGNED_OFF_BY is "") ? null : DateTime.UtcNow;;
         _diaryService.UpdateDiary(diary!);
         return Ok(diaryVM);
     }

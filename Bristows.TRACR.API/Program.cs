@@ -16,8 +16,8 @@ using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Bristows.TRACR.API.AuthenticationTemplate;
-using Bristows.TRACR.API.AuthenticationTemplate.Interfaces;
+using Bristows.TRACR.BLL.Authentication.Infrastructure;
+using Bristows.TRACR.API.Authentication;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 builder.Services.AddLogging();
@@ -87,10 +87,10 @@ builder.Services.AddScoped<IAuthorizationHandler, TraineeRequirementHandler>();
 //     options.Cookie.IsEssential = true;
 // });
 
-// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
-// builder.Services.ConfigureOptions<JwtOptionsSetup>();
-// builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
-// builder.Services.ConfigureOptions<ServerOptionsSetup>();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+builder.Services.ConfigureOptions<JwtOptionsSetup>();
+builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
+builder.Services.ConfigureOptions<ServerOptionsSetup>();
 
 // builder.Services.AddAuthentication(options =>
 // {
@@ -115,17 +115,16 @@ builder.Services.AddScoped(provider =>
 {
     var httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();
     return GetClaimsPrincipal(httpContextAccessor);
-});
-// Configuring authorization policies
+}); // Configuring authorization policies
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("tracr-default", policy => policy.RequireAuthenticatedUser());
-    options.AddPolicy("trainee//reviewer", policy => 
+    options.AddPolicy("trainee/reviewer", policy => 
     {
         policy.Requirements.Add(new TraineeRequirement());
         policy.Requirements.Add(new ReviewerRequirement());
     });
-    options.AddPolicy("admin//reviewer", policy => 
+    options.AddPolicy("admin/reviewer", policy => 
     {
         policy.Requirements.Add(new AdminRequirement());
         policy.Requirements.Add(new ReviewerRequirement());

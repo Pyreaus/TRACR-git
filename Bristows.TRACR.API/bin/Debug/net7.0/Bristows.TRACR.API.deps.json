@@ -1151,7 +1151,8 @@
       "Bristows.TRACR.BLL/1.0.0": {
         "dependencies": {
           "Bristows.TRACR.DAL": "1.0.0",
-          "Bristows.TRACR.Model": "1.0.0"
+          "Bristows.TRACR.Model": "1.0.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.5"
         },
         "runtime": {
           "Bristows.TRACR.BLL.dll": {}

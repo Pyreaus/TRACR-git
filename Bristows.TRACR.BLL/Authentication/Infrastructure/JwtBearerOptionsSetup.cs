@@ -2,13 +2,13 @@
 
 using System.Text;
 using System.Text.Json;
-using Bristows.TRACR.API.AuthenticationTemplate.Interfaces;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 
-namespace Bristows.TRACR.API.AuthenticationTemplate;
-internal sealed partial class JwtBearerOptionsSetup : IConfigureOptions<JwtBearerOptions>, IJwtBearerOptionsSetup<JwtBearerOptions>
+namespace Bristows.TRACR.BLL.Authentication.Infrastructure;
+public sealed partial class JwtBearerOptionsSetup : IConfigureOptions<JwtBearerOptions>, IJwtBearerOptionsSetup<JwtBearerOptions>
 {
     public JwtOptions _options;
     public JwtBearerOptionsSetup(IOptions<JwtOptions> options) => _options = options.Value;
@@ -23,7 +23,7 @@ internal sealed partial class JwtBearerOptionsSetup : IConfigureOptions<JwtBeare
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(
-                    _options.Key.ToCharArray()))
+                    _options.Key!.ToCharArray()))
         };
         opts.Events = new JwtBearerEvents()
         {

@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Bristows.TRACR.DAL\Bristows.TRACR.DAL.csproj" />
     <ProjectReference Include="..\Bristows.TRACR.Model\Bristows.TRACR.Model.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
   </ItemGroup>
 
   <PropertyGroup>

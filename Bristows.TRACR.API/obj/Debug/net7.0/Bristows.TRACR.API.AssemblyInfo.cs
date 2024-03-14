@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Bristows.TRACR.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+726a243d86bfb125c8bab54330030130c4e074f4")]
 [assembly: System.Reflection.AssemblyProductAttribute("Bristows.TRACR.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Bristows.TRACR.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

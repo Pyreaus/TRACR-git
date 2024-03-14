@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
 namespace Bristows.TRACR.API.Authorization
-{
+{ 
     internal sealed class ReviewerRequirement : IAuthorizationRequirement { }
     internal sealed partial class ReviewerRequirementHandler : AuthorizationHandler<ReviewerRequirement>
     {

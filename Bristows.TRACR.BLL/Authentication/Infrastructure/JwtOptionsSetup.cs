@@ -1,8 +1,8 @@
-using Bristows.TRACR.API.AuthenticationTemplate.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
-namespace Bristows.TRACR.API.AuthenticationTemplate;
-internal sealed class JwtOptionsSetup : IConfigureOptions<JwtOptions>, IJwtOptionsSetup<JwtOptions>
+namespace Bristows.TRACR.BLL.Authentication.Infrastructure;
+public sealed class JwtOptionsSetup : IConfigureOptions<JwtOptions>, IJwtOptionsSetup<JwtOptions>
 {
     private readonly IConfiguration _config;
     private readonly string _path;

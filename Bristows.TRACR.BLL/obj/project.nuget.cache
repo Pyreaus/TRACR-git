@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bLUqTuEvsGU1FCLDsmwVN1TeDwHHUusJ7h8aEdGTKfCcmj2aS1g6jLw2UjkSqaM2yWXd+R5adZl/v7V6EO1XfA==",
+  "dgSpecHash": "4CMolZj/2CS95Kk+arOH9gVJwVa8c30+mREWzpmenanZRK7WmimCIAfiHI8npSkB7YWcTNbHyF6OXWya4V7R9Q==",
   "success": true,
   "projectFilePath": "/Users/noel/Desktop/Dev/TRACR/TRACR-git/Bristows.TRACR.BLL/Bristows.TRACR.BLL.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "/Users/noel/.nuget/packages/azure.core/1.24.0/azure.core.1.24.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/azure.identity/1.6.0/azure.identity.1.6.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/7.0.5/microsoft.aspnetcore.authentication.jwtbearer.7.0.5.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/microsoft.data.sqlclient/5.0.1/microsoft.data.sqlclient.5.0.1.nupkg.sha512",
@@ -78,7 +79,9 @@
     "/Users/noel/.nuget/packages/system.text.json/8.0.0/system.text.json.8.0.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/system.threading.tasks/4.3.0/system.threading.tasks.4.3.0.nupkg.sha512",
     "/Users/noel/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "/Users/noel/.nuget/packages/system.windows.extensions/5.0.0/system.windows.extensions.5.0.0.nupkg.sha512"
+    "/Users/noel/.nuget/packages/system.windows.extensions/5.0.0/system.windows.extensions.5.0.0.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.netcore.app.ref/7.0.17/microsoft.netcore.app.ref.7.0.17.nupkg.sha512",
+    "/Users/noel/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.17/microsoft.aspnetcore.app.ref.7.0.17.nupkg.sha512"
   ],
   "logs": [
     {

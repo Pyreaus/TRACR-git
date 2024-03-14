@@ -3,8 +3,23 @@ using Bristows.TRACR.Model.DTOs;
 using Bristows.TRACR.Model.Models.Entities;
 using Bristows.TRACR.Model.Models.Entities.Employees;
 using Bristows.TRACR.Model.Models.ViewModels;
+using Bristows.TRACR.Model.Models.POCOs;
 
-namespace Bristows.TRACR.Model.Models.AutomapperProfiles;
+namespace Bristows.TRACR.BLL.MapperProfiles;
+public class AuthProviderProfile : Profile
+{
+    public AuthProviderProfile()
+    {
+        CreateMap<User, DevUserViewModel>().ForMember((dest) => dest.AuthTokenExpiration, (opt) => opt.Ignore());
+        CreateMap<RegisterUserReq, User>()
+            .ForMember((dest) => dest.StoredHash, (opt) => opt.Ignore()
+            ).ForMember((dest) => dest.StoredSalt, (opt) => opt.Ignore()
+            ).ForMember((dest) => dest.AuthToken, (opt) => opt.Ignore()
+            ).ForMember((dest) => dest.Value, (opt) => opt.Ignore()
+            ).ForMember((dest) => dest.Role, (opt) => opt.MapFrom(_ => "Unauthorized")
+            ).ForMember((dest) => dest.Id, (opt) => opt.MapFrom(_ => Guid.NewGuid().ToString()));
+    }
+}
 public class TRACRProfiles : Profile
 {
     public TRACRProfiles()
